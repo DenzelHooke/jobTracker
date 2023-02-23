@@ -1,0 +1,97 @@
+// TEXT
+
+.bold-text {
+  font-weight: bold;
+}
+
+.light-text {
+  font-weight: 200;
+}
+
+.reg-text {
+  font-weight: 400;
+}
+
+// FLEX
+
+.flex-column {
+  flex-direction: column;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-justify-center {
+  justify-content: center;
+}
+
+.flex-align-center {
+  align-items: center;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.heading {
+  text-align: center;
+  font-size: var(--global-header-size);
+  margin-bottom: 50px;
+  padding-top: 10px;
+}
+
+.section {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.logo {
+  width: 100%;
+  height: 100%;
+}
+
+.external {
+  // color: yellow !important;
+}
+
+.bold {
+  font-weight: 800;
+}
+
+.dark-black-bg {
+  background-color: var(--dark-black);
+}
+
+.white-text {
+  color: var(--global-white) !important;
+}
+
+.center-text {
+  text-align: center;
+}
+
+.medium-text {
+  font-weight: 500;
+}
+
+.light-text {
+  font-weight: 300;
+}
+
+.light-color {
+  color: var(--light-text-color);
+}
+
+.flex-grow {
+  flex-grow: 1000;
+}
+
+.fill-page {
+  width: 100%;
+  height: 100vh;
+}

@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400&display=swap');
+
+:root {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins';
+  box-sizing: border-box;
+}
+
+$caribbean-current: #006d77ff;
+$tiffany-blue: #83c5beff;
+$alice-blue: #edf6f9ff;
+$pale-dogwood: #ffddd2ff;
+$atomic-tangerine: #e29578ff;
+
+.register-form-wrapper {
+  background-color: $alice-blue;
+}
+
+.form-wrapper {
+  min-width: 400px;
+  min-height: 400px;
+
+  .form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: auto;
+    .input {
+      display: block;
+      border: 0;
+      padding: 8px;
+      margin: 20px 0;
+      flex-grow: 1000;
+    }
+  }
+
+  .form {
+    width: 100%;
+  }
+}
+
+.global-container {
+  max-width: 90vw;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.page {
+  min-height: 100vh;
+}
