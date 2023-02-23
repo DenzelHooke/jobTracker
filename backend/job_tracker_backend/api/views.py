@@ -11,3 +11,13 @@ def getData(request):
     serializer = JobSerializer(jobs, many=True)
 
     return Response(serializer.data)
+
+
+@api_view(['POST'])
+def addJob(request):
+    serializer = JobSerializer(data=request.data)
+    if serializer.is_valid():
+        # Create item in databasqe
+        serializer.save()
+
+    return Response(serializer.data)
