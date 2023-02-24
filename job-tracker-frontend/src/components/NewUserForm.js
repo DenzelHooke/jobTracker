@@ -28,6 +28,7 @@ const NewUserForm = ({ onSubmit, onChange, formData }) => {
           placeholder="Confirm password"
           onChange={onChange}
         />
+        <button className="button">Create Account</button>
       </form>
     </>
   );

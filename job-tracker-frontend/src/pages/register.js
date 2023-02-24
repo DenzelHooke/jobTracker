@@ -9,13 +9,12 @@ export default function Register() {
 
   return (
     <div className="page">
-      <div className="flex flex-align-center flex-row fill-page">
-        <div className="global-container">
-          <FormWrapper
-            form={<RegisterForm />}
-            className="register-form-wrapper"
-          />
-        </div>
+      <div className="flex flex-justify-center flex-align-center fill-page">
+        <FormWrapper
+          form={<RegisterForm />}
+          message="Welcome Back"
+          className="register-form-wrapper shadow-panel white-bg round-panel"
+        />
       </div>
     </div>
   );
