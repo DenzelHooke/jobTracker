@@ -40,15 +40,21 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+
+    'rest_framework',
+    'base',
+    'account',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # 'account.apps.AccountConfig',
 
-    'rest_framework',
-    'base',
+
+
 ]
 
 MIDDLEWARE = [
@@ -80,7 +86,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'job_tracker_backend.wsgi.application'
-
+AUTH_USER_MODEL = 'account.Account'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
