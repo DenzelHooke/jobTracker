@@ -11,26 +11,6 @@ if (!isServer) {
   rtcToken = localStorage.getItem('rtcToken');
 }
 
-//* ─── Reducers ──────────────────────────────────────────────────────────────────
-const registerUser = createAsyncThunk(
-  'auth/registerUser',
-  async ({ email, password }, thunkAPI) => {
-    try {
-      const res = authService.registerUser();
-      if (res) {
-        return res;
-      }
-    } catch (error) {
-      const message =
-        (error.message && error.response.data && error.response.data.message) ||
-        error.message ||
-        error.toString();
-
-      return thunkAPI.rejectWithValue(message);
-    }
-  }
-);
-
 //* ─── App State ──────────────────────────────────────────────────────────────────
 
 const initialState = {
@@ -42,11 +22,40 @@ const initialState = {
   message: '',
 };
 
+//* ─── Reducers ──────────────────────────────────────────────────────────────────
+export const registerUser = createAsyncThunk(
+  'auth/registerUser',
+  async ({ email, password }, thunkAPI) => {
+    try {
+      console.log('calling register reducer');
+      // console.log('AFTER CALL');
+      return await authService.registerUser({
+        email: email,
+        password: password,
+      });
+    } catch (error) {
+      const message =
+        (error.message && error.response.data && error.response.data.message) ||
+        error.message ||
+        error.toString();
+      console.error(message);
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 //* ─── Slice ──────────────────────────────────────────────────────────────────
 export const authSlice = createSlice({
   name: 'auth',
   initialState: initialState,
-  reducers: {},
+  reducers: {
+    resetAuth: (state) => {
+      state.isSuccess = false;
+      state.isError = false;
+      state.isLoading = false;
+      state.message = false;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(registerUser.pending, (state) => {
@@ -64,5 +73,7 @@ export const authSlice = createSlice({
       });
   },
 });
+
+const { resetAuth } = authSlice.actions;
 
 export default authSlice.reducer;
