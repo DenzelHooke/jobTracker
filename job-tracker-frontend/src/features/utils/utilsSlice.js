@@ -18,13 +18,22 @@ export const utilsSlice = createSlice({
       state.isError = true;
       state.message = action.payload;
     },
-    resetError: (state, action) => {
+    setSuccess: (state, action) => {
+      if (!action.payload) {
+        throw new Error('Please include a message before calling setSuccess');
+      }
+
+      state.isSuccess = true;
+      state.message = action.payload;
+    },
+    resetState: (state, action) => {
       state.isError = false;
+      state.isSuccess = false;
       state.message = '';
     },
   },
   extraReducers: {},
 });
 
-export const { setError, resetError } = utilsSlice.actions;
+export const { setError, resetState, setSuccess } = utilsSlice.actions;
 export default utilsSlice.reducer;

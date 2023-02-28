@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
-import { resetError } from '../features/utils/utilsSlice';
+import { resetState } from '../features/utils/utilsSlice';
 
 const NotifyWatcher = () => {
   const { isError, isSuccess, message } = useSelector((state) => state.utils);
@@ -10,8 +10,11 @@ const NotifyWatcher = () => {
   useEffect(() => {
     if (isError) {
       toast.error(message);
+    } else if (isSuccess) {
+      toast.success(message);
     }
-    dispatch(resetError());
+
+    dispatch(resetState());
   }, [isError, isSuccess, message]);
 };
 

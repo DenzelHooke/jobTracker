@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setError } from '../features/utils/utilsSlice';
+import { setError, setSuccess } from '../features/utils/utilsSlice';
 import { resetAuth } from '../features/auth/authSlice';
 import { registerUser } from '@/features/auth/authSlice';
-import { Router } from 'next/router';
+import { useRouter } from 'next/router';
 
 const RegisterForm = () => {
-  const router = Router;
+  const router = useRouter();
 
   const dispatch = useDispatch();
-  const { isSuccess } = useSelector((state) => state.auth);
+  const { isSuccess, isError, message } = useSelector((state) => state.auth);
   const [formData, setFormData] = useState({
     email: null,
     password1: null,
@@ -19,9 +19,12 @@ const RegisterForm = () => {
   useEffect(() => {
     if (isSuccess) {
       router.push('/dashboard');
-      dispatch(resetAuth());
+      dispatch(setSuccess('Account successfully created'));
+    } else if (isError) {
+      dispatch(setError(message));
     }
-  }, [isSuccess]);
+    dispatch(resetAuth());
+  }, [isSuccess, isError]);
 
   const onSubmit = (e) => {
     const validRegex =
@@ -46,7 +49,7 @@ const RegisterForm = () => {
     }
 
     // Data is valid
-    dispatch(registerUser({ email, password1 }));
+    dispatch(registerUser({ email, password: password1 }));
   };
 
   const onChange = (e) => {

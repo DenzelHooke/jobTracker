@@ -2,6 +2,12 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from base.models import Job
 from .serializers import JobSerializer, AccountSerializer
+import bcrypt
+from account.models import Account
+import json
+from api.custom_exceptions import UserExists, InvalidCreds
+from api.handlers.jwt_handlers import jwtWrapper
+from django.contrib.auth import authenticate, login
 
 
 @api_view(['GET'])
@@ -25,15 +31,40 @@ def addJob(request):
 
 @api_view(['POST'])
 def registerUser(request):
-    serializer = AccountSerializer(data=request.data)
-    if serializer.is_valid():
-        #  Cretae user in database
-        serializer.save()
+    user_exists = Account.objects.filter(email=request.data['email'])
+    if user_exists:
+        raise UserExists
 
-    return Response(serializer.data)
+    user = Account.objects.create_user(email=request.data['email'],
+                                       password=request.data['password'])
 
+    if user:
+        payload = {
+            "email": user.email
+        }
+        token = jwtWrapper().encode(payload)
+    return Response(json.dumps({
+        "token": token
+    }))
+
+
+@api_view(['POST'])
+def loginUser(request):
+    # Check if user exists, reject if user doesnt
+    userExists = Account.objects.filter(email=request.data['email'])
+
+    if not userExists:
+        raise InvalidCreds
+
+    user = authenticate(username=request.data.get('email'),
+                        password=request.data.get('password'))
+
+    if user:
+        print(user)
 
 # Info endpoint
+
+
 @api_view(['GET'])
 def info(request):
     endpoints = {

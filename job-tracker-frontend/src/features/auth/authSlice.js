@@ -39,7 +39,8 @@ export const registerUser = createAsyncThunk(
         error.message ||
         error.toString();
       console.error(message);
-      return thunkAPI.rejectWithValue(message);
+      console.log(message, error);
+      return thunkAPI.rejectWithValue(error.response.data.detail || message);
     }
   }
 );
@@ -69,11 +70,12 @@ export const authSlice = createSlice({
       .addCase(registerUser.rejected, (state, action) => {
         state.isLoading = false;
         state.isSuccess = false;
+        state.isError = true;
         state.message = action.payload;
       });
   },
 });
 
-const { resetAuth } = authSlice.actions;
+export const { resetAuth } = authSlice.actions;
 
 export default authSlice.reducer;
