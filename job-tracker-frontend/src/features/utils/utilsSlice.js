@@ -32,7 +32,7 @@ export const utilsSlice = createSlice({
       state.message = '';
     },
   },
-  extraReducers: {},
+  extraReducers: (builder) => {},
 });
 
 export const { setError, resetState, setSuccess } = utilsSlice.actions;

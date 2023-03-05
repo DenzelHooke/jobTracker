@@ -45,6 +45,28 @@ export const registerUser = createAsyncThunk(
   }
 );
 
+export const loginUser = createAsyncThunk(
+  'auth/loginUser',
+  async ({ email, password }, thunkAPI) => {
+    try {
+      console.log('calling login reducer');
+      // console.log('AFTER CALL');
+      return await authService.loginUser({
+        email: email,
+        password: password,
+      });
+    } catch (error) {
+      const message =
+        (error.message && error.response.data && error.response.data.message) ||
+        error.message ||
+        error.toString();
+      console.error(message);
+      console.log(message, error);
+      return thunkAPI.rejectWithValue(error.response.data.detail || message);
+    }
+  }
+);
+
 //* ─── Slice ──────────────────────────────────────────────────────────────────
 export const authSlice = createSlice({
   name: 'auth',
@@ -66,8 +88,25 @@ export const authSlice = createSlice({
       .addCase(registerUser.fulfilled, (state) => {
         state.isLoading = false;
         state.isSuccess = true;
+        state.user = JSON.parse(localStorage.getItem('user'));
       })
       .addCase(registerUser.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+
+      .addCase(loginUser.pending, (state) => {
+        state.isLoading = true;
+      })
+
+      .addCase(loginUser.fulfilled, (state) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.user = JSON.parse(localStorage.getItem('user'));
+      })
+      .addCase(loginUser.rejected, (state, action) => {
         state.isLoading = false;
         state.isSuccess = false;
         state.isError = true;

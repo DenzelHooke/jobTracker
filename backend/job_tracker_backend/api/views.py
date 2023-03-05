@@ -44,7 +44,8 @@ def registerUser(request):
         }
         token = jwtWrapper().encode(payload)
     return Response(json.dumps({
-        "token": token
+        "token": token,
+        "email": user.email
     }))
 
 
@@ -60,7 +61,16 @@ def loginUser(request):
                         password=request.data.get('password'))
 
     if user:
-        print(user)
+        payload = {
+            "email": user.email
+        }
+        token = jwtWrapper().encode(payload)
+
+        # TODO Create payload generator function
+        return Response(json.dumps({
+            "token": token,
+            "email": user.email
+        }))
 
 # Info endpoint
 

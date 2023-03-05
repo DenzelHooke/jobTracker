@@ -7,11 +7,18 @@ $pale-dogwood: #ffddd2ff;
 $atomic-tangerine: #e29578ff;
 $dark-grey-black: #171717;
 $off-white: rgb(235, 235, 235);
+$navbar-bg: rgb(27, 27, 27);
+$border-edge: black;
 
 :root {
   box-sizing: border-box;
   --white: white;
   --input-border: rgba(0, 0, 0, 0.337);
+}
+
+a {
+  color: white;
+  text-decoration: none;
 }
 
 * {
@@ -25,8 +32,8 @@ body {
   background-color: $off-white;
 }
 
-.register-form-wrapper {
-  width: 400px;
+.form-panel {
+  width: 350px;
   height: 400px;
 }
 
@@ -73,7 +80,6 @@ body {
 }
 
 .page {
-  min-height: 100vh;
 }
 
 .button {
@@ -89,5 +95,100 @@ body {
 
   &:hover {
     background-color: #2d2d2d;
+  }
+}
+
+// Layout
+
+#__next {
+  min-height: 100vh;
+  display: flex;
+  flex-flow: column;
+}
+
+#layout {
+  flex: 1 1 auto;
+  // display: flex;
+}
+
+.layout-dashboard {
+  display: flex;
+}
+
+// Navbar
+#navbar {
+  min-height: 80px;
+  display: flex;
+  background-color: $navbar-bg;
+  flex-direction: column;
+  padding: 10px;
+  display: fixed;
+  top: 0;
+
+  .logo-image {
+    width: 150px;
+    height: 70px;
+  }
+
+  .nav-links {
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    align-items: flex-end;
+
+    li {
+      margin: 0 10px;
+    }
+  }
+}
+
+//Dashboard
+
+#dashboard {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  width: 100%;
+  // height: 100%;
+
+  .content {
+    padding: 10px 40px;
+  }
+
+  #sidebar {
+    $sidebarPadding: 10px;
+    padding: 5px 0;
+    width: 100%;
+    // background-color: red;
+    border-right: 1px solid $border-edge;
+
+    .sidebar-title {
+      margin-top: 40px;
+      margin-bottom: 20px;
+      padding: 0 $sidebarPadding;
+    }
+
+    .sidebar-options-wrapper {
+      .sidebar-options {
+        list-style: none;
+        .sidebar-option {
+          transition: all 100ms ease-in-out;
+          cursor: pointer;
+          // margin-bottom: 20px;
+          display: flex;
+          align-items: center;
+          padding: 10px 0;
+          padding-left: 30px;
+
+          &:hover {
+            background-color: #c1c1c1;
+          }
+
+          .icon {
+            margin: 0 10px;
+          }
+        }
+      }
+    }
   }
 }

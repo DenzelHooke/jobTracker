@@ -8,12 +8,12 @@ export default function Register() {
   };
 
   return (
-    <div className="page">
+    <div className="page flex flex-justify-center flex-align-center">
       <div className="flex flex-justify-center flex-align-center fill-page">
         <FormWrapper
           form={<RegisterForm />}
-          message="Welcome Back"
-          className="register-form-wrapper shadow-panel white-bg round-panel"
+          message="Create account"
+          className="register-form-wrapper shadow-panel white-bg round-panel form-panel"
         />
       </div>
     </div>

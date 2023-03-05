@@ -10,12 +10,27 @@ const registerUser = async ({ email, password }) => {
   const payload = { email, password };
   const res = await axios.post(`${API_URL}/register/`, payload);
   if (res.data) {
+    console.log(res);
+    localStorage.setItem('user', res.data);
+    return res.data;
+  }
+};
+
+const loginUser = async ({ email, password }) => {
+  const payload = {
+    email,
+    password,
+  };
+  const res = await axios.post(`${API_URL}/login/`, payload);
+  if (res.data) {
+    localStorage.setItem('user', res.data);
     return res.data;
   }
 };
 
 const authService = {
   registerUser,
+  loginUser,
 };
 
 export default authService;
