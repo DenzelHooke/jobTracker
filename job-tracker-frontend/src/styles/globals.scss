@@ -9,6 +9,7 @@ $dark-grey-black: #171717;
 $off-white: rgb(235, 235, 235);
 $navbar-bg: rgb(27, 27, 27);
 $border-edge: black;
+$buttonBG: #3b8df8;
 
 :root {
   box-sizing: border-box;
@@ -149,8 +150,33 @@ body {
   display: grid;
   grid-template-columns: 220px 1fr;
   width: 100%;
+  position: relative;
   // height: 100%;
 
+  .dashboard-intro {
+    display: flex;
+    justify-content: space-between;
+
+    button {
+      border-radius: 10px;
+      width: 200px;
+      background-color: $buttonBG;
+      border: 0;
+      color: white;
+      // font-weight: 600;
+      // word-spacing: 5px;
+      font-size: 14px;
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      cursor: pointer;
+      transition: all 100ms ease-in-out;
+
+      &:hover {
+        background-color: #2c6cbe;
+      }
+    }
+  }
   .content {
     padding: 10px 40px;
   }
@@ -183,12 +209,31 @@ body {
           &:hover {
             background-color: #c1c1c1;
           }
-
+          span {
+            pointer-events: none;
+          }
           .icon {
+            pointer-events: none;
             margin: 0 10px;
           }
         }
       }
     }
   }
+}
+
+// Modal
+.modal {
+  position: absolute;
+  top: 25%;
+  width: 600px;
+  height: 300px;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+
+  // transform: translateX(100%);
+  background-color: white;
+  z-index: 200;
 }

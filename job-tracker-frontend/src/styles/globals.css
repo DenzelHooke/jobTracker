@@ -118,6 +118,27 @@ body {
   display: grid;
   grid-template-columns: 220px 1fr;
   width: 100%;
+  position: relative;
+}
+#dashboard .dashboard-intro {
+  display: flex;
+  justify-content: space-between;
+}
+#dashboard .dashboard-intro button {
+  border-radius: 10px;
+  width: 200px;
+  background-color: #3b8df8;
+  border: 0;
+  color: white;
+  font-size: 14px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  cursor: pointer;
+  transition: all 100ms ease-in-out;
+}
+#dashboard .dashboard-intro button:hover {
+  background-color: #2c6cbe;
 }
 #dashboard .content {
   padding: 10px 40px;
@@ -146,6 +167,23 @@ body {
 #dashboard #sidebar .sidebar-options-wrapper .sidebar-options .sidebar-option:hover {
   background-color: #c1c1c1;
 }
+#dashboard #sidebar .sidebar-options-wrapper .sidebar-options .sidebar-option span {
+  pointer-events: none;
+}
 #dashboard #sidebar .sidebar-options-wrapper .sidebar-options .sidebar-option .icon {
+  pointer-events: none;
   margin: 0 10px;
+}
+
+.modal {
+  position: absolute;
+  top: 25%;
+  width: 600px;
+  height: 300px;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: white;
+  z-index: 200;
 }/*# sourceMappingURL=globals.css.map */

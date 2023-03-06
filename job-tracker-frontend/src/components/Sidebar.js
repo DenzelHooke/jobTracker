@@ -1,7 +1,7 @@
 import { BsEnvelope, BsClock, BsPuzzle } from 'react-icons/bs';
 import { motion } from 'framer-motion';
 
-export const Sidebar = ({ pageData }) => {
+export const Sidebar = ({ currentPage, onSelect }) => {
   const iconSize = 19;
 
   const tags = {
@@ -21,6 +21,14 @@ export const Sidebar = ({ pageData }) => {
     // },
   };
 
+  const onClick = (e) => {
+    if (e.target.tagName != 'LI') {
+      return;
+    }
+    console.log(e.target.id);
+    onSelect(e.target.id);
+  };
+
   return (
     <div id="sidebar">
       <div className="sidebar-title">
@@ -28,15 +36,27 @@ export const Sidebar = ({ pageData }) => {
       </div>
       <div className="sidebar-options-wrapper">
         <ul className="sidebar-options">
-          <motion.li {...tags} className="sidebar-option">
+          <motion.li
+            {...tags}
+            id="applied"
+            onClick={(e) => onClick(e)}
+            className="sidebar-option">
             <BsEnvelope size={iconSize} className="icon" />
             <span>Applied</span>
           </motion.li>
-          <motion.li {...tags} className="sidebar-option">
+          <motion.li
+            {...tags}
+            id="pending"
+            onClick={(e) => onClick(e)}
+            className="sidebar-option">
             <BsClock size={iconSize} className="icon" />
             <span>Pending</span>
           </motion.li>
-          <motion.li {...tags} className="sidebar-option">
+          <motion.li
+            {...tags}
+            id="rejected"
+            onClick={(e) => onClick(e)}
+            className="sidebar-option">
             <BsPuzzle size={iconSize} className="icon" />
             <span>Rejected</span>
           </motion.li>
