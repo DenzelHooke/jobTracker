@@ -57,6 +57,7 @@ def loginUser(request):
     if not userExists:
         raise InvalidCreds
 
+    # Returns user object if user and password combination matches
     user = authenticate(username=request.data.get('email'),
                         password=request.data.get('password'))
 
@@ -64,6 +65,7 @@ def loginUser(request):
         payload = {
             "email": user.email
         }
+        # Encode our payload into a jwt token
         token = jwtWrapper().encode(payload)
 
         # TODO Create payload generator function
@@ -71,6 +73,8 @@ def loginUser(request):
             "token": token,
             "email": user.email
         }))
+    else:
+        raise InvalidCreds
 
 # Info endpoint
 

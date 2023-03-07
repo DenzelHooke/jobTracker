@@ -9,5 +9,5 @@ class UserExists(APIException):
 
 class InvalidCreds(APIException):
     status_code = 401
-    default_detail = "Invalid Credentials"
+    default_detail = "Invalid login credentials. Please try again."
     default_code = "bad_credentials"

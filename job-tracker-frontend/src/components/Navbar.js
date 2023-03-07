@@ -1,7 +1,16 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { useSelector, useDispatch } from 'react-redux';
+import authService from '@/features/auth/authService';
 
 const Navbar = () => {
+  const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
+  const onLogout = () => {
+    authService.logout();
+  };
+
   return (
     <>
       <nav id="navbar">
@@ -16,12 +25,27 @@ const Navbar = () => {
             />
           </div>
           <ul className="nav-links">
-            <li>
-              <Link href="/dashboard">Dashboard</Link>
-            </li>
-            <li className="logout-btn">
-              <Link href="/">Logout</Link>
-            </li>
+            {user ? (
+              <>
+                <li>
+                  <Link href="/dashboard">Dashboard</Link>
+                </li>
+                <li className="logout-btn">
+                  <Link href="#" onClick={() => onLogout()}>
+                    Logout
+                  </Link>
+                </li>
+              </>
+            ) : (
+              <>
+                <li>
+                  <Link href="/register">Register</Link>
+                </li>
+                <li className="">
+                  <Link href="/login">Login</Link>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </nav>

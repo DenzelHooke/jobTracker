@@ -9,7 +9,7 @@ function login() {
       <div className="flex flex-justify-center flex-align-center fill-page">
         <FormWrapper
           form={<LoginForm />}
-          message="Login"
+          message="Welcome back"
           className="login-form-wrapper shadow-panel white-bg round-panel form-panel"
         />
       </div>

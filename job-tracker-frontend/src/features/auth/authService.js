@@ -28,9 +28,15 @@ const loginUser = async ({ email, password }) => {
   }
 };
 
+const logout = () => {
+  console.log('Logging out.');
+  localStorage.removeItem('user');
+};
+
 const authService = {
   registerUser,
   loginUser,
+  logout,
 };
 
 export default authService;

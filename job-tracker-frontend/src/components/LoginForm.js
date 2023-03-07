@@ -18,7 +18,7 @@ const LoginUser = () => {
   useEffect(() => {
     if (isSuccess) {
       router.push('/dashboard');
-      dispatch(setSuccess('Account successfully created'));
+      dispatch(setSuccess('Welcome home pal!'));
     } else if (isError) {
       dispatch(setError(message));
     }
@@ -29,10 +29,10 @@ const LoginUser = () => {
     const validRegex =
       /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
-    const { email, password1, password2 } = formData;
+    const { email, password } = formData;
 
     e.preventDefault();
-    if (!email || !password1 || !password2) {
+    if (!email || !password) {
       dispatch(setError('Please fill out all fields'));
       return;
     }
@@ -41,6 +41,8 @@ const LoginUser = () => {
       dispatch(setError('Please enter a valid email address'));
       return;
     }
+
+    dispatch(loginUser(formData));
   };
 
   const onChange = (e) => {
@@ -67,7 +69,7 @@ const LoginUser = () => {
           placeholder="Password"
           onChange={onChange}
         />
-        <button className="button">Create Account</button>
+        <button className="button">Login</button>
       </form>
     </>
   );
