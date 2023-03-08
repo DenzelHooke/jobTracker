@@ -6,14 +6,19 @@ $alice-blue: #edf6f9ff;
 $pale-dogwood: #ffddd2ff;
 $atomic-tangerine: #e29578ff;
 $dark-grey-black: #171717;
+$flat-grey: #353531;
 $off-white: rgb(235, 235, 235);
 $navbar-bg: rgb(27, 27, 27);
 $border-edge: black;
 $buttonBG: #3b8df8;
+$greenery-green: #04724d;
+$wary-orange: #ff9505;
+$bad-orange: #ec4e20;
+$rufous: #a72608;
 
 :root {
   box-sizing: border-box;
-  --white: white;
+  --global-white: white;
   --input-border: rgba(0, 0, 0, 0.337);
 }
 
@@ -31,6 +36,26 @@ a {
 
 body {
   background-color: $off-white;
+}
+
+.wary-orange-bg {
+  background-color: $wary-orange;
+}
+
+.bad-orange-bg {
+  background-color: $bad-orange;
+}
+
+.greenery-green-bg {
+  background-color: $greenery-green;
+}
+
+.rufous-bg {
+  background-color: $rufous;
+}
+
+.white-text {
+  color: white !important;
 }
 
 .form-panel {
@@ -270,6 +295,31 @@ body {
     button {
       grid-column: 1 / -1;
       background-color: $buttonBG;
+    }
+
+    .status-checkbox-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+
+      .status-checkbox {
+        font-weight: 400;
+        border-radius: 10px;
+        padding: 5px;
+        text-align: center;
+        box-shadow: 0px 0px 20px -1px rgba(0, 0, 0, 0.14);
+        -webkit-box-shadow: 0px 0px 20px -1px rgba(0, 0, 0, 0.14);
+        span {
+          padding-left: 10px;
+        }
+      }
+
+      .status-checkbox:nth-child(1) {
+        grid-column: 1/2;
+      }
+      .status-checkbox:nth-child(2) {
+        grid-column: 2/-1;
+      }
     }
   }
 }

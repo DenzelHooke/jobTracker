@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400&display=swap");
 :root {
   box-sizing: border-box;
-  --white: white;
+  --global-white: white;
   --input-border: rgba(0, 0, 0, 0.337);
 }
 
@@ -19,6 +19,26 @@ a {
 
 body {
   background-color: rgb(235, 235, 235);
+}
+
+.wary-orange-bg {
+  background-color: #ff9505;
+}
+
+.bad-orange-bg {
+  background-color: #ec4e20;
+}
+
+.greenery-green-bg {
+  background-color: #04724d;
+}
+
+.rufous-bg {
+  background-color: #a72608;
+}
+
+.white-text {
+  color: white !important;
 }
 
 .form-panel {
@@ -214,4 +234,26 @@ body {
 .add-job-modal form button {
   grid-column: 1/-1;
   background-color: #3b8df8;
+}
+.add-job-modal form .status-checkbox-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.add-job-modal form .status-checkbox-wrapper .status-checkbox {
+  font-weight: 400;
+  border-radius: 10px;
+  padding: 5px;
+  text-align: center;
+  box-shadow: 0px 0px 20px -1px rgba(0, 0, 0, 0.14);
+  -webkit-box-shadow: 0px 0px 20px -1px rgba(0, 0, 0, 0.14);
+}
+.add-job-modal form .status-checkbox-wrapper .status-checkbox span {
+  padding-left: 10px;
+}
+.add-job-modal form .status-checkbox-wrapper .status-checkbox:nth-child(1) {
+  grid-column: 1/2;
+}
+.add-job-modal form .status-checkbox-wrapper .status-checkbox:nth-child(2) {
+  grid-column: 2/-1;
 }/*# sourceMappingURL=globals.css.map */

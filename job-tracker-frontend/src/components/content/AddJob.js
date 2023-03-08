@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import StatusCheckbox from '../statusCheckbox';
+import StatusCheckbox from '../StatusCheckbox';
 
 const AddJob = () => {
   const [formData, setFormData] = useState({
@@ -56,6 +56,7 @@ const AddJob = () => {
               value={formData.address}
             />
           </div>
+          <StatusCheckbox />
           <button
             className="round-panel button buttonHoverSuccess"
             type="submit">
@@ -63,7 +64,6 @@ const AddJob = () => {
           </button>
         </form>
       </div>
-      <StatusCheckbox />
     </>
   );
 };

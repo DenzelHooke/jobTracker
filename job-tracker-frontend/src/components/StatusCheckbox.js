@@ -9,29 +9,36 @@ const StatusCheckbox = () => {
   });
   const size = 15;
   const onClick = (e) => {
-    console.log(e.target.id);
+    if (e.target !== e.currentTarget) return;
+    console.log(e.currentTarget);
+    setStatus(() => ({
+      applied: false,
+      pending: false,
+      rejected: false,
+      [e.target.id]: !status[`${e.target.id}`],
+    }));
   };
 
   return (
     <div className="status-checkbox-wrapper">
       <div
-        className={`status-checkbox clickable`}
+        className={`status-checkbox clickable greenery-green-bg white-text no-click-child`}
         onClick={onClick}
-        id="applied-btn">
+        id="applied">
         <BsSendCheckFill size={15} />
-        <span>Appld</span>
+        <span>I applied!</span>
       </div>
       <div
-        className={`status-checkbox clickable`}
+        className={`status-checkbox clickable wary-orange-bg white-text no-click-child`}
         onClick={onClick}
-        id="pending-btn">
+        id="pending">
         <BsHourglassSplit size={15} />
         <span>Haven't applied yet</span>
       </div>
       <div
-        className={`status-checkbox clickable`}
+        className={`status-checkbox clickable rufous-bg white-text no-click-child`}
         onClick={onClick}
-        id="rejected-btn">
+        id="rejected">
         <FaSadCry size={15} />
         <span>Rejected</span>
       </div>

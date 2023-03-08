@@ -122,4 +122,12 @@
 
 .clickable {
   cursor: pointer;
+}
+
+.no-click {
+  pointer-events: none;
+}
+
+.no-click-child * {
+  pointer-events: none;
 }/*# sourceMappingURL=utils.css.map */

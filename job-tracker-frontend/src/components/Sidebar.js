@@ -1,7 +1,13 @@
+import { useEffect } from 'react';
 import { BsEnvelope, BsClock, BsPuzzle } from 'react-icons/bs';
 import { motion } from 'framer-motion';
 
 export const Sidebar = ({ currentPage, onSelect }) => {
+  // useEffect(() => {
+  //   try {
+  //     document.getElementById(currentPage).classList.add('selected');
+  //   } catch (error) {}
+  // }, []);
   const iconSize = 19;
 
   const tags = {
