@@ -83,7 +83,7 @@ const RegisterForm = () => {
           placeholder="Confirm password"
           onChange={onChange}
         />
-        <button className="button">Create Account</button>
+        <button className="button buttonHoverDark">Create Account</button>
       </form>
     </>
   );

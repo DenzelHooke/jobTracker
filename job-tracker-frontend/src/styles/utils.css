@@ -34,6 +34,10 @@
   flex-wrap: wrap;
 }
 
+.no-flex {
+  display: block !important;
+}
+
 .heading {
   text-align: center;
   font-size: var(--global-header-size);
@@ -109,4 +113,13 @@
   bottom: 0;
   z-index: 100;
   background-color: rgba(0, 0, 0, 0.105);
+}
+
+.button {
+  border-style: none;
+  padding: 5px;
+}
+
+.clickable {
+  cursor: pointer;
 }/*# sourceMappingURL=utils.css.map */

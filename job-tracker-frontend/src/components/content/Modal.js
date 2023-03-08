@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 
-const Modal = ({ content, setModal }) => {
+const Modal = ({ content, setModal, className }) => {
   const modalRef = useRef(null);
 
   const handleClickOutside = (event) => {
@@ -21,9 +21,8 @@ const Modal = ({ content, setModal }) => {
   }, []);
 
   return (
-    <div ref={modalRef} className="modal panel round-panel">
+    <div ref={modalRef} className={`modal panel round-panel ${className}`}>
       {content}
-      MODAL
     </div>
   );
 };

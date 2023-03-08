@@ -2,14 +2,26 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useSelector, useDispatch } from 'react-redux';
 import authService from '@/features/auth/authService';
+import { useEffect, useState } from 'react';
 
 const Navbar = () => {
+  const [loggedIn, setLoggedIn] = useState(false);
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   const onLogout = () => {
     authService.logout();
   };
+
+  useEffect(() => {
+    if (loggedIn) {
+      return;
+    }
+
+    if (user) {
+      setLoggedIn(true);
+    }
+  }, [loggedIn]);
 
   return (
     <>
@@ -25,7 +37,7 @@ const Navbar = () => {
             />
           </div>
           <ul className="nav-links">
-            {user ? (
+            {loggedIn ? (
               <>
                 <li>
                   <Link href="/dashboard">Dashboard</Link>

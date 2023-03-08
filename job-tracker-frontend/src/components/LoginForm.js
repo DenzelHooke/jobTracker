@@ -69,7 +69,7 @@ const LoginUser = () => {
           placeholder="Password"
           onChange={onChange}
         />
-        <button className="button">Login</button>
+        <button className="button buttonHoverDark">Login</button>
       </form>
     </>
   );

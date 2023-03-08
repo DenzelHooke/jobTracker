@@ -71,9 +71,15 @@ body {
   color: white;
   margin-top: 40px;
   cursor: pointer;
+  transition: all 100ms ease-in-out;
 }
-.button:hover {
+
+.buttonHoverDark:hover {
   background-color: #2d2d2d;
+}
+
+.buttonHoverSuccess:hover {
+  background-color: #3276ce;
 }
 
 #__next {
@@ -186,4 +192,26 @@ body {
   margin-right: auto;
   background-color: white;
   z-index: 200;
+}
+
+.add-job-modal {
+  height: auto;
+  padding: 20px 5px;
+}
+.add-job-modal form {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+}
+.add-job-modal form div {
+  grid-column: 1/-1;
+  font-weight: bold;
+  margin: 5px 0;
+}
+.add-job-modal form #company {
+  grid-column: 1/-1;
+}
+.add-job-modal form button {
+  grid-column: 1/-1;
+  background-color: #3b8df8;
 }/*# sourceMappingURL=globals.css.map */

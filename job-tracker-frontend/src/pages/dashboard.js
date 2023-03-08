@@ -33,6 +33,7 @@ export default function Dashboard() {
     }
 
     return () => {
+      document.getElementById('layout').classList.remove('layout-dashboard');
       setDisplayingModal(false);
     };
   }, []);
@@ -53,7 +54,11 @@ export default function Dashboard() {
   return (
     <div id="dashboard">
       {displayingModal && (
-        <Modal setModal={setDisplayingModal} content={<AddJob />} />
+        <Modal
+          setModal={setDisplayingModal}
+          content={<AddJob />}
+          className="add-job-modal"
+        />
       )}
       <Sidebar content={content.current} onSelect={onSidebarSelect} />
       <div className="content">
