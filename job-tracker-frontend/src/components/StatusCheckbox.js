@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { BsSendCheckFill, BsHourglassSplit } from 'react-icons/bs';
 import { FaSadCry } from 'react-icons/fa';
-const StatusCheckbox = () => {
+const StatusCheckbox = ({ onStatusChange }) => {
   const [status, setStatus] = useState({
-    applied: false,
+    applied: true,
     pending: false,
     rejected: false,
   });
@@ -15,9 +15,13 @@ const StatusCheckbox = () => {
       applied: false,
       pending: false,
       rejected: false,
-      [e.target.id]: !status[`${e.target.id}`],
+      [e.target.id]: true,
     }));
   };
+
+  useEffect(() => {
+    onStatusChange(status);
+  }, [status]);
 
   return (
     <div className="status-checkbox-wrapper">

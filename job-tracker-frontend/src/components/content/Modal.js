@@ -15,7 +15,7 @@ const Modal = ({ content, setModal, className }) => {
     document.getElementById('layout').classList.add('modal-background');
 
     return () => {
-      document.removeEventListener('mouseup', handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
       document.getElementById('layout').classList.remove('modal-background');
     };
   }, []);

@@ -4,29 +4,41 @@ from base.models import Job
 from .serializers import JobSerializer, AccountSerializer
 import bcrypt
 from account.models import Account
+from base.models import Job
 import json
 from api.custom_exceptions import UserExists, InvalidCreds
 from api.handlers.jwt_handlers import jwtWrapper
 from django.contrib.auth import authenticate, login
+from operator import attrgetter
 
 
-@api_view(['GET'])
-def getData(request):
-    jobs = Job.objects.all()
-    # Many tells our serializer to accept an iterable of objects
-    serializer = JobSerializer(jobs, many=True)
+@api_view(['GET', 'POST'])
+def jobDetail(request):
+    if request.method == "POST":
+        try:
+            company = request.data['company']
+            email = request.data['email']
+            address = request.data['address']
+            jobStatus = request.data['jobStatus']
+            applied = jobStatus['applied']
+            pending = jobStatus['pending']
+            rejected = jobStatus['rejected']
 
-    return Response(serializer.data)
+            new_job = Job.objects.create(
+                company_name=company,
+                company_email=email,
+                company_address=address,
+                applied=applied,
+                pending=pending,
+                rejected=rejected
+            )
 
+            if new_job:
+                return Response(new_job)
 
-@api_view(['POST'])
-def addJob(request):
-    serializer = JobSerializer(data=request.data)
-    if serializer.is_valid():
-        # Create item in databasqe
-        serializer.save()
-
-    return Response(serializer.data)
+            print(company, email, address, jobStatus)
+        except Exception as e:
+            print(e)
 
 
 @api_view(['POST'])
