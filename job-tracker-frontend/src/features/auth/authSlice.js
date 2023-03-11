@@ -56,6 +56,7 @@ export const loginUser = createAsyncThunk(
         password: password,
       });
     } catch (error) {
+      console.log(error);
       const message =
         (error.message && error.response.data && error.response.data.message) ||
         error.message ||
@@ -102,13 +103,14 @@ export const authSlice = createSlice({
       .addCase(loginUser.fulfilled, (state) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.user = JSON.parse(localStorage.getItem('user'));
+        state.user = localStorage.getItem('user');
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.isLoading = false;
         state.isSuccess = false;
         state.isError = true;
         state.message = action.payload;
+        // console.log(message);
       });
   },
 });

@@ -1,5 +1,6 @@
 import jwt
 import os
+from rest_framework_simplejwt.tokens import RefreshToken
 
 
 class jwtWrapper:
@@ -22,3 +23,11 @@ class jwtWrapper:
 
     def decode(self, encoded_jwt):
         return jwt.decode(encoded_jwt, jwtWrapper._SECRET_KEY, algorithm=jwtWrapper._ALGORITHIM)
+
+    def getToken(self, user):
+        refresh = RefreshToken.for_user(user)
+
+        return {
+            'refresh': str(refresh),
+            'access': str(refresh.access_token)
+        }

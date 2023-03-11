@@ -55,6 +55,16 @@ INSTALLED_APPS = [
     # 'account.apps.AccountConfig',
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+}
+
+SIMPLE_JWT = {
+    "TOKEN_OBTAIN_SERIALIZER": "base.serializers.CustomTokenObtainPairSerializer",
+}
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -21,9 +21,10 @@ const loginUser = async ({ email, password }) => {
     email,
     password,
   };
-  const res = await axios.post(`${API_URL}/login/`, payload);
+  const res = await axios.post(`${API_URL}/token/`, payload);
   if (res.data) {
-    localStorage.setItem('user', res.data);
+    console.log('RESPONSE: ', res);
+    localStorage.setItem('user', JSON.stringify(res.data));
     return res.data;
   }
 };

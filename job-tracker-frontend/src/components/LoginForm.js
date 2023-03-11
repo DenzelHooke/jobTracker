@@ -20,6 +20,7 @@ const LoginUser = () => {
       router.push('/dashboard');
       dispatch(setSuccess('Welcome home pal!'));
     } else if (isError) {
+      console.log('ERROR: ', message);
       dispatch(setError(message));
     }
     dispatch(resetAuth());
