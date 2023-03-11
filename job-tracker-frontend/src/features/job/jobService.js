@@ -21,7 +21,15 @@ export const createJob = async ({ company, address, email, jobStatus }) => {
     jobStatus,
   };
 
-  return await axios.post(`${API_URL}/job/`, payload);
+  const user = JSON.parse(localStorage.getItem('user'));
+  console.log(user.access);
+  const config = {
+    headers: {
+      Authorization: `Bearer ${user.access}`,
+    },
+  };
+
+  return await axios.post(`${API_URL}/job/`, payload, config);
 };
 
 const jobService = {

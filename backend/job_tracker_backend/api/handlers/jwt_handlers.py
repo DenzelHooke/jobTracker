@@ -26,6 +26,7 @@ class jwtWrapper:
 
     def getToken(self, user):
         refresh = RefreshToken.for_user(user)
+        refresh['email'] = user.email
 
         return {
             'refresh': str(refresh),

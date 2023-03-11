@@ -36,7 +36,9 @@ def jobDetail(request):
             )
 
             if new_job:
-                return Response(new_job)
+                return Response({
+                    "created": 1
+                })
 
             print(company, email, address, jobStatus)
         except Exception as e:
@@ -88,7 +90,7 @@ def loginUser(request):
     if not user:
         raise InvalidCreds
 
-    return Response(json.dumps(jwtWrapper().getToken(user)))
+    return Response(jwtWrapper().getToken(user))
 
 
 # Info endpoint
