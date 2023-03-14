@@ -4,5 +4,6 @@ from . import views
 # /job/
 urlpatterns = [
     path('', views.jobDetail),
+    path('category/', views.getCategory)
 
 ]

@@ -1,6 +1,6 @@
 from pathlib import Path
 import os
-
+import datetime
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -34,7 +34,10 @@ SECRET_KEY = ENV_SECRET_KEY
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = ENV_DEBUG_MODE
 ALLOWED_HOSTS = ['*']
-CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+]
+CORS_ALLOW_CREDENTIALS = True
 
 
 # Application definition
@@ -59,9 +62,16 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
+    'EXCEPTION_HANDLER': 'api.handlers.exception_handler.custom_exception_handler',
 }
 
+COOKIE_REFRESH_EXPIRE = datetime.datetime.utcnow() + datetime.timedelta(days=7)
+
+
 SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": datetime.timedelta(days=7),
+    "REFRESH_TOKEN_LIFETIME": datetime.timedelta(days=14),
+
     "TOKEN_OBTAIN_SERIALIZER": "base.serializers.CustomTokenObtainPairSerializer",
 }
 

@@ -18,7 +18,6 @@ const initialState = {
   isError: false,
   isSuccess: false,
   isLoading: false,
-  rtcToken: rtcToken ? rtcToken : null,
   message: '',
 };
 
@@ -57,6 +56,21 @@ export const loginUser = createAsyncThunk(
       });
     } catch (error) {
       console.log(error);
+      const message =
+        (error.message && error.response.data && error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(error.response.data.detail || message);
+    }
+  }
+);
+
+export const authenticateToken = createAsyncThunk(
+  'auth/authenticateToken',
+  async () => {
+    try {
+      return await authService.authenticateToken();
+    } catch (error) {
       const message =
         (error.message && error.response.data && error.response.data.message) ||
         error.message ||

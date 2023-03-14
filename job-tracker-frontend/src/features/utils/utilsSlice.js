@@ -4,6 +4,7 @@ const initialState = {
   isError: false,
   isSuccess: false,
   message: '',
+  redirect: null,
 };
 
 export const utilsSlice = createSlice({
@@ -12,7 +13,7 @@ export const utilsSlice = createSlice({
   reducers: {
     setError: (state, action) => {
       if (!action.payload) {
-        throw new Error('Please include a message before calling setError!');
+        console.error('Must add payload before calling.');
       }
 
       state.isError = true;
@@ -20,7 +21,7 @@ export const utilsSlice = createSlice({
     },
     setSuccess: (state, action) => {
       if (!action.payload) {
-        throw new Error('Please include a message before calling setSuccess');
+        console.error('Must add payload before calling.');
       }
 
       state.isSuccess = true;
@@ -31,9 +32,14 @@ export const utilsSlice = createSlice({
       state.isSuccess = false;
       state.message = '';
     },
+    redirect: (state, action) => {
+      console.log('redirect called');
+      state.redirect = action.payload;
+    },
   },
   extraReducers: (builder) => {},
 });
 
-export const { setError, resetState, setSuccess } = utilsSlice.actions;
+export const { setError, resetState, setSuccess, redirect } =
+  utilsSlice.actions;
 export default utilsSlice.reducer;

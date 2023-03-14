@@ -10,6 +10,7 @@ from api.custom_exceptions import UserExists, InvalidCreds
 from api.handlers.jwt_handlers import jwtWrapper
 from django.contrib.auth import authenticate, login
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.exceptions import AuthenticationFailed
 
 
 @api_view(['GET', 'POST'])
@@ -17,6 +18,8 @@ from rest_framework.permissions import IsAuthenticated
 def jobDetail(request):
 
     if request.method == "POST":
+
+        print(request.COOKIES)
         try:
             company = request.data['company']
             email = request.data['email']
@@ -32,17 +35,51 @@ def jobDetail(request):
                 company_address=address,
                 applied=applied,
                 pending=pending,
-                rejected=rejected
+                rejected=rejected,
+                user=request.user
             )
 
-            if new_job:
-                return Response({
-                    "created": 1
-                })
+            return Response({
+                "created": 1
+            })
 
-            print(company, email, address, jobStatus)
         except Exception as e:
             print(e)
+            return Response({
+                "message": str(e)
+            })
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def getCategory(request):
+    print(request.user)
+    user = request.user
+    category = {
+        request.query_params['category']: True
+    }
+    all_category_jobs = []
+
+    try:
+        all_category_jobs = Job.objects.filter(
+            user=user).filter(**category).values()
+        print(all_category_jobs)
+
+    except Exception as e:
+        print(e)
+        return Response({
+            "message": str(e)
+        })
+
+    return Response({
+        "jobs": all_category_jobs
+    })
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def verifyToken(request):
+    return Response({"authorized": 1})
 
 
 @api_view(['POST'])

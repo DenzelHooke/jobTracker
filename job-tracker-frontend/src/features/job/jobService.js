@@ -6,11 +6,23 @@ const API_URL = DEV
   : process.env.NEXT_PUBLIC_PROD_API;
 
 export const getCategoryJobs = async ({ categoryID }) => {
-  const payload = {
-    catgory: categoryID,
+  const user = JSON.parse(localStorage.getItem('user'));
+  const token = user.access;
+  console.log(categoryID);
+  const config = {
+    params: {
+      category: categoryID,
+    },
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
   };
 
-  return await axios.get(`${API_URL}/job/category/${categoryID}`, payload);
+  const res = await axios.get(`${API_URL}/job/category/`, config);
+
+  if (res.data) {
+    return res.data;
+  }
 };
 
 export const createJob = async ({ company, address, email, jobStatus }) => {
@@ -22,14 +34,18 @@ export const createJob = async ({ company, address, email, jobStatus }) => {
   };
 
   const user = JSON.parse(localStorage.getItem('user'));
-  console.log(user.access);
+  console.log(user);
   const config = {
     headers: {
       Authorization: `Bearer ${user.access}`,
     },
   };
 
-  return await axios.post(`${API_URL}/job/`, payload, config);
+  const res = await axios.post(`${API_URL}/job/`, payload, config);
+
+  if (res.data) {
+    return res.data;
+  }
 };
 
 const jobService = {
