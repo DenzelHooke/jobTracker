@@ -190,7 +190,7 @@ body {
   .dashboard-intro {
     display: flex;
     justify-content: space-between;
-
+    margin-bottom: 60px;
     button {
       border-radius: 10px;
       width: 200px;
@@ -251,6 +251,31 @@ body {
             margin: 0 10px;
           }
         }
+      }
+    }
+  }
+
+  // Jobs
+  .jobs-wrapper {
+    display: flex;
+    // justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    .job-item-wrapper {
+      // -webkit-box-shadow: 0px 22px 58px -4px rgba(167, 167, 167, 1);
+      // -moz-box-shadow: 0px 22px 58px -4px rgba(167, 167, 167, 1);
+      // box-shadow: 0px 22px 58px -4px rgba(167, 167, 167, 1);
+      min-width: 300px;
+      padding: 10px;
+      border-radius: 10px;
+      margin-bottom: 40px;
+      background-color: white;
+
+      h3 {
+        font-style: italic;
+        font-weight: 600;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+        margin-bottom: 40px;
       }
     }
   }

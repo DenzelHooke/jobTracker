@@ -9,29 +9,32 @@ const DisplayJobs = () => {
 
   return (
     <>
-      {jobs.length > 0
-        ? jobs.map((job) => {
-            return (
-              <>
-                <div className="job-item-wrapper">
-                  <div className="job-item">
-                    <div className="job-title">
-                      <h3>{job.company_name}</h3>
-                    </div>
-                    <div className="contact">
-                      <div>
-                        <span>Email:</span> <span>{job.company_email}</span>
+      <div className="jobs-wrapper">
+        {jobs.length > 0
+          ? jobs.map((job) => {
+              return (
+                <>
+                  <div className="job-item-wrapper">
+                    <div className="job-item">
+                      <div className="job-title">
+                        <h3>{job.company_name}</h3>
                       </div>
-                      <div>
-                        <span>Address:</span> <span>{job.company_address}</span>
+                      <div className="contact">
+                        <div>
+                          <span>Email:</span> <span>{job.company_email}</span>
+                        </div>
+                        <div>
+                          <span>Address:</span>{' '}
+                          <span>{job.company_address}</span>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </>
-            );
-          })
-        : 'Nothing loaded'}
+                </>
+              );
+            })
+          : 'Nothing loaded'}
+      </div>
     </>
   );
 };

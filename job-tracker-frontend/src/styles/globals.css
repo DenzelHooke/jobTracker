@@ -149,6 +149,7 @@ body {
 #dashboard .dashboard-intro {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 60px;
 }
 #dashboard .dashboard-intro button {
   border-radius: 10px;
@@ -199,6 +200,24 @@ body {
 #dashboard #sidebar .sidebar-options-wrapper .sidebar-options .sidebar-option .icon {
   pointer-events: none;
   margin: 0 10px;
+}
+#dashboard .jobs-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+#dashboard .jobs-wrapper .job-item-wrapper {
+  min-width: 300px;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 40px;
+  background-color: white;
+}
+#dashboard .jobs-wrapper .job-item-wrapper h3 {
+  font-style: italic;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  margin-bottom: 40px;
 }
 
 .modal {
