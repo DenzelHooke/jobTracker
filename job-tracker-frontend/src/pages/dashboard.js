@@ -10,8 +10,7 @@ import Rejected from '../components/content/Rejected';
 import Modal from '../components/content/Modal';
 import AddJob from '@/components/content/AddJob';
 import { GoPlus } from 'react-icons/go';
-import axios from 'axios';
-import { getCategoryJobs } from '@/features/job/jobSlice';
+import { getCategoryJobs, setCategory } from '@/features/job/jobSlice';
 import DisplayJobs from '@/components/DisplayJobs';
 
 const DEV = process.env.NEXT_PUBLIC_DEV;
@@ -20,11 +19,8 @@ const API_URL = DEV
   : process.env.NEXT_PUBLIC_PROD_API;
 
 export default function Dashboard() {
-  const [content, setContent] = useState({
-    current: 'applied',
-  });
   const { user } = useSelector((state) => state.auth);
-  const { isJobError, isJobSuccess, jobMessage } = useSelector(
+  const { isJobError, isJobSuccess, jobMessage, category } = useSelector(
     (state) => state.jobs
   );
 
@@ -38,8 +34,8 @@ export default function Dashboard() {
   };
 
   useEffect(() => {
-    dispatch(getCategoryJobs({ categoryID: content.current }));
-  }, [content]);
+    dispatch(getCategoryJobs({ categoryID: category }));
+  }, [category]);
 
   useEffect(() => {
     if (isJobError) {
@@ -67,9 +63,7 @@ export default function Dashboard() {
   const onSidebarSelect = (value) => {
     let selection = value.toLowerCase();
     selection = selection.trim();
-    setContent({
-      current: selection,
-    });
+    dispatch(setCategory(selection));
   };
 
   const onCreateNewClick = () => {
@@ -86,7 +80,7 @@ export default function Dashboard() {
           className="add-job-modal"
         />
       )}
-      <Sidebar content={content.current} onSelect={onSidebarSelect} />
+      <Sidebar content={category} onSelect={onSidebarSelect} />
       <div className="content">
         <div className="dashboard-intro">
           <h2>Dashboard</h2>

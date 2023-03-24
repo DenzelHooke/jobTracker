@@ -25,13 +25,8 @@ export const getCategoryJobs = async ({ categoryID }) => {
   }
 };
 
-export const createJob = async ({ company, address, email, jobStatus }) => {
-  const payload = {
-    company,
-    address,
-    email,
-    jobStatus,
-  };
+export const createJob = async (formData) => {
+  const payload = formData;
 
   const user = JSON.parse(localStorage.getItem('user'));
   console.log(user);
@@ -48,9 +43,29 @@ export const createJob = async ({ company, address, email, jobStatus }) => {
   }
 };
 
+export const deleteJob = async ({ job_id, category }) => {
+  const user = JSON.parse(localStorage.getItem('user'));
+  console.log(user);
+  const config = {
+    headers: {
+      Authorization: `Bearer ${user.access}`,
+    },
+  };
+
+  const res = await axios.delete(
+    `${API_URL}/job/remove/${job_id}?category=${category}`,
+    config
+  );
+
+  if (res.data) {
+    return res.data;
+  }
+};
+
 const jobService = {
   getCategoryJobs: getCategoryJobs,
   createJob: createJob,
+  deleteJob: deleteJob,
 };
 
 export default jobService;

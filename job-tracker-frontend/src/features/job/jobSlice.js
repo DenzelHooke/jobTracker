@@ -10,9 +10,11 @@ const initialState = {
   isJobError: false,
   isJobSuccess: false,
   jobMessage: '',
+  category: 'applied',
 };
 
 // REDUCERS
+
 export const getCategoryJobs = createAsyncThunk(
   'job/getCategoryJobs',
   async ({ categoryID }, thunkAPI) => {
@@ -31,9 +33,9 @@ export const getCategoryJobs = createAsyncThunk(
 
 export const createJob = createAsyncThunk(
   'job/createJob',
-  async ({ company, address, email, jobStatus }, thunkAPI) => {
+  async (formData, thunkAPI) => {
     try {
-      return await jobService.createJob({ company, address, email, jobStatus });
+      return await jobService.createJob(formData);
     } catch (error) {
       console.log(error);
       const message = error.message || error.toString();
@@ -44,6 +46,23 @@ export const createJob = createAsyncThunk(
     }
   }
 );
+
+export const deleteJob = createAsyncThunk(
+  'job/deleteJob',
+  async ({ job_id, category }, thunkAPI) => {
+    try {
+      return await jobService.deleteJob({ job_id, category });
+    } catch (error) {
+      console.log(error);
+      const message = error.message || error.toString();
+      return thunkAPI.rejectWithValue({
+        message: message,
+        code: error.response.status,
+      });
+    }
+  }
+);
+
 export const jobSlice = createSlice({
   name: 'job',
   initialState: initialState,
@@ -54,6 +73,9 @@ export const jobSlice = createSlice({
       state.isJobSuccess = false;
       state.isJobLoading = false;
       state.jobMessage = '';
+    },
+    setCategory: (state, action) => {
+      state.category = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -86,9 +108,17 @@ export const jobSlice = createSlice({
       .addCase(getCategoryJobs.rejected, (state, action) => {
         state.gettingJobs = false;
         state.jobs = {};
+      })
+
+      .addCase(deleteJob.pending, (state) => {
+        state.isJobLoading = true;
+      })
+      .addCase(deleteJob.fulfilled, (state, action) => {
+        state.isJobLoading = false;
+        state.jobs = action.payload.jobs;
       });
   },
 });
 
-export const { resetJobState } = jobSlice.actions;
+export const { resetJobState, setCategory } = jobSlice.actions;
 export default jobSlice.reducer;

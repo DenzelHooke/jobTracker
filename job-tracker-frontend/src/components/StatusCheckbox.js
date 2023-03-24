@@ -26,21 +26,27 @@ const StatusCheckbox = ({ onStatusChange }) => {
   return (
     <div className="status-checkbox-wrapper">
       <div
-        className={`status-checkbox clickable greenery-green-bg white-text no-click-child`}
+        className={`status-checkbox clickable  white-text no-click-child ${
+          status.applied ? 'greenery-green-bg' : 'off'
+        }`}
         onClick={onClick}
         id="applied">
         <BsSendCheckFill size={15} />
         <span>I applied!</span>
       </div>
       <div
-        className={`status-checkbox clickable wary-orange-bg white-text no-click-child`}
+        className={`status-checkbox clickable wary-orange-bg white-text no-click-child ${
+          status.pending ? 'wary-orange-bg' : 'off'
+        }`}
         onClick={onClick}
         id="pending">
         <BsHourglassSplit size={15} />
         <span>Haven't applied yet</span>
       </div>
       <div
-        className={`status-checkbox clickable rufous-bg white-text no-click-child`}
+        className={`status-checkbox clickable rufous-bg white-text no-click-child ${
+          status.rejected ? 'rufous-bg' : 'off'
+        }`}
         onClick={onClick}
         id="rejected">
         <FaSadCry size={15} />

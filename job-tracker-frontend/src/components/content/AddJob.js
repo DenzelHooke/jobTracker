@@ -3,15 +3,19 @@ import StatusCheckbox from '../StatusCheckbox';
 import { createJob } from '@/features/job/jobSlice';
 import { useDispatch } from 'react-redux';
 import { setError, reset } from '@/features/utils/utilsSlice/';
+import FileUpload from './FileUpload';
+import { generateFormData } from '@/helpers/auth/createJobData';
 
 const AddJob = () => {
   const dispatch = useDispatch();
 
+  const [formFiles, setFormFiles] = useState(false);
   const [formData, setFormData] = useState({
     company: '',
     address: '',
     email: '',
     status: {},
+    resume: false,
   });
 
   const onSubmit = (e) => {
@@ -30,14 +34,17 @@ const AddJob = () => {
         dispatch(setError('Please provide a valid company email address'));
       }
     }
-    dispatch(
-      createJob({
-        company: formData.company,
-        email: formData.email,
-        address: formData.address,
-        jobStatus: formData.status,
-      })
-    );
+
+    const newFormData = generateFormData({
+      company: formData.company,
+      email: formData.email,
+      address: formData.address,
+      jobStatus: formData.status,
+      resumePDF: formFiles,
+    });
+    console.log(...newFormData);
+
+    dispatch(createJob(newFormData));
   };
 
   const onChange = (e) => {
@@ -53,6 +60,10 @@ const AddJob = () => {
       status: status,
     }));
   };
+
+  useEffect(() => {
+    console.log(formFiles);
+  }, [formFiles]);
 
   return (
     <>
@@ -91,6 +102,7 @@ const AddJob = () => {
               value={formData.address}
             />
           </div>
+          <FileUpload formFiles={formFiles} setFormFiles={setFormFiles} />
           <StatusCheckbox onStatusChange={onStatusChange} />
           <button
             className="round-panel button buttonHoverSuccess"

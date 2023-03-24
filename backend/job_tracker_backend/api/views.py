@@ -17,6 +17,7 @@ from rest_framework.exceptions import AuthenticationFailed
 @permission_classes([IsAuthenticated])
 def jobDetail(request):
 
+    print("REQUEST: ", request.data)
     if request.method == "POST":
 
         print(request.COOKIES)
@@ -28,6 +29,9 @@ def jobDetail(request):
             applied = jobStatus['applied']
             pending = jobStatus['pending']
             rejected = jobStatus['rejected']
+            resume = request.data['resume']
+            # print("RESUME: ", resume)
+            print("REQUEST: ", request)
 
             new_job = Job.objects.create(
                 company_name=company,
@@ -48,6 +52,34 @@ def jobDetail(request):
             return Response({
                 "message": str(e)
             })
+
+
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
+def deleteJob(request, pk):
+    print("DELETE PK: ", pk)
+
+    try:
+        user = request.user
+        deleted_job = Job.objects.filter(id=pk).delete()
+
+        category = {
+            request.query_params['category']: True
+        }
+        all_category_jobs = []
+
+        all_category_jobs = Job.objects.filter(
+            user=user).filter(**category).values()
+
+    except Exception as e:
+        return Response({
+            "message": str(e)
+        })
+
+    return Response({
+        "deleted": deleted_job,
+        "jobs": all_category_jobs
+    })
 
 
 @api_view(['GET'])
