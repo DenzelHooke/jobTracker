@@ -11,17 +11,24 @@ from api.handlers.jwt_handlers import jwtWrapper
 from django.contrib.auth import authenticate, login
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.exceptions import AuthenticationFailed
+import uuid
+import os
+from api.handlers.helpers import create_image_dir, save_pdf_to_dir
 
 
 @api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
 def jobDetail(request):
-
-    print("REQUEST: ", request.data)
     if request.method == "POST":
 
-        print(request.COOKIES)
         try:
+            resume = request.FILES.get('resume')
+
+            # Check if images folder exists
+            if resume:
+                resume_dir = create_image_dir(request.user.id, "resume")
+                save_pdf_to_dir(resume, resume_dir, "resume")
+
             company = request.data['company']
             email = request.data['email']
             address = request.data['address']
@@ -29,26 +36,28 @@ def jobDetail(request):
             applied = jobStatus['applied']
             pending = jobStatus['pending']
             rejected = jobStatus['rejected']
-            resume = request.data['resume']
-            # print("RESUME: ", resume)
-            print("REQUEST: ", request)
 
-            new_job = Job.objects.create(
-                company_name=company,
-                company_email=email,
-                company_address=address,
-                applied=applied,
-                pending=pending,
-                rejected=rejected,
-                user=request.user
-            )
+            # print("RESUME: ", resume)
+
+            # new_job = Job.objects.create(
+            #     company_name=company,
+            #     company_email=email,
+            #     company_address=address,
+            #     applied=applied,
+            #     pending=pending,
+            #     rejected=rejected,
+            #     user=request.user
+            # )
 
             return Response({
                 "created": 1
             })
 
         except Exception as e:
-            print(e)
+            # if not company or not email or not jobStatus:
+            #     raise InvalidCreds
+
+            print("ERROR: ", e)
             return Response({
                 "message": str(e)
             })
