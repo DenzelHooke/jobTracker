@@ -6,11 +6,15 @@ export function generateFormData({
   resumePDF,
 }) {
   const formData = new FormData();
-  formData.append('resumePDF', resumePDF);
+  formData.append('resume', resumePDF);
   formData.append('company', company);
-  formData.append('company', email);
+  formData.append('email', email);
   formData.append('address', address);
-  formData.append('jobStatus', jobStatus);
+  formData.append('jobStatus', JSON.stringify(jobStatus));
 
   return formData;
 }
+
+const serializeFile = (file) => {
+  return JSON.stringify(file);
+};

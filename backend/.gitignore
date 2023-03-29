@@ -2,3 +2,10 @@
 .env
 *.sqlite3
 __pycache__/
+.files
+files/
+backend/.aws/
+credentials
+.aws
+/.aws
+.aws/

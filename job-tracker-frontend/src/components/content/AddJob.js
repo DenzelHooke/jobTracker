@@ -9,13 +9,15 @@ import { generateFormData } from '@/helpers/auth/createJobData';
 const AddJob = () => {
   const dispatch = useDispatch();
 
-  const [formFiles, setFormFiles] = useState(false);
+  const [formFiles, setFormFiles] = useState({
+    resume: false,
+    cover: false,
+  });
   const [formData, setFormData] = useState({
     company: '',
     address: '',
     email: '',
     status: {},
-    resume: false,
   });
 
   const onSubmit = (e) => {
@@ -40,7 +42,7 @@ const AddJob = () => {
       email: formData.email,
       address: formData.address,
       jobStatus: formData.status,
-      resumePDF: formFiles,
+      resumePDF: formFiles.resume,
     });
     console.log(...newFormData);
 
@@ -68,7 +70,11 @@ const AddJob = () => {
   return (
     <>
       <div className="form-wrapper no-flex">
-        <form onSubmit={onSubmit} autoComplete="off" className="form no-flex">
+        <form
+          onSubmit={onSubmit}
+          autoComplete="off"
+          className="form no-flex"
+          encType="multipart/form-data">
           <div>
             <label>Business Name</label>
             <input

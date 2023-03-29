@@ -13,54 +13,66 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.exceptions import AuthenticationFailed
 import uuid
 import os
-from api.handlers.helpers import create_image_dir, save_pdf_to_dir
+from api.handlers.helpers import writePDF, AWS, generateFileNameFromUser
+from job_tracker_backend.settings import IMAGE_BUCKET
+from pathlib import Path
+import json
+
+
+root_dir = Path(__file__).parent.parent
 
 
 @api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
 def jobDetail(request):
-    if request.method == "POST":
+    if request.method == 'POST':
+        s3_instance = None
 
-        try:
-            resume = request.FILES.get('resume')
+        resume = request.FILES.get('resume')
+        cover = request.FILES.get('cover')
+        # Check if images folder exists
+        if resume:
+            file_name = generateFileNameFromUser(
+                resume.name, request.user, type="resume")
+            path = writePDF(path=f'{root_dir}/files/',
+                            file=resume, file_name=file_name)
+            s3_instance = AWS()
+            uploaded = s3_instance.upload_file(
+                bucket_name=IMAGE_BUCKET, path_to_file=path, file_name=file_name, type="resume")
 
-            # Check if images folder exists
-            if resume:
-                resume_dir = create_image_dir(request.user.id, "resume")
-                save_pdf_to_dir(resume, resume_dir, "resume")
+            resume = file_name
 
-            company = request.data['company']
-            email = request.data['email']
-            address = request.data['address']
-            jobStatus = request.data['jobStatus']
-            applied = jobStatus['applied']
-            pending = jobStatus['pending']
-            rejected = jobStatus['rejected']
+        jobStatus = json.loads(request.data['jobStatus'])
+        print(request.data)
+        job_values = {
+            'company_name': request.data.get('company', None),
+            'company_email': request.data.get('email', None),
+            'company_address': request.data.get('address', None),
+            'applied': jobStatus['applied'],
+            'pending': jobStatus['pending'],
+            'rejected': jobStatus['rejected'],
+            'cover': cover or '',
+            'resume': resume or '',
 
-            # print("RESUME: ", resume)
+        }
 
-            # new_job = Job.objects.create(
-            #     company_name=company,
-            #     company_email=email,
-            #     company_address=address,
-            #     applied=applied,
-            #     pending=pending,
-            #     rejected=rejected,
-            #     user=request.user
-            # )
+        # company = request.data['company']
+        # email = request.data['email']
+        # address = request.data['address']
+        # applied = jobStatus['applied']
+        # pending = jobStatus['pending']
+        # rejected = jobStatus['rejected']
 
-            return Response({
-                "created": 1
-            })
+        # print("RESUME: ", resume)
 
-        except Exception as e:
-            # if not company or not email or not jobStatus:
-            #     raise InvalidCreds
+        new_job = Job.objects.create(
+            **job_values,
+            user=request.user
+        )
 
-            print("ERROR: ", e)
-            return Response({
-                "message": str(e)
-            })
+        return Response({
+            "created": 1
+        })
 
 
 @api_view(['DELETE'])

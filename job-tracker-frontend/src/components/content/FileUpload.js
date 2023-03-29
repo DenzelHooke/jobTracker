@@ -7,7 +7,7 @@ const FileUpload = ({ formFiles, setFormFiles }) => {
   const onChange = (e) => {
     setFormFiles((prevData) => ({
       ...prevData,
-      resume: e.target.files[0],
+      [e.target.id]: e.target.files[0],
     }));
     // console.log(e.target.files);
   };
@@ -16,7 +16,7 @@ const FileUpload = ({ formFiles, setFormFiles }) => {
     <>
       <div className="file-upload-wrapper">
         <div className="file-upload box__dragndrop">
-          <input type="file" id="pdf-selector" onChange={onChange} />
+          <input type="file" id="resume" onChange={onChange} />
           {<BsUpload size={iconSize} />}
           <p>Select a PDF file to upload</p>
           <span>Or drag & drop it here</span>

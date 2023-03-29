@@ -14,9 +14,9 @@ class Job(models.Model):
     pending = models.BooleanField(default=False)
     rejected = models.BooleanField(default=False)
     resume = models.CharField(
-        max_length=500, unique=True, default='')
+        max_length=500, unique=False, default='')
     cover = models.CharField(
-        max_length=500, unique=True, default='')
+        max_length=500, unique=False, default='')
     user = models.ForeignKey(Account, on_delete=models.CASCADE)
     created_on = models.DateTimeField(auto_now_add=True)
 

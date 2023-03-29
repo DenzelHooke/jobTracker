@@ -6,6 +6,7 @@ load_dotenv()
 
 ENV_SECRET_KEY = os.getenv('SECRET_KEY')
 ENV_DEBUG_MODE = os.getenv("DEBUG_MODE")
+IMAGE_BUCKET = os.getenv('IMAGE_BUCKET')
 
 
 """
