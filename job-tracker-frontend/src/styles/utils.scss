@@ -114,6 +114,11 @@
   border-radius: 15px;
 }
 
+.rectangleBtn {
+  min-width: 80px;
+  height: 30px;
+}
+
 .modal-background {
   &::after {
     content: '';
@@ -128,9 +133,13 @@
   }
 }
 
-.button {
+button {
   border-style: none;
   padding: 5px;
+}
+
+.roundBtn {
+  border-radius: 5px;
 }
 
 .clickable {
@@ -145,4 +154,10 @@
   * {
     pointer-events: none;
   }
+}
+
+.italic {
+  font-style: italic;
+  font-weight: bold;
+  font-size: 14px;
 }

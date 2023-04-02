@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteJob } from '@/features/job/jobSlice';
+import Job from './content/Job';
+import { v4 as uuidv4 } from 'uuid';
 
 const DisplayJobs = () => {
   const dispatch = useDispatch();
@@ -20,26 +22,7 @@ const DisplayJobs = () => {
       <div className="jobs-wrapper">
         {jobs.length > 0
           ? jobs.map((job) => {
-              return (
-                <div className="job-item-wrapper" key={job.id}>
-                  <div className="job-item">
-                    <div className="job-title">
-                      <button onClick={() => onJobDelete(job.id)}>
-                        DELETE
-                      </button>
-                      <h3>{job.company_name}</h3>
-                    </div>
-                    <div className="contact">
-                      <div>
-                        <span>Email:</span> <span>{job.company_email}</span>
-                      </div>
-                      <div>
-                        <span>Address:</span> <span>{job.company_address}</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              );
+              return <Job job={job} key={uuidv4()} />;
             })
           : 'Nothing loaded'}
       </div>

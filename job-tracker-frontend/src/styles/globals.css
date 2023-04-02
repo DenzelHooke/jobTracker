@@ -206,12 +206,34 @@ body {
   flex-wrap: wrap;
   gap: 10px;
 }
+#dashboard .jobs-wrapper .interactables {
+  display: flex;
+  justify-content: space-between;
+}
+#dashboard .jobs-wrapper .interactables .icon {
+  color: #171717;
+}
+#dashboard .jobs-wrapper .rectangleBtn {
+  border: 2px solid #171717;
+  background-color: white;
+}
 #dashboard .jobs-wrapper .job-item-wrapper {
   min-width: 300px;
   padding: 10px;
   border-radius: 10px;
   margin-bottom: 40px;
   background-color: white;
+  height: 70px;
+  overflow: hidden;
+}
+#dashboard .jobs-wrapper .job-item-wrapper .item {
+  margin-bottom: 20px;
+}
+#dashboard .jobs-wrapper .job-item-wrapper .small {
+  font-size: 14px;
+  color: gray;
+  font-weight: 300;
+  margin-left: 10px;
 }
 #dashboard .jobs-wrapper .job-item-wrapper h3 {
   font-style: italic;
@@ -322,4 +344,11 @@ body {
 }
 .add-job-modal form .status-checkbox-wrapper .status-checkbox span {
   padding-left: 10px;
+}
+
+@media screen and (max-width: 1350px) {
+  .status-checkbox-wrapper {
+    display: flex !important;
+    flex-wrap: wrap !important;
+  }
 }/*# sourceMappingURL=globals.css.map */

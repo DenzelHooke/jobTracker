@@ -32,16 +32,22 @@ def jobDetail(request):
         cover = request.FILES.get('cover')
         # Check if images folder exists
         if resume:
+            # Generate appropriate file name
             file_name = generateFileNameFromUser(
                 resume.name, request.user, type="resume")
+
+            # Create pdf and return path on sysyem
             path = writePDF(path=f'{root_dir}/files/',
                             file=resume, file_name=file_name)
             s3_instance = AWS()
+
+            # Upload file to aws
             uploaded = s3_instance.upload_file(
                 bucket_name=IMAGE_BUCKET, path_to_file=path, file_name=file_name, type="resume")
 
             resume = file_name
 
+        # Deserialize job status into dict
         jobStatus = json.loads(request.data['jobStatus'])
         print(request.data)
         job_values = {
@@ -65,6 +71,7 @@ def jobDetail(request):
 
         # print("RESUME: ", resume)
 
+        # Create a job with populated values
         new_job = Job.objects.create(
             **job_values,
             user=request.user
@@ -193,3 +200,31 @@ def info(request):
     }
 
     return Response(endpoints)
+
+
+@api_view(['GET'])
+def access_image(request):
+
+    try:
+        user = request.user
+        s3_instance = AWS()
+        resume = user.resume or None
+        cover = user.cover or None
+
+        resume_url = s3_instance.generatePreSigned(
+            key=resume, bucket=IMAGE_BUCKET)
+
+        cover_url = s3_instance.generatePreSigned(
+            key=cover, bucket=IMAGE_BUCKET)
+
+        return Response(
+            {
+                'resume_url': resume_url,
+                'cover_url': cover_url
+            }
+        )
+    except Exception as e:
+        print("ERROR in access_image view: ", e)
+        return Response({
+            'error': e
+        })

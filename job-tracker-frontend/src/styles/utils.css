@@ -104,6 +104,11 @@
   border-radius: 15px;
 }
 
+.rectangleBtn {
+  min-width: 80px;
+  height: 30px;
+}
+
 .modal-background::after {
   content: "";
   position: absolute;
@@ -115,9 +120,13 @@
   background-color: rgba(0, 0, 0, 0.105);
 }
 
-.button {
+button {
   border-style: none;
   padding: 5px;
+}
+
+.roundBtn {
+  border-radius: 5px;
 }
 
 .clickable {
@@ -130,4 +139,10 @@
 
 .no-click-child * {
   pointer-events: none;
+}
+
+.italic {
+  font-style: italic;
+  font-weight: bold;
+  font-size: 14px;
 }/*# sourceMappingURL=utils.css.map */

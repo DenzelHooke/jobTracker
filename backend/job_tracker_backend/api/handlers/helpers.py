@@ -38,6 +38,18 @@ class AWS:
                 AWS.s3_resource.meta.client.upload_fileobj(
                     f, bucket_name, file_name)
 
+    def generatePreSigned(self, key, bucket, expires=14400):
+        # Time = 4 hours
+
+        url = AWS.s3_resource.meta.client.generate_presigned_url(
+            ClientMethod='get_object',
+            Params={'Bucket': bucket, 'Key': key},
+            ExpiresIn=expires
+        )
+
+        if url:
+            return url
+
 
 def generateFileNameFromUser(file_name, user, type):
     resume_tag = 1

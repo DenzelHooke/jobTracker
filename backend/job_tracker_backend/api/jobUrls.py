@@ -5,6 +5,7 @@ from . import views
 urlpatterns = [
     path('', views.jobDetail),
     path('remove/<int:pk>', views.deleteJob),
-    path('category/', views.getCategory)
+    path('category/', views.getCategory),
+    path('access-image/', views.access_image)
 
 ]
