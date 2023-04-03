@@ -25,6 +25,21 @@ export const getCategoryJobs = async ({ categoryID }) => {
   }
 };
 
+export const getImageAccess = async (job_id) => {
+  const user = JSON.parse(localStorage.getItem('user'));
+  const config = {
+    headers: {
+      Authorization: `Bearer ${user.access}`,
+    },
+  };
+
+  const res = await axios.get(`${API_URL}/job/access-image/${job_id}`, config);
+
+  if (res.data) {
+    return res.data;
+  }
+};
+
 export const createJob = async (formData) => {
   const payload = formData;
 

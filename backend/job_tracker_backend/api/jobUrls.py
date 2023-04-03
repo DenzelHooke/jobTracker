@@ -6,6 +6,6 @@ urlpatterns = [
     path('', views.jobDetail),
     path('remove/<int:pk>', views.deleteJob),
     path('category/', views.getCategory),
-    path('access-image/', views.access_image)
+    path('access-image/<int:pk>', views.access_image)
 
 ]

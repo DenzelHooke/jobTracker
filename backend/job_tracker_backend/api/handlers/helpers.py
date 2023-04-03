@@ -3,10 +3,12 @@ import uuid
 from pathlib import Path
 from account.models import Account
 import boto3
+from botocore.client import Config
 
 
 class AWS:
-    s3_resource = boto3.resource('s3')
+    s3_resource = boto3.resource('s3', config=Config(signature_version='s3v4'))
+    clientS3 = boto3.client('s3', config=Config(signature_version='s3v4'))
 
     def __init__(self, resume=False, cover=False):
         self.resume = resume
@@ -36,17 +38,24 @@ class AWS:
         if type.lower() == "resume":
             with open(path_to_file or self.resume, 'rb') as f:
                 AWS.s3_resource.meta.client.upload_fileobj(
-                    f, bucket_name, file_name)
+                    f, bucket_name, file_name, ExtraArgs={
+                        'ContentType': 'application/pdf',
+                        'ContentDisposition': 'inline'
+                    })
 
     def generatePreSigned(self, key, bucket, expires=14400):
         # Time = 4 hours
-
-        url = AWS.s3_resource.meta.client.generate_presigned_url(
+        print("KEY: ", key)
+        url = AWS.clientS3.generate_presigned_url(
             ClientMethod='get_object',
-            Params={'Bucket': bucket, 'Key': key},
-            ExpiresIn=expires
+            Params={
+                'Bucket': bucket,
+                'Key': key.strip(),
+            },
+            ExpiresIn=expires,
+            HttpMethod='GET',
         )
-
+        print(url)
         if url:
             return url
 

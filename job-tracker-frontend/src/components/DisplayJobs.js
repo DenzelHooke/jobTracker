@@ -12,11 +12,6 @@ const DisplayJobs = () => {
     // console.log(jobs);
   }, [jobs]);
 
-  const onJobDelete = (job_id) => {
-    console.log('delete job ', job_id);
-    dispatch(deleteJob({ job_id, category }));
-  };
-
   return (
     <>
       <div className="jobs-wrapper">

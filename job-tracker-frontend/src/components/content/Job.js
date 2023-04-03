@@ -4,15 +4,29 @@ import { BsTrash3Fill } from 'react-icons/bs';
 import { MdEmail, MdOutlineExpandCircleDown } from 'react-icons/md';
 import { ImOffice } from 'react-icons/im';
 import { returnNA } from '@/helpers/data/strings';
+import { getImageAccess } from '@/features/job/jobService';
+import { useSelector, useDispatch } from 'react-redux';
+import { deleteJob } from '@/features/job/jobSlice';
+import Image from 'next/image';
 
 const Job = ({ job }) => {
   const [isExpand, setIsExpand] = useState(false);
-  const expandHeight = '300px';
+  const [coverURL, setCoverURL] = useState('');
+  const [resumeURL, setResumeURL] = useState('');
+  const expandHeight = '650px';
   const shrinkHeight = '140px';
   const iconSize = 20;
+  const dispatch = useDispatch();
+  const { category } = useSelector((state) => state.jobs);
 
-  useState(() => {
+  useState(async () => {
     console.log('BOOP');
+    if (job.id) {
+      const { resume_url, cover_url } = await getImageAccess(job.id);
+      setResumeURL(resume_url);
+      setCoverURL(cover_url);
+    }
+
     return () => setIsExpand(false);
   }, [job.id]);
 
@@ -33,6 +47,11 @@ const Job = ({ job }) => {
   const tags = {
     initial: 'shrink',
     animate: isExpand ? 'expand' : '',
+  };
+
+  const onJobDelete = (job_id) => {
+    console.log('delete job ', job_id);
+    dispatch(deleteJob({ job_id, category }));
   };
 
   const onExpandJob = (id) => {
@@ -65,6 +84,8 @@ const Job = ({ job }) => {
           <br />
           <h3>{job.company_name}</h3>
         </div>
+        <embed src={resumeURL} alt="Resume image" width="300px" height={300} />
+        <img src={coverURL} alt="" />
         <div className="contact">
           <div className="item">
             <ImOffice size={iconSize} />

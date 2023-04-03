@@ -28,8 +28,8 @@ def jobDetail(request):
     if request.method == 'POST':
         s3_instance = None
 
-        resume = request.FILES.get('resume')
-        cover = request.FILES.get('cover')
+        resume = request.FILES.get('resume') or ''
+        cover = request.FILES.get('cover') or ''
         # Check if images folder exists
         if resume:
             # Generate appropriate file name
@@ -43,7 +43,7 @@ def jobDetail(request):
 
             # Upload file to aws
             uploaded = s3_instance.upload_file(
-                bucket_name=IMAGE_BUCKET, path_to_file=path, file_name=file_name, type="resume")
+                bucket_name=IMAGE_BUCKET, path_to_file=path, file_name=file_name.strip(), type="resume")
 
             resume = file_name
 
@@ -57,8 +57,8 @@ def jobDetail(request):
             'applied': jobStatus['applied'],
             'pending': jobStatus['pending'],
             'rejected': jobStatus['rejected'],
-            'cover': cover or '',
-            'resume': resume or '',
+            'cover': cover.strip() or '',
+            'resume': resume.strip() or '',
 
         }
 
@@ -203,19 +203,27 @@ def info(request):
 
 
 @api_view(['GET'])
-def access_image(request):
+def access_image(request, pk):
+    _NON_EXIST_MESSAGE = "N/A"
 
     try:
         user = request.user
+        job = Job.objects.filter(user=user, id=pk)[0]
         s3_instance = AWS()
-        resume = user.resume or None
-        cover = user.cover or None
+        resume = job.resume or None
+        cover = job.cover or None
 
-        resume_url = s3_instance.generatePreSigned(
-            key=resume, bucket=IMAGE_BUCKET)
+        if resume:
+            resume_url = s3_instance.generatePreSigned(
+                key=resume, bucket=IMAGE_BUCKET)
+        else:
+            resume_url = _NON_EXIST_MESSAGE
 
-        cover_url = s3_instance.generatePreSigned(
-            key=cover, bucket=IMAGE_BUCKET)
+        if cover:
+            cover_url = s3_instance.generatePreSigned(
+                key=cover, bucket=IMAGE_BUCKET)
+        else:
+            cover_url = _NON_EXIST_MESSAGE
 
         return Response(
             {
