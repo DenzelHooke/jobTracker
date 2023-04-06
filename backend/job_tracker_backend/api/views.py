@@ -53,7 +53,7 @@ def jobDetail(request):
         job_values = {
             'company_name': request.data.get('company', None),
             'company_email': request.data.get('email', None),
-            'company_address': request.data.get('address', None),
+            'company_position': request.data.get('position', None),
             'applied': jobStatus['applied'],
             'pending': jobStatus['pending'],
             'rejected': jobStatus['rejected'],
@@ -61,13 +61,6 @@ def jobDetail(request):
             'resume': resume.strip() or '',
 
         }
-
-        # company = request.data['company']
-        # email = request.data['email']
-        # address = request.data['address']
-        # applied = jobStatus['applied']
-        # pending = jobStatus['pending']
-        # rejected = jobStatus['rejected']
 
         # print("RESUME: ", resume)
 
@@ -236,3 +229,10 @@ def access_image(request, pk):
         return Response({
             'error': e
         })
+
+
+@api_view(['GET'])
+# @permission_classes([IsAuthenticated])
+def authenticate(request):
+    print("Authenticate")
+    return Response("Authenticated")

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { BsTrash3Fill } from 'react-icons/bs';
+import { BsTrash3Fill, BsFileEarmarkPdfFill } from 'react-icons/bs';
 import { MdEmail, MdOutlineExpandCircleDown } from 'react-icons/md';
 import { ImOffice } from 'react-icons/im';
 import { returnNA } from '@/helpers/data/strings';
@@ -32,10 +32,10 @@ const Job = ({ job }) => {
 
   const jobVariant = {
     shrink: {
-      height: shrinkHeight,
+      maxHeight: shrinkHeight,
     },
     expand: {
-      height: expandHeight,
+      maxHeight: expandHeight,
       transition: {
         type: 'spring',
         stiffness: 320,
@@ -80,12 +80,10 @@ const Job = ({ job }) => {
             </button>
           </div>
           <br />
-          <span className="italic">Company</span>
+          <span className="italic company">Company</span>
           <br />
           <h3>{job.company_name}</h3>
         </div>
-        <embed src={resumeURL} alt="Resume image" width="300px" height={300} />
-        <img src={coverURL} alt="" />
         <div className="contact">
           <div className="item">
             <ImOffice size={iconSize} />
@@ -97,10 +95,23 @@ const Job = ({ job }) => {
           </div>
           <div className="item">
             <MdEmail size={iconSize} />
-            <span className="italic small">Company address</span>
+            <span className="italic small">Position</span>
             <br />
-            <div>
-              <span>{returnNA(job.company_address)}</span>
+            <span>{returnNA(job.position)}</span>
+          </div>
+          <div className="item">
+            <div></div>
+            <div className="item">
+              <BsFileEarmarkPdfFill size={iconSize} />
+              <span className="italic small">Documents</span>
+              <br />
+              <embed
+                src={resumeURL}
+                alt="Resume image"
+                width="300px"
+                height={300}
+              />
+              <img src={coverURL} alt="" />
             </div>
           </div>
         </div>

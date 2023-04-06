@@ -6,6 +6,7 @@ from django.http import HttpResponseRedirect
 def custom_exception_handler(exc, context):
     # Call REST framework's default exception handler first,
     # to get the standard error response.
+    response = exception_handler(exc, context)
 
     # # Now add the HTTP status code to the response.
     # if response is not None:
@@ -16,7 +17,5 @@ def custom_exception_handler(exc, context):
         # Check if refresh token is valid
         # print("DENIED ", dir(context['view'].request))
         print("DENIED ", context['request'].COOKIES)
-
-    response = exception_handler(exc, context)
 
     return response

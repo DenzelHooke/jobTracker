@@ -124,6 +124,7 @@ body {
   padding: 10px;
   display: fixed;
   top: 0;
+  z-index: 99999;
 }
 #navbar .logo-image {
   width: 150px;
@@ -223,7 +224,6 @@ body {
   border-radius: 10px;
   margin-bottom: 40px;
   background-color: white;
-  height: 70px;
   overflow: hidden;
 }
 #dashboard .jobs-wrapper .job-item-wrapper .item {
@@ -231,13 +231,17 @@ body {
 }
 #dashboard .jobs-wrapper .job-item-wrapper .small {
   font-size: 14px;
-  color: gray;
+  color: grey;
   font-weight: 300;
   margin-left: 10px;
 }
+#dashboard .jobs-wrapper .job-item-wrapper .company {
+  font-weight: 500;
+  color: grey;
+}
 #dashboard .jobs-wrapper .job-item-wrapper h3 {
   font-style: italic;
-  font-weight: 600;
+  font-weight: 500;
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
   margin-bottom: 40px;
 }
@@ -269,16 +273,17 @@ body {
 .add-job-modal form div {
   grid-column: 1/-1;
 }
-.add-job-modal form div:nth-child(1) {
+.add-job-modal form #company-wrapper {
+  grid-column: 1/-1;
+  grid-row: 1;
+}
+.add-job-modal form #email-wrapper {
   grid-column: 1/3;
   grid-row: 2;
 }
-.add-job-modal form div:nth-child(3) {
+.add-job-modal form #position-wrapper {
   grid-column: 3/-1;
   grid-row: 2;
-}
-.add-job-modal form #company {
-  grid-column: 1/-1;
 }
 .add-job-modal form button {
   grid-column: 1/-1;

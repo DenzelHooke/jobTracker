@@ -19,7 +19,7 @@ const DisplayJobs = () => {
           ? jobs.map((job) => {
               return <Job job={job} key={uuidv4()} />;
             })
-          : 'Nothing loaded'}
+          : "You don't have any jobs saved for this category."}
       </div>
     </>
   );

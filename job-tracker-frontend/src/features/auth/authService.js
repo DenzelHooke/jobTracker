@@ -46,26 +46,25 @@ const loginUser = async ({ email, password }) => {
   }
 };
 
-const authenticateToken = async () => {
-  try {
-    const user = JSON.parse(localStorage.getItem('user'));
-    const token = user.access;
-    const config = {
-      Authorization: `Bearer ${token}`,
-    };
-    const res = await axios.post();
-  } catch (error) {}
-};
-
 const logout = () => {
   console.log('Logging out.');
   localStorage.removeItem('user');
+};
+
+const auhenticate = () => {
+  // const user = JSON.parse(localStorage.getItem('user'));
+  // const token = user.access;
+  // const config = {
+  //   Authorization: `Bearer ${token}`,
+  // };
+  return axios.get(`${API_URL}/authenticate`);
 };
 
 const authService = {
   registerUser,
   loginUser,
   logout,
+  auhenticate,
 };
 
 export default authService;

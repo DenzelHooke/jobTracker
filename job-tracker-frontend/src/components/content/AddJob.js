@@ -15,7 +15,7 @@ const AddJob = () => {
   });
   const [formData, setFormData] = useState({
     company: '',
-    address: '',
+    position: '',
     email: '',
     status: {},
   });
@@ -40,7 +40,7 @@ const AddJob = () => {
     const newFormData = generateFormData({
       company: formData.company,
       email: formData.email,
-      address: formData.address,
+      position: formData.position,
       jobStatus: formData.status,
       resumePDF: formFiles.resume,
     });
@@ -75,37 +75,37 @@ const AddJob = () => {
           autoComplete="off"
           className="form no-flex"
           encType="multipart/form-data">
-          <div>
-            <label>Business Name</label>
+          <div id="company-wrapper">
+            <label>Company</label>
             <input
               type="text"
-              placeholder="Enter the business name"
+              placeholder="What's the company name?"
               onChange={onChange}
               id="company"
               className="input"
               value={formData.company}
             />
           </div>
-          <div>
+          <div id="email-wrapper">
             <label>Email Address</label>
             <input
               type="text"
-              placeholder="Enter company email address"
+              placeholder="Email of recruiter (Optional)"
               onChange={onChange}
               id="email"
               className="input"
               value={formData.email}
             />
           </div>
-          <div>
-            <label htmlFor="">Street Address</label>
+          <div id="position-wrapper">
+            <label htmlFor="">Job Position</label>
             <input
               type="text"
-              placeholder="Enter company address"
+              placeholder="Enter job position (Optional)"
               onChange={onChange}
-              id="address"
+              id="position"
               className="input"
-              value={formData.address}
+              value={formData.position}
             />
           </div>
           <FileUpload formFiles={formFiles} setFormFiles={setFormFiles} />

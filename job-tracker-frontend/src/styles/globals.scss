@@ -16,6 +16,7 @@ $wary-orange: #ff9505;
 $bad-orange: #ec4e20;
 $modalBG: rgb(245, 245, 245);
 $rufous: #a72608;
+$fadedText: grey;
 
 :root {
   box-sizing: border-box;
@@ -160,6 +161,7 @@ body {
   padding: 10px;
   display: fixed;
   top: 0;
+  z-index: 99999;
 
   .logo-image {
     width: 150px;
@@ -289,7 +291,6 @@ body {
       border-radius: 10px;
       margin-bottom: 40px;
       background-color: white;
-      height: 70px;
       overflow: hidden;
 
       .item {
@@ -298,14 +299,19 @@ body {
 
       .small {
         font-size: 14px;
-        color: gray;
+        color: $fadedText;
         font-weight: 300;
         margin-left: 10px;
       }
 
+      .company {
+        font-weight: 500;
+        color: $fadedText;
+      }
+
       h3 {
         font-style: italic;
-        font-weight: 600;
+        font-weight: 500;
         border-bottom: 1px solid rgba(0, 0, 0, 0.12);
         margin-bottom: 40px;
       }
@@ -346,17 +352,18 @@ body {
       grid-column: 1 / -1;
     }
 
-    div:nth-child(1) {
+    #company-wrapper {
+      grid-column: 1 / -1;
+      grid-row: 1;
+    }
+    #email-wrapper {
       grid-column: 1 / 3;
       grid-row: 2;
     }
-    div:nth-child(3) {
+
+    #position-wrapper {
       grid-column: 3 / -1;
       grid-row: 2;
-    }
-
-    #company {
-      grid-column: 1 / -1;
     }
 
     button {
