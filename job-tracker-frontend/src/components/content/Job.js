@@ -8,12 +8,13 @@ import { getImageAccess } from '@/features/job/jobService';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteJob } from '@/features/job/jobSlice';
 import Image from 'next/image';
+import DocumentPDF from '../DocumentPDF';
 
 const Job = ({ job }) => {
   const [isExpand, setIsExpand] = useState(false);
   const [coverURL, setCoverURL] = useState('');
   const [resumeURL, setResumeURL] = useState('');
-  const expandHeight = '650px';
+  const [expandHeight, setExpandHeight] = useState('426px');
   const shrinkHeight = '140px';
   const iconSize = 20;
   const dispatch = useDispatch();
@@ -101,18 +102,17 @@ const Job = ({ job }) => {
           </div>
           <div className="item">
             <div></div>
-            <div className="item">
+            <motion.div className="resume">
               <BsFileEarmarkPdfFill size={iconSize} />
               <span className="italic small">Documents</span>
               <br />
-              <embed
-                src={resumeURL}
-                alt="Resume image"
-                width="300px"
-                height={300}
+              <DocumentPDF
+                url={resumeURL}
+                icon={<BsFileEarmarkPdfFill />}
+                setExpandHeight={setExpandHeight}
               />
-              <img src={coverURL} alt="" />
-            </div>
+            </motion.div>
+            <img src={coverURL ? coverURL : ''} alt="" />
           </div>
         </div>
       </div>

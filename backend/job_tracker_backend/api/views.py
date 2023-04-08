@@ -49,7 +49,7 @@ def jobDetail(request):
 
         # Deserialize job status into dict
         jobStatus = json.loads(request.data['jobStatus'])
-        print(request.data)
+        print(request.data.get(''))
         job_values = {
             'company_name': request.data.get('company', None),
             'company_email': request.data.get('email', None),
@@ -197,7 +197,7 @@ def info(request):
 
 @api_view(['GET'])
 def access_image(request, pk):
-    _NON_EXIST_MESSAGE = "N/A"
+    _NON_EXIST_MESSAGE = ''
 
     try:
         user = request.user

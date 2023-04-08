@@ -1,7 +1,7 @@
 export function generateFormData({
   company,
   email,
-  address,
+  position,
   jobStatus,
   resumePDF,
 }) {
@@ -9,7 +9,7 @@ export function generateFormData({
   formData.append('resume', resumePDF);
   formData.append('company', company);
   formData.append('email', email);
-  formData.append('address', address);
+  formData.append('position', position);
   formData.append('jobStatus', JSON.stringify(jobStatus));
 
   return formData;
