@@ -203,9 +203,8 @@ body {
   margin: 0 10px;
 }
 #dashboard .jobs-wrapper {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(auto-fill);
+  display: flex;
+  flex-wrap: wrap;
   gap: 10px;
 }
 #dashboard .jobs-wrapper .interactables {
@@ -239,17 +238,25 @@ body {
 }
 #dashboard .jobs-wrapper .job-item-wrapper .item .document .head {
   padding: 10px;
-  height: 45px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
 }
-#dashboard .jobs-wrapper .job-item-wrapper .item .document embed {
+#dashboard .jobs-wrapper .job-item-wrapper .item .document #outerContainer #mainContainer #viewerContainer {
+  top: 0;
+}
+#dashboard .jobs-wrapper .job-item-wrapper .item .document .doc {
+  min-height: 250px;
   position: relative;
+}
+#dashboard .jobs-wrapper .job-item-wrapper .item .document .doc iframe {
+  position: absolute;
   display: block;
-  padding: 10px 0;
+  padding: 0;
   width: 100%;
+  height: 100%;
+  border: 0;
 }
 #dashboard .jobs-wrapper .job-item-wrapper .small {
   font-size: 14px;

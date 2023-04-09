@@ -261,9 +261,13 @@ body {
 
   // Jobs
   .jobs-wrapper {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(auto-fill);
+    // display: grid;
+    // grid-template-columns: repeat(4, 1fr);
+    // grid-auto-flow: column;
+    // grid-template-rows: repeat(auto-fill);
+
+    display: flex;
+    flex-wrap: wrap;
 
     gap: 10px;
     $expandBtnBg: grey;
@@ -307,17 +311,28 @@ body {
 
           .head {
             padding: 10px;
-            height: 45px;
+
             display: flex;
             flex-direction: row;
             align-items: center;
             justify-content: space-between;
           }
-          embed {
+
+          #outerContainer #mainContainer #viewerContainer {
+            top: 0;
+          }
+          .doc {
+            min-height: 250px;
             position: relative;
-            display: block;
-            padding: 10px 0;
-            width: 100%;
+
+            iframe {
+              position: absolute;
+              display: block;
+              padding: 0;
+              width: 100%;
+              height: 100%;
+              border: 0;
+            }
           }
         }
       }

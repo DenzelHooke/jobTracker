@@ -231,8 +231,8 @@ def access_image(request, pk):
         })
 
 
-@api_view(['GET'])
-# @permission_classes([IsAuthenticated])
-def authenticate(request):
-    print("Authenticate")
-    return Response("Authenticated")
+# @api_view(['GET'])
+# # @permission_classes([IsAuthenticated])
+# def authenticate(request):
+#     print("Authenticate")
+#     return Response("Authenticated")

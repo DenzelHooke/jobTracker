@@ -6,8 +6,8 @@ class httpOnlyCookieAuth:
         self.get_response = get_response
 
     def __call__(self, request):
-        # print(request.COOKIES)
-        print("MIDDLEEEWAREEE")
+        print(request.COOKIES)
+        # print("MIDDLEEEWAREEE")
 
         response = self.get_response(request)
         return response

@@ -51,7 +51,7 @@ const logout = () => {
   localStorage.removeItem('user');
 };
 
-const auhenticate = () => {
+const authenticate = () => {
   // const user = JSON.parse(localStorage.getItem('user'));
   // const token = user.access;
   // const config = {
@@ -64,7 +64,7 @@ const authService = {
   registerUser,
   loginUser,
   logout,
-  auhenticate,
+  authenticate,
 };
 
 export default authService;

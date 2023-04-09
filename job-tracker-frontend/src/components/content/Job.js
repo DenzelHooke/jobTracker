@@ -7,7 +7,6 @@ import { returnNA } from '@/helpers/data/strings';
 import { getImageAccess } from '@/features/job/jobService';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteJob } from '@/features/job/jobSlice';
-import Image from 'next/image';
 import DocumentPDF from '../DocumentPDF';
 
 const Job = ({ job }) => {
@@ -20,13 +19,17 @@ const Job = ({ job }) => {
   const dispatch = useDispatch();
   const { category } = useSelector((state) => state.jobs);
 
-  useState(async () => {
-    console.log('BOOP');
-    if (job.id) {
-      const { resume_url, cover_url } = await getImageAccess(job.id);
-      setResumeURL(resume_url);
-      setCoverURL(cover_url);
-    }
+  useEffect(() => {
+    const fetchData = async () => {
+      console.log('BOOP');
+      if (job.id) {
+        const { resume_url, cover_url } = await getImageAccess(job.id);
+        setResumeURL(resume_url);
+        setCoverURL(cover_url);
+      }
+    };
+
+    fetchData();
 
     return () => setIsExpand(false);
   }, [job.id]);
@@ -87,6 +90,12 @@ const Job = ({ job }) => {
         </div>
         <div className="contact">
           <div className="item">
+            <MdEmail size={iconSize} />
+            <span className="italic small">Position</span>
+            <br />
+            <span>{returnNA(job.company_position)}</span>
+          </div>
+          <div className="item">
             <ImOffice size={iconSize} />
             <span className="italic small">Company email</span>
             <br />
@@ -94,12 +103,7 @@ const Job = ({ job }) => {
               <span>{returnNA(job.company_email)}</span>
             </div>
           </div>
-          <div className="item">
-            <MdEmail size={iconSize} />
-            <span className="italic small">Position</span>
-            <br />
-            <span>{returnNA(job.position)}</span>
-          </div>
+
           <div className="item">
             <div></div>
             <motion.div className="resume">
@@ -109,6 +113,7 @@ const Job = ({ job }) => {
               <DocumentPDF
                 url={resumeURL}
                 icon={<BsFileEarmarkPdfFill />}
+                type="Resume"
                 setExpandHeight={setExpandHeight}
               />
             </motion.div>

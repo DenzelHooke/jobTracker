@@ -86,7 +86,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
-    'base.middleware.middleware.httpOnlyCookieAuth',
+    # 'base.middleware.middleware.httpOnlyCookieAuth',
 ]
 
 ROOT_URLCONF = 'job_tracker_backend.urls'

@@ -11,13 +11,7 @@ import Modal from '../components/content/Modal';
 import AddJob from '@/components/content/AddJob';
 import { GoPlus } from 'react-icons/go';
 import { getCategoryJobs, setCategory } from '@/features/job/jobSlice';
-import jobService from '@/features/auth/authService';
 import DisplayJobs from '@/components/DisplayJobs';
-
-const DEV = process.env.NEXT_PUBLIC_DEV;
-const API_URL = DEV
-  ? process.env.NEXT_PUBLIC_DEV_API
-  : process.env.NEXT_PUBLIC_PROD_API;
 
 export default function Dashboard() {
   const { user } = useSelector((state) => state.auth);
@@ -96,8 +90,10 @@ export default function Dashboard() {
 }
 
 export const getServerSideProps = async (request) => {
-  console.log('Authenticating user');
-  const res = jobService.auhenticate();
+  try {
+    console.log('Authenticating user');
+    // const res = authService.authenticate();
 
-  return { props: {} };
+    return { props: {} };
+  } catch (error) {}
 };
