@@ -260,8 +260,6 @@ body {
 }
 #dashboard .jobs-wrapper .job-item-wrapper .small {
   font-size: 14px;
-  color: grey;
-  font-weight: 300;
   margin-left: 10px;
 }
 #dashboard .jobs-wrapper .job-item-wrapper .company {

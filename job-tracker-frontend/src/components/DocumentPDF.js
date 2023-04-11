@@ -1,9 +1,20 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { renderPDF } from '@/helpers/pdf';
+import { MdOutlineMarkUnreadChatAlt } from 'react-icons/md';
 
 const documentPDF = ({ url, icon, type, setExpandHeight }) => {
   const [isExpand, setIsExpand] = useState(false);
+  const [docURL, setDocURL] = useState(false);
+
+  useEffect(() => {
+    if (!url) {
+      setDocURL(false);
+      return;
+    }
+
+    setDocURL(url);
+  }, [url]);
 
   const dropdownVariant = {
     shrink: {
@@ -26,7 +37,7 @@ const documentPDF = ({ url, icon, type, setExpandHeight }) => {
       color: 'white',
     },
     hover: {
-      backgroundColor: [initialBG, '#171717'],
+      backgroundColor: [initialBG, '#313131'],
       transition: {
         duration: 2,
         ease: [0.075, 0.82, 0.165, 1],
@@ -59,7 +70,7 @@ const documentPDF = ({ url, icon, type, setExpandHeight }) => {
     setIsExpand((prevState) => !prevState);
   };
 
-  return (
+  return docURL ? (
     <motion.div
       className="document roundBtn"
       variants={dropdownVariant}
@@ -77,12 +88,14 @@ const documentPDF = ({ url, icon, type, setExpandHeight }) => {
       <div className="doc">
         {/* <canvas id="resume-canvas"></canvas> */}
         <iframe
-          src={`${url ? url : ''}#toolbar=0`}
+          src={`${docURL}#toolbar=0`}
           alt="Application document image"
           width="100%"
           height="100%"></iframe>
       </div>
     </motion.div>
+  ) : (
+    <p className="mute">{`You have no ${type.toLowerCase()}s saved.`}</p>
   );
 };
 

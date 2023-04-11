@@ -54,6 +54,11 @@
   padding-bottom: 40px;
 }
 
+.mutedText {
+  color: grey;
+  font-weight: 300;
+}
+
 .logo {
   width: 100%;
   height: 100%;
@@ -158,6 +163,4 @@ button {
 
 .italic {
   font-style: italic;
-  font-weight: bold;
-  font-size: 14px;
 }

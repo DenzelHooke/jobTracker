@@ -7,10 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 const DisplayJobs = () => {
   const dispatch = useDispatch();
 
-  const { jobs, category } = useSelector((state) => state.jobs);
-  useEffect(() => {
-    // console.log(jobs);
-  }, [jobs]);
+  const { jobs } = useSelector((state) => state.jobs);
 
   return (
     <>
