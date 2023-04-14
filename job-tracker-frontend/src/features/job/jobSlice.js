@@ -68,7 +68,6 @@ export const jobSlice = createSlice({
   initialState: initialState,
   reducers: {
     resetJobState: (state) => {
-      state.jobs = {};
       state.isJobError = false;
       state.isJobSuccess = false;
       state.isJobLoading = false;
@@ -81,16 +80,13 @@ export const jobSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(createJob.pending, (state, action) => {
-        console.log('pending');
+        state.isJobLoading = true;
       })
       .addCase(createJob.rejected, (state, action) => {
         if (action.payload.code === 401) {
           state.jobMessage = authFailedLoginAgain();
         }
-        state.jobMessage = action.payload.message;
         state.isJobError = true;
-        console.log('REJECTED');
-        console.log(action);
       })
       .addCase(createJob.fulfilled, (state) => {
         state.isJobSuccess = true;
@@ -108,6 +104,10 @@ export const jobSlice = createSlice({
       .addCase(getCategoryJobs.rejected, (state, action) => {
         state.gettingJobs = false;
         state.jobs = {};
+        state.isJobError = true;
+        if (action.payload.code === 401) {
+          state.jobMessage = authFailedLoginAgain();
+        }
       })
 
       .addCase(deleteJob.pending, (state) => {
@@ -116,6 +116,10 @@ export const jobSlice = createSlice({
       .addCase(deleteJob.fulfilled, (state, action) => {
         state.isJobLoading = false;
         state.jobs = action.payload.jobs;
+      })
+      .addCase(deleteJob.rejected, (state, action) => {
+        state.isJobError = true;
+        state.jobMessage = action.payload;
       });
   },
 });

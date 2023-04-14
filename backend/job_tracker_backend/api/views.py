@@ -78,9 +78,11 @@ def jobDetail(request):
 @api_view(['DELETE'])
 @permission_classes([IsAuthenticated])
 def deleteJob(request, pk):
+
     print("DELETE PK: ", pk)
 
     try:
+        s3_instance = AWS()
         user = request.user
         deleted_job = Job.objects.filter(id=pk).delete()
 
@@ -92,15 +94,15 @@ def deleteJob(request, pk):
         all_category_jobs = Job.objects.filter(
             user=user).filter(**category).values()
 
+        return Response({
+            "deleted": deleted_job,
+            "jobs": all_category_jobs
+        })
+
     except Exception as e:
         return Response({
             "message": str(e)
         })
-
-    return Response({
-        "deleted": deleted_job,
-        "jobs": all_category_jobs
-    })
 
 
 @api_view(['GET'])

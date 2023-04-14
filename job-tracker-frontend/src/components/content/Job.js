@@ -19,7 +19,6 @@ const Job = ({ job }) => {
   const iconSize = 20;
   const dispatch = useDispatch();
   const { category } = useSelector((state) => state.jobs);
-  const { isSuccess, isError } = useSelector((state) => state.utils);
 
   useEffect(() => {
     const fetchData = async () => {

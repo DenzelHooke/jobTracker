@@ -494,3 +494,7 @@ body {
     flex-wrap: wrap !important;
   }
 }
+
+.Toastify__toast-container {
+  z-index: 99999999999999 !important;
+}

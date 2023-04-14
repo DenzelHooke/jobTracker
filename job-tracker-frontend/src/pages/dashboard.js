@@ -5,8 +5,6 @@ import { setError, setSuccess } from '../features/utils/utilsSlice';
 import { resetJobState } from '@/features/job/jobSlice';
 import { permissionDeniedText } from '../helpers/auth/auth';
 import Sidebar from '../components/Sidebar';
-import Applied from '../components/content/Applied';
-import Rejected from '../components/content/Rejected';
 import Modal from '../components/content/Modal';
 import AddJob from '@/components/content/AddJob';
 import { GoPlus } from 'react-icons/go';
@@ -23,20 +21,19 @@ export default function Dashboard() {
   const dispatch = useDispatch();
   const [displayingModal, setDisplayingModal] = useState(false);
 
-  const contentStates = {
-    applied: <Applied />,
-    rejected: <Rejected />,
-  };
-
   useEffect(() => {
     dispatch(getCategoryJobs({ categoryID: category }));
+    console.log('USEEFFECT CATEGORY');
   }, [category]);
 
   useEffect(() => {
     if (isJobError) {
+      console.log('JOB ERROR: ', jobMessage);
       dispatch(setError(jobMessage));
     } else if (isJobSuccess) {
       dispatch(setSuccess(jobMessage));
+      dispatch(getCategoryJobs({ categoryID: category }));
+      console.log('SECOND CATEGORY');
     }
     dispatch(resetJobState());
   }, [isJobError, isJobSuccess]);

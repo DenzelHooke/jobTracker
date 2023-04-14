@@ -12,11 +12,15 @@ const DisplayJobs = () => {
   return (
     <>
       <div className="jobs-wrapper">
-        {jobs.length > 0
-          ? jobs.map((job) => {
-              return <Job job={job} key={uuidv4()} />;
-            })
-          : "You don't have any jobs saved for this category."}
+        {jobs.length > 0 ? (
+          jobs.map((job) => {
+            return <Job job={job} key={uuidv4()} />;
+          })
+        ) : (
+          <>
+            <p>😥 You don't have any jobs saved in this category.</p>
+          </>
+        )}
       </div>
     </>
   );

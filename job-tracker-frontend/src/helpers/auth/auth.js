@@ -3,5 +3,5 @@ export const permissionDeniedText = () => {
 };
 
 export const authFailedLoginAgain = () => {
-  return 'Verification failed. Please log in again before attempting this action.';
+  return 'Invalid Token. Re-login before attempting this action.';
 };

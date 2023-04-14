@@ -383,4 +383,7 @@ body {
     display: flex !important;
     flex-wrap: wrap !important;
   }
+}
+.Toastify__toast-container {
+  z-index: 99999999999999 !important;
 }/*# sourceMappingURL=globals.css.map */
