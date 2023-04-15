@@ -36,20 +36,20 @@ def jobDetail(request):
             file_name = generateFileNameFromUser(
                 resume.name, request.user, type="resume")
 
-            # Create pdf and return path on sysyem
+            # Create pdf on system and return path of file.
             path = writePDF(path=f'{root_dir}/files/',
                             file=resume, file_name=file_name)
             s3_instance = AWS()
 
             # Upload file to aws
-            uploaded = s3_instance.upload_file(
+            s3_instance.upload_file(
                 bucket_name=IMAGE_BUCKET, path_to_file=path, file_name=file_name.strip(), type="resume")
+            os.remove(path)
 
             resume = file_name
 
         # Deserialize job status into dict
         jobStatus = json.loads(request.data['jobStatus'])
-        print(request.data.get(''))
         job_values = {
             'company_name': request.data.get('company', None),
             'company_email': request.data.get('email', None),
@@ -61,8 +61,6 @@ def jobDetail(request):
             'resume': resume.strip() or '',
 
         }
-
-        # print("RESUME: ", resume)
 
         # Create a job with populated values
         new_job = Job.objects.create(
@@ -79,36 +77,39 @@ def jobDetail(request):
 @permission_classes([IsAuthenticated])
 def deleteJob(request, pk):
 
-    print("DELETE PK: ", pk)
+    s3_instance = AWS()
 
-    try:
-        s3_instance = AWS()
-        user = request.user
-        deleted_job = Job.objects.filter(id=pk).delete()
+    user = request.user
+    job = Job.objects.filter(id=pk)[0]
+    print(job)
+    if job.resume:
+        s3_instance.s3_resource.meta.client.delete_object(
+            Bucket=IMAGE_BUCKET, Key=job.resume)
 
-        category = {
-            request.query_params['category']: True
-        }
-        all_category_jobs = []
+    if job.cover:
+        s3_instance.s3_resource.meta.client.delete_object(
+            Bucket=IMAGE_BUCKET, Key=job.cover)
 
-        all_category_jobs = Job.objects.filter(
-            user=user).filter(**category).values()
+    deleted_job = job.delete()
 
-        return Response({
-            "deleted": deleted_job,
-            "jobs": all_category_jobs
-        })
+    category = {
+        request.query_params['category']: True
+    }
+    all_category_jobs = []
 
-    except Exception as e:
-        return Response({
-            "message": str(e)
-        })
+    all_category_jobs = Job.objects.filter(
+        user=user).filter(**category).values()
+
+    return Response({
+        "deleted": deleted_job,
+        "jobs": all_category_jobs
+    })
 
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def getCategory(request):
-    print(request.user)
+
     user = request.user
     category = {
         request.query_params['category']: True
@@ -118,10 +119,9 @@ def getCategory(request):
     try:
         all_category_jobs = Job.objects.filter(
             user=user).filter(**category).values()
-        print(all_category_jobs)
 
     except Exception as e:
-        print(e)
+
         return Response({
             "message": str(e)
         })
@@ -227,7 +227,7 @@ def access_image(request, pk):
             }
         )
     except Exception as e:
-        print("ERROR in access_image view: ", e)
+
         return Response({
             'error': e
         })

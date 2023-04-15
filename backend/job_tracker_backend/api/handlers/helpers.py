@@ -44,8 +44,6 @@ class AWS:
                     })
 
     def generatePreSigned(self, key, bucket, expires=14400):
-        # Time = 4 hours
-        print("KEY: ", key)
         url = AWS.clientS3.generate_presigned_url(
             ClientMethod='get_object',
             Params={
@@ -55,7 +53,6 @@ class AWS:
             ExpiresIn=expires,
             HttpMethod='GET',
         )
-        print(url)
         if url:
             return url
 
@@ -69,7 +66,6 @@ def generateFileNameFromUser(file_name, user, type):
 
 
 def writePDF(path, file, file_name):
-    print(path)
     with open(f'{path}/{file_name}', 'wb') as f:
         f.write(file.read())
         return f'{path}/{file_name}'

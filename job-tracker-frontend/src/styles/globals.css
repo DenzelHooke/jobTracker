@@ -119,12 +119,14 @@ body {
 #navbar {
   min-height: 80px;
   display: flex;
-  background-color: rgb(27, 27, 27);
+  background-color: #171717;
   flex-direction: column;
   padding: 10px;
-  display: fixed;
+  position: sticky;
   top: 0;
-  z-index: 99999;
+  left: 0;
+  right: 0;
+  z-index: 999;
 }
 #navbar .logo-image {
   width: 150px;
@@ -174,7 +176,9 @@ body {
 #dashboard #sidebar {
   padding: 5px 0;
   width: 100%;
+  background-color: #171717;
   border-right: 1px solid black;
+  color: white;
 }
 #dashboard #sidebar .sidebar-title {
   margin-top: 40px;
@@ -215,8 +219,10 @@ body {
   color: #171717;
 }
 #dashboard .jobs-wrapper .rectangleBtn {
-  border: 2px solid #171717;
-  background-color: white;
+  background-color: rgb(236, 236, 236);
+}
+#dashboard .jobs-wrapper .rectangleBtn svg {
+  fill: #171717;
 }
 #dashboard .jobs-wrapper .job-item-wrapper {
   min-width: 300px;
@@ -386,4 +392,52 @@ body {
 }
 .Toastify__toast-container {
   z-index: 99999999999999 !important;
+}
+
+.data-nextjs-dialog-overlay {
+  z-index: 99999999999999 !important;
+}
+
+.loader,
+.loader:before,
+.loader:after {
+  border-radius: 50%;
+  width: 2.5em;
+  height: 2.5em;
+  animation-fill-mode: both;
+  animation: load7 1.8s infinite ease-in-out;
+}
+
+.loader {
+  color: #3874ff;
+  font-size: 10px;
+  margin: 80px auto;
+  position: relative;
+  text-indent: -9999em;
+  transform: translateZ(0);
+  animation-delay: -0.16s;
+}
+
+.loader:before,
+.loader:after {
+  content: "";
+  position: absolute;
+  top: 0;
+}
+
+.loader:before {
+  left: -3.5em;
+  animation-delay: -0.32s;
+}
+
+.loader:after {
+  left: 3.5em;
+}
+@keyframes load7 {
+  0%, 80%, 100% {
+    box-shadow: 0 2.5em 0 -1.3em;
+  }
+  40% {
+    box-shadow: 0 2.5em 0 0;
+  }
 }/*# sourceMappingURL=globals.css.map */

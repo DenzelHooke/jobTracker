@@ -16,6 +16,6 @@ def custom_exception_handler(exc, context):
     if isinstance(exc, AuthenticationFailed):
         # Check if refresh token is valid
         # print("DENIED ", dir(context['view'].request))
-        print("DENIED ", context['request'].COOKIES)
 
+        print("DENIED ", context['request'].COOKIES)
     return response

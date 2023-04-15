@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import jobService from './jobService';
 import { redirect } from '../utils/utilsSlice';
-import { authFailedLoginAgain } from '@/helpers/auth/auth';
+import { authFailedLoginAgain, unexpectedError } from '@/helpers/auth/auth';
 
 const initialState = {
   jobs: {},
@@ -83,10 +83,14 @@ export const jobSlice = createSlice({
         state.isJobLoading = true;
       })
       .addCase(createJob.rejected, (state, action) => {
-        if (action.payload.code === 401) {
-          state.jobMessage = authFailedLoginAgain();
-        }
         state.isJobError = true;
+        try {
+          if (action.payload.code === 401) {
+            state.jobMessage = authFailedLoginAgain();
+          }
+        } catch (error) {
+          state.jobMessage = unexpectedError();
+        }
       })
       .addCase(createJob.fulfilled, (state) => {
         state.isJobSuccess = true;
@@ -105,8 +109,13 @@ export const jobSlice = createSlice({
         state.gettingJobs = false;
         state.jobs = {};
         state.isJobError = true;
-        if (action.payload.code === 401) {
-          state.jobMessage = authFailedLoginAgain();
+
+        try {
+          if (action.payload.code === 401) {
+            state.jobMessage = authFailedLoginAgain();
+          }
+        } catch (error) {
+          state.jobMessage = unexpectedError();
         }
       })
 
@@ -119,7 +128,7 @@ export const jobSlice = createSlice({
       })
       .addCase(deleteJob.rejected, (state, action) => {
         state.isJobError = true;
-        state.jobMessage = action.payload;
+        state.jobMessage = action.payload.message;
       });
   },
 });

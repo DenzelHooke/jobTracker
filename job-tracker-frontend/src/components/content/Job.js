@@ -53,6 +53,17 @@ const Job = ({ job }) => {
     },
   };
 
+  const buttonVariant = {
+    hover: {
+      backgroundColor: ['#ececec', '#c3c3c3'],
+      transition: {
+        type: 'spring',
+        stiffness: 200,
+        damping: 40,
+      },
+    },
+  };
+
   const tags = {
     initial: 'shrink',
     animate: isExpand ? 'expand' : '',
@@ -77,16 +88,20 @@ const Job = ({ job }) => {
       <div className="job-item">
         <div className="job-title">
           <div className="interactables">
-            <button
+            <motion.button
+              variants={buttonVariant}
+              whileHover="hover"
               onClick={() => onJobDelete(job.id)}
               className="deleteBtn roundBtn clickable rectangleBtn">
               <BsTrash3Fill size={iconSize} className="icon" />
-            </button>
-            <button
+            </motion.button>
+            <motion.button
+              variants={buttonVariant}
+              whileHover="hover"
               className="expandBtn roundBtn clickable rectangleBtn"
               onClick={(e) => onExpandJob(`job-${job.id}`)}>
               <MdOutlineExpandCircleDown size={iconSize} className="icon" />
-            </button>
+            </motion.button>
           </div>
           <br />
           <span className="italic company mutedText">Company</span>

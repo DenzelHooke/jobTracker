@@ -13,9 +13,8 @@ import DisplayJobs from '@/components/DisplayJobs';
 
 export default function Dashboard() {
   const { user } = useSelector((state) => state.auth);
-  const { isJobError, isJobSuccess, jobMessage, category } = useSelector(
-    (state) => state.jobs
-  );
+  const { isJobError, isJobSuccess, jobMessage, category, gettingJobs } =
+    useSelector((state) => state.jobs);
 
   const router = useRouter();
   const dispatch = useDispatch();

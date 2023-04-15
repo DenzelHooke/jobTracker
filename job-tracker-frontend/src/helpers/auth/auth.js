@@ -5,3 +5,7 @@ export const permissionDeniedText = () => {
 export const authFailedLoginAgain = () => {
   return 'Invalid Token. Re-login before attempting this action.';
 };
+
+export const unexpectedError = () => {
+  return 'An unexpected error has occured.';
+};
