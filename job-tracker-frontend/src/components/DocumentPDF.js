@@ -82,7 +82,7 @@ const documentPDF = ({ url, icon, type, setExpandHeight }) => {
           variants={expandVariant}
           {...expandBtnTags}
           onClick={onExpand}>
-          Expand
+          {isExpand ? 'Collapse' : 'Expand'}
         </motion.button>
       </div>
       <div className="doc">

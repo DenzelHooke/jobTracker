@@ -100,7 +100,7 @@ const Job = ({ job }) => {
               whileHover="hover"
               className="expandBtn roundBtn clickable rectangleBtn"
               onClick={(e) => onExpandJob(`job-${job.id}`)}>
-              <MdOutlineExpandCircleDown size={iconSize} className="icon" />
+              {isExpand ? 'Collapse' : 'Expand'}
             </motion.button>
           </div>
           <br />
