@@ -16,10 +16,11 @@ const FileUpload = ({ formFiles, setFormFiles }) => {
     <>
       <div className="file-upload-wrapper">
         <div className="file-upload box__dragndrop">
-          <input type="file" id="resume" onChange={onChange} />
-          {<BsUpload size={iconSize} />}
-          <p>Select a PDF file to upload</p>
-          <span>Or drag & drop it here</span>
+          <div className="input-wrapper">
+            <label htmlFor="">Upload Document</label>
+            <input type="file" id="resume" onChange={onChange} />
+          </div>
+          {/* {<BsUpload size={iconSize} />} */}
         </div>
       </div>
     </>
