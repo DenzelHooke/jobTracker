@@ -77,7 +77,7 @@ const AddJob = () => {
         damping: 10,
       },
     },
-    visible: {
+    fade: {
       opacity: ['100%', '0%'],
       transition: {
         type: 'spring',
@@ -92,6 +92,9 @@ const AddJob = () => {
       <motion.div
         className="no-flex"
         variants={addJobVariant}
+        exit={{
+          y: -1000,
+        }}
         animate="visible">
         <h2>Score your next job</h2>
         <form
