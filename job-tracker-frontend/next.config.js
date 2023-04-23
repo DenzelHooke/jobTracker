@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: false,
   images: {
-    domains: ['job-tracker-files.s3.amazonaws.com'],
+    domains: ['job-tracker-files.s3.amazonaws.com', 'images.pexels.com'],
   },
 };
 

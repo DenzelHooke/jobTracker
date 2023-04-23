@@ -1,0 +1,125 @@
+@import 'utilities/variables';
+
+// Bold text
+// font-size: 40px
+
+html,
+body {
+  min-height: 100vh;
+}
+
+.max-container {
+  max-width: 1700px;
+  margin: 0 auto;
+  padding: 50px;
+}
+
+.index-header {
+  height: 100%;
+  background-image: url('/assets/busy-downtown.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  z-index: 100;
+
+  .content {
+    z-index: 100;
+    padding-top: 10%;
+    max-width: 65%;
+
+    .title {
+      color: white;
+      font-size: 56px;
+      font-weight: 500;
+
+      span {
+        font-weight: 100;
+      }
+    }
+
+    p {
+      font-size: 18px;
+      max-width: 50%;
+      color: $fadedText;
+    }
+
+    button {
+      margin-top: 70px;
+      width: 250px;
+      background-color: $yorkYellow;
+      color: white;
+      font-size: 20px;
+      font-weight: 400;
+      transition: all 150ms ease-in-out;
+
+      &:hover {
+        background-color: $yorkYellowDarken;
+      }
+    }
+  }
+
+  ::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    z-index: -10;
+    background-color: rgba(0, 0, 0, 0.148);
+  }
+}
+
+.grid {
+  display: grid;
+}
+
+.mission {
+  color: $dark-grey-black;
+
+  .title {
+    font-weight: 400;
+    font-size: $title-size;
+    color: $dark-grey-black;
+
+    span {
+      font-weight: 600;
+    }
+  }
+  .utility {
+    display: flex;
+    justify-content: space-around;
+    padding: 30px;
+    gap: 5px;
+
+    .container {
+      flex-grow: 2;
+      max-width: 600px;
+
+      .prelude {
+        padding-top: 20px;
+        color: $fadedText;
+      }
+
+      .text-body {
+        // max-width: 60%;
+        padding-top: 15px;
+      }
+    }
+
+    .image-container {
+      flex-grow: 1;
+      position: relative;
+      max-width: 400px;
+      //   overflow: hidden;
+      //   border-radius: 10px;
+      img {
+        border-radius: 10px;
+        object-fit: cover;
+        max-height: 600px;
+        width: 100%;
+      }
+    }
+  }
+}

@@ -10,6 +10,31 @@ import { deleteJob } from '@/features/job/jobSlice';
 import DocumentPDF from '../DocumentPDF';
 import { setError, setSuccess, resetState } from '@/features/utils/utilsSlice';
 
+const addObserver = (element) => {
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      console.log(mutation.type);
+      if (mutation.type === 'characterData') {
+        console.log(mutation.target);
+      }
+    });
+  });
+
+  // Config mutation
+  const config = {
+    attributes: true,
+    childList: true,
+    characterData: true,
+    subtree: true,
+  };
+
+  // Hook observer into element
+  observer.observe(element, config);
+
+  // How to dissconnect observer
+  // observer.disconnect();
+};
+
 const Job = ({ job }) => {
   const [isExpand, setIsExpand] = useState(false);
   const [coverURL, setCoverURL] = useState('');
@@ -21,6 +46,22 @@ const Job = ({ job }) => {
   const { category } = useSelector((state) => state.jobs);
 
   useEffect(() => {
+    console.log(document.querySelectorAll('.item-value'));
+
+    const field_items = document.querySelectorAll('.item-value');
+
+    field_items.forEach((item) => {
+      addObserver(item);
+    });
+
+    for (let i = 0; i < field_items.length; i++) {
+      field_items[i].addEventListener('click', (event) => {
+        const field = event.target;
+        field.contentEditable = field.contentEditable === true ? false : true;
+        console.log('value editable');
+      });
+    }
+
     const fetchData = async () => {
       console.log('BOOP');
       if (job.id) {
@@ -78,6 +119,10 @@ const Job = ({ job }) => {
     setIsExpand((prevState) => !prevState);
   };
 
+  const onValueChange = (val) => {
+    console.log(val);
+  };
+
   return (
     <motion.div
       {...tags}
@@ -106,21 +151,23 @@ const Job = ({ job }) => {
           <br />
           <span className="italic company mutedText">Company</span>
           <br />
-          <h3>{job.company_name}</h3>
+          <h3 className="item-value" onChange={onValueChange}>
+            {job.company_name}
+          </h3>
         </div>
         <div className="contact">
           <div className="item">
             <MdEmail size={iconSize} />
             <span className="italic small mutedText">Position</span>
             <br />
-            <span>{returnNA(job.company_position)}</span>
+            <div className="item-value">{returnNA(job.company_position)}</div>
           </div>
           <div className="item">
             <ImOffice size={iconSize} />
             <span className="italic small mutedText">Company email</span>
             <br />
             <div>
-              <span>{returnNA(job.company_email)}</span>
+              <div className="item-value">{returnNA(job.company_email)}</div>
             </div>
           </div>
 

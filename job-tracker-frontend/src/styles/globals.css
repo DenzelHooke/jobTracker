@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 :root {
   box-sizing: border-box;
   --global-white: white;
@@ -6,7 +6,7 @@
 }
 
 a {
-  color: white;
+  color: #171717;
   text-decoration: none;
 }
 
@@ -93,7 +93,8 @@ body {
 }
 
 #layout {
-  flex: 1 1 auto;
+  flex-grow: 1;
+  height: 0px;
 }
 
 .layout-dashboard {
@@ -103,7 +104,7 @@ body {
 #navbar {
   min-height: 80px;
   display: flex;
-  background-color: #171717;
+  background-color: rgb(255, 255, 255);
   flex-direction: column;
   padding: 10px;
   position: sticky;
@@ -111,6 +112,7 @@ body {
   left: 0;
   right: 0;
   z-index: 999;
+  color: #171717;
 }
 #navbar .logo-image {
   width: 150px;
@@ -209,7 +211,8 @@ body {
   fill: #171717;
 }
 #dashboard .jobs-wrapper .job-item-wrapper {
-  min-width: 300px;
+  min-width: 250px;
+  max-width: 300px;
   padding: 10px;
   border-radius: 10px;
   margin-bottom: 40px;
@@ -254,7 +257,7 @@ body {
 }
 #dashboard .jobs-wrapper .job-item-wrapper .company {
   font-weight: 500;
-  color: grey;
+  color: rgb(171, 171, 171);
 }
 #dashboard .jobs-wrapper .job-item-wrapper h3 {
   font-style: italic;
