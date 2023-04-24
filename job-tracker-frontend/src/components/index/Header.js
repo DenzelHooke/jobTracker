@@ -14,7 +14,7 @@ const Header = () => {
       <div className="max-container">
         <div className="content">
           <h1 className="title">
-            Keep track of your job applications with <span>ease</span>
+            Track your job applications with <span>ease</span>
           </h1>
           <p>
             Gone are the days of losing track of your job applications. Keep

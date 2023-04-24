@@ -28,13 +28,13 @@ const Navbar = () => {
       <nav id="navbar">
         <div className="flex">
           <div className="logo">
-            <Image
+            {/* <Image
               className="logo-image"
               alt="Website logo"
               src="/assets/job-tracker-logo-white.png"
               width="200"
               height="80"
-            />
+            /> */}
           </div>
           <ul className="nav-links">
             {loggedIn ? (

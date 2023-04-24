@@ -102,17 +102,22 @@ body {
 }
 
 #navbar {
-  min-height: 80px;
+  min-height: 40px;
   display: flex;
-  background-color: rgb(255, 255, 255);
+  background-color: #141414;
   flex-direction: column;
-  padding: 10px;
+  justify-content: end;
+  padding: 0 10px;
+  padding-top: 10px;
+  padding-bottom: 5px;
   position: sticky;
   top: 0;
   left: 0;
   right: 0;
   z-index: 999;
-  color: #171717;
+}
+#navbar .flex {
+  min-height: 100%;
 }
 #navbar .logo-image {
   width: 150px;
@@ -122,11 +127,16 @@ body {
   width: 30%;
   display: flex;
   justify-content: center;
+  align-items: end;
   list-style: none;
   align-items: flex-end;
 }
 #navbar .nav-links li {
+  font-weight: 400;
   margin: 0 10px;
+}
+#navbar .nav-links li a {
+  color: white !important;
 }
 
 #dashboard {

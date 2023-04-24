@@ -123,18 +123,23 @@ body {
 
 // Navbar
 #navbar {
-  min-height: 80px;
+  min-height: 40px;
   display: flex;
   background-color: $navbar-bg;
   flex-direction: column;
-  padding: 10px;
+  justify-content: end;
+  padding: 0 10px;
+  padding-top: 10px;
+  padding-bottom: 5px;
   position: sticky;
   top: 0;
   left: 0;
   right: 0;
   z-index: 999;
-  color: $dark-grey-black;
 
+  .flex {
+    min-height: 100%;
+  }
   .logo-image {
     width: 150px;
     height: 70px;
@@ -144,10 +149,15 @@ body {
     width: 30%;
     display: flex;
     justify-content: center;
+    align-items: end;
     list-style: none;
     align-items: flex-end;
 
     li {
+      a {
+        color: white !important;
+      }
+      font-weight: 400;
       margin: 0 10px;
     }
   }

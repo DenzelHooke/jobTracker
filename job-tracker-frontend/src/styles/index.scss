@@ -16,7 +16,7 @@ body {
 
 .index-header {
   height: 100%;
-  background-image: url('/assets/busy-downtown.jpg');
+  background-image: url('/assets/busy-downtown-op.gif');
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
@@ -78,19 +78,11 @@ body {
 .mission {
   color: $dark-grey-black;
 
-  .title {
-    font-weight: 400;
-    font-size: $title-size;
-    color: $dark-grey-black;
-
-    span {
-      font-weight: 600;
-    }
-  }
   .utility {
     display: flex;
-    justify-content: space-around;
-    padding: 30px;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    // padding: 30px;
     gap: 5px;
 
     .container {
@@ -98,13 +90,13 @@ body {
       max-width: 600px;
 
       .prelude {
-        padding-top: 20px;
+        padding-top: 80px;
         color: $fadedText;
       }
 
       .text-body {
         // max-width: 60%;
-        padding-top: 15px;
+        padding-top: 30px;
       }
     }
 
@@ -112,6 +104,7 @@ body {
       flex-grow: 1;
       position: relative;
       max-width: 400px;
+      margin-top: 20px;
       //   overflow: hidden;
       //   border-radius: 10px;
       img {
@@ -120,6 +113,99 @@ body {
         max-height: 600px;
         width: 100%;
       }
+    }
+  }
+}
+
+// Inform
+
+.inform {
+  color: $dark-grey-black;
+  position: relative;
+
+  .title {
+    text-align: center;
+    padding-bottom: 100px;
+  }
+
+  .utility {
+    display: flex;
+    gap: 5%;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    .info-item {
+      display: flex;
+      flex-direction: column;
+      background-color: white;
+      text-align: center;
+      max-width: 20%;
+      min-width: 300px;
+
+      margin: 20px;
+      padding: 40px 20px;
+      border-radius: 5px;
+      min-height: 400px;
+
+      -webkit-box-shadow: 0px 5px 5px -2px rgba(0, 0, 0, 0.33);
+      -moz-box-shadow: 0px 5px 5px -2px rgba(0, 0, 0, 0.33);
+      box-shadow: 0px 5px 5px -2px rgba(0, 0, 0, 0.33);
+
+      .icon-wrapper {
+        display: flex;
+        justify-content: center;
+        padding-top: 50px;
+
+        .icon {
+          border-radius: 50%;
+          padding: 10px;
+          overflow: hidden;
+          aspect-ratio: 1 / 1;
+          scale: 1.5;
+        }
+      }
+
+      .title {
+        font-size: 30px;
+      }
+
+      .content {
+        margin: 0 auto;
+        margin-top: auto;
+        max-width: 100%;
+        min-height: 129px;
+        align-self: flex-end;
+      }
+    }
+  }
+
+  &::after {
+    content: '';
+    background-color: $fadedText;
+    width: 200px;
+    height: 2px;
+    position: absolute;
+    top: 10px;
+    left: 0;
+    right: 0;
+
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.section {
+  padding-top: 100px;
+}
+
+@media screen and (max-width: 500px) {
+  .max-container {
+    padding: 0 10px;
+  }
+
+  .index-header {
+    .content {
+      max-width: 100%;
     }
   }
 }

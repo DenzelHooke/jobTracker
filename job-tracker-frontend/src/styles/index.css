@@ -11,7 +11,7 @@ body {
 
 .index-header {
   height: 100%;
-  background-image: url("/assets/busy-downtown.jpg");
+  background-image: url("/assets/busy-downtown-op.gif");
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
@@ -65,18 +65,10 @@ body {
 .mission {
   color: #171717;
 }
-.mission .title {
-  font-weight: 400;
-  font-size: 40px;
-  color: #171717;
-}
-.mission .title span {
-  font-weight: 600;
-}
 .mission .utility {
   display: flex;
-  justify-content: space-around;
-  padding: 30px;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
   gap: 5px;
 }
 .mission .utility .container {
@@ -84,16 +76,17 @@ body {
   max-width: 600px;
 }
 .mission .utility .container .prelude {
-  padding-top: 20px;
+  padding-top: 80px;
   color: rgb(171, 171, 171);
 }
 .mission .utility .container .text-body {
-  padding-top: 15px;
+  padding-top: 30px;
 }
 .mission .utility .image-container {
   flex-grow: 1;
   position: relative;
   max-width: 400px;
+  margin-top: 20px;
 }
 .mission .utility .image-container img {
   border-radius: 10px;
@@ -101,4 +94,79 @@ body {
      object-fit: cover;
   max-height: 600px;
   width: 100%;
+}
+
+.inform {
+  color: #171717;
+  position: relative;
+}
+.inform .title {
+  text-align: center;
+  padding-bottom: 100px;
+}
+.inform .utility {
+  display: flex;
+  gap: 5%;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.inform .utility .info-item {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  text-align: center;
+  max-width: 20%;
+  min-width: 300px;
+  margin: 20px;
+  padding: 40px 20px;
+  border-radius: 5px;
+  min-height: 400px;
+  box-shadow: 0px 5px 5px -2px rgba(0, 0, 0, 0.33);
+}
+.inform .utility .info-item .icon-wrapper {
+  display: flex;
+  justify-content: center;
+  padding-top: 50px;
+}
+.inform .utility .info-item .icon-wrapper .icon {
+  border-radius: 50%;
+  padding: 10px;
+  overflow: hidden;
+  aspect-ratio: 1/1;
+  scale: 1.5;
+}
+.inform .utility .info-item .title {
+  font-size: 30px;
+}
+.inform .utility .info-item .content {
+  margin: 0 auto;
+  margin-top: auto;
+  max-width: 100%;
+  min-height: 129px;
+  align-self: flex-end;
+}
+.inform::after {
+  content: "";
+  background-color: rgb(171, 171, 171);
+  width: 200px;
+  height: 2px;
+  position: absolute;
+  top: 10px;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.section {
+  padding-top: 100px;
+}
+
+@media screen and (max-width: 500px) {
+  .max-container {
+    padding: 0 10px;
+  }
+  .index-header .content {
+    max-width: 100%;
+  }
 }/*# sourceMappingURL=index.css.map */

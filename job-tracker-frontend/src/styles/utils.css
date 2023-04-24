@@ -148,4 +148,19 @@ button {
 
 .italic {
   font-style: italic;
+}
+
+.fadeText {
+  color: rgb(171, 171, 171);
+}
+
+.boldText {
+  font-weight: 600;
+}
+
+.title {
+  font-weight: 400;
+  font-size: 40px;
+  color: #171717;
+  margin-bottom: 60px;
 }/*# sourceMappingURL=utils.css.map */

@@ -165,3 +165,19 @@ button {
 .italic {
   font-style: italic;
 }
+
+.fadeText {
+  color: $fadedText;
+}
+
+.boldText {
+  font-weight: 600;
+}
+
+.title {
+  font-weight: 400;
+  font-size: $title-size;
+  color: $dark-grey-black;
+
+  margin-bottom: 60px;
+}
