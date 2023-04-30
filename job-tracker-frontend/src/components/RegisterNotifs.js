@@ -1,13 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { v4 as uuid } from 'uuid';
-
-const displayStatus = ({ bool, falseText, trueText }) => {
-  if (!bool) {
-    return falseText;
-  }
-
-  return trueText;
-};
+import { BsFillCheckCircleFill } from 'react-icons/bs';
 
 const passwordConfirm = (bool) => {
   return {
@@ -66,12 +59,21 @@ const RegisterNotifs = ({
     ]);
   }, [emailValid, passwordLength, isPasswordConfirm]);
 
+  const iconSize = 15;
+
   return (
-    <div className="signup-stats">
+    <div className="signup-stats conditions">
       <ul>
         {values.map((item, index) => {
           return (
-            <li key={uuid()}>
+            <li
+              key={uuid()}
+              className={
+                `condition` + `${item.value.valid ? ' success' : ' invalid'}`
+              }>
+              <span>
+                <BsFillCheckCircleFill size={iconSize} />
+              </span>
               {item.value.valid ? item.value.trueText : item.value.falseText}
             </li>
           );

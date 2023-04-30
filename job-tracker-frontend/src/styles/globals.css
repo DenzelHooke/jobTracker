@@ -21,13 +21,10 @@ body {
   background-color: rgb(235, 235, 235);
 }
 
-.white-text {
-  color: white !important;
-}
-
-.form-panel {
-  width: 350px;
-  height: 400px;
+.global-container {
+  max-width: 90vw;
+  margin: 0 auto;
+  padding: 10px;
 }
 
 .form-wrapper {
@@ -60,10 +57,31 @@ body {
   width: 100%;
 }
 
-.global-container {
-  max-width: 90vw;
-  margin: 0 auto;
-  padding: 10px;
+.conditions {
+  width: 100%;
+}
+.conditions ul {
+  list-style: none;
+  padding-bottom: 20px;
+}
+.conditions ul li {
+  display: flex;
+  padding: 2px 6px;
+  border-radius: 5px;
+  font-size: 15px;
+  color: #171717;
+  margin: 10px 0;
+}
+.conditions ul li span {
+  display: flex;
+  align-items: center;
+  padding-right: 10px;
+}
+.conditions ul .success span svg {
+  fill: #04724d;
+}
+.conditions ul .invalid span svg {
+  fill: #ec4e20;
 }
 
 .button {

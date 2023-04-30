@@ -181,3 +181,15 @@ button {
 
   margin-bottom: 60px;
 }
+
+.white-text {
+  color: white !important;
+}
+
+.form-panel {
+  min-width: 420px;
+  max-height: 600px;
+  min-height: 450px;
+
+  transition: width 1s ease-in-out;
+}
