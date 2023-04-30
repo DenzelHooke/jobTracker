@@ -4,7 +4,7 @@
 :root {
   box-sizing: border-box;
   --global-white: white;
-  --input-border: rgba(0, 0, 0, 0.337);
+  --input-border: rgba(74, 74, 74, 0.249);
 }
 
 a {
@@ -55,7 +55,7 @@ body {
     .input {
       display: block;
       border: 0;
-      padding: 6px;
+      padding: 4px 6px;
       margin: 5px 0;
       width: 100%;
       border-radius: 4px;
@@ -433,6 +433,10 @@ body {
       border: 1.5px solid $borderGrey;
     }
   }
+}
+
+.ui {
+  background-color: white;
 }
 
 .status-checkbox-wrapper {

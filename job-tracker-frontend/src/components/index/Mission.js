@@ -1,11 +1,40 @@
 import React from 'react';
 import Image from 'next/image';
+import { useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 
 const Mission = () => {
+  const titleRef = useRef(null);
+  gsap.registerPlugin(ScrollTrigger);
+
+  useEffect(() => {
+    const titleAnim = gsap.fromTo(
+      titleRef.current,
+      {
+        translateX: '-50vw',
+        opacity: '0%',
+      },
+      {
+        translateX: 0,
+        opacity: '100%',
+        ease: 'ease-out',
+
+        scrollTrigger: {
+          trigger: titleRef.current,
+          start: 'top 50% bottom 40%',
+          end: 'top 20%',
+          scrub: 2,
+        },
+      }
+    );
+  }, []);
+
   return (
     <section className="mission section">
       <div className="max-container">
-        <h2 className="title">
+        <h2 className="title" ref={titleRef}>
           Maximize productivity to it's <span className="boldText">peak</span>
         </h2>
         <div className="utility">

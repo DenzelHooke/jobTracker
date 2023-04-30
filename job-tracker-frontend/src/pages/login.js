@@ -5,7 +5,7 @@ import LoginForm from '../components/LoginForm';
 
 function login() {
   return (
-    <div className="page flex flex-justify-center flex-align-center">
+    <div className="page flex flex-justify-center flex-align-center ">
       <div className="flex flex-justify-center flex-align-center fill-page">
         <FormWrapper
           form={<LoginForm />}

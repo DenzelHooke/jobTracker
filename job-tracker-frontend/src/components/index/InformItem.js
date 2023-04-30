@@ -40,13 +40,13 @@ const InformItem = ({ title, icon, bgColor, body }) => {
         translateY: 0,
         opacity: '100%',
         ease: 'ease',
-        duration: 1,
+        duration: 2,
 
         scrollTrigger: {
           trigger: iconRef.current,
           start: 'top: 80%',
-          end: 'top: 50%',
-          scrub: 0.5,
+          end: 'top: 20%',
+          scrub: 2,
         },
       }
     );
@@ -56,13 +56,6 @@ const InformItem = ({ title, icon, bgColor, body }) => {
     <div className="info-item" ref={iconRef}>
       <div className="icon-wrapper">
         <motion.div
-          whileHover={{
-            scale: 0.8,
-            transition: {
-              damping: 100,
-              stiffness: 100,
-            },
-          }}
           className="icon"
           style={{
             background: bgColor,
