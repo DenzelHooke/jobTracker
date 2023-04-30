@@ -9,48 +9,72 @@ const displayStatus = ({ bool, falseText, trueText }) => {
   return trueText;
 };
 
-const RegisterNotifs = ({ emailValid, passwordLength, isPasswordConfirm }) => {
+const passwordConfirm = (bool) => {
+  return {
+    valid: bool,
+    falseText: "Passwords don't match",
+    trueText: 'Passwords match',
+  };
+};
+
+const emailConfirm = (bool) => {
+  return {
+    valid: bool,
+    falseText: 'Your email is invalid',
+    trueText: 'Your email is valid',
+  };
+};
+
+const passwordLengthConfirm = (bool, min, max) => {
+  return {
+    valid: bool,
+    falseText: `Password must be between ${min} - ${max} characters`,
+    trueText: 'Your password is valid',
+  };
+};
+
+const RegisterNotifs = ({
+  emailValid,
+  passwordLength,
+  isPasswordConfirm,
+  passwordMin,
+  passwordMax,
+}) => {
   const [values, setValues] = useState([
     {
-      value: {
-        valid: emailValid,
-        falseText: 'Your email is invalid',
-        trueText: 'Your email is valid',
-      },
+      value: emailConfirm(emailValid),
     },
     {
-      value: {
-        valid: passwordLength,
-        falseText: 'Password must be between 5 - 20 characters.',
-        trueText: 'Your password is valid',
-      },
+      value: passwordLengthConfirm(passwordLength, passwordMin, passwordMax),
     },
     {
-      value: {
-        valid: isPasswordConfirm,
-        falseText: "Passwords don't match",
-        trueText: 'Passwords match',
-      },
+      value: passwordConfirm(isPasswordConfirm),
     },
   ]);
 
   useEffect(() => {
-    const bools = [emailValid, passwordLength, isPasswordConfirm];
-
-    for (let i = 0; i < values.length; i++) {
-      const bool = bools[i];
-
-      values[i].value.valid = bool;
-    }
+    setValues([
+      {
+        value: emailConfirm(emailValid),
+      },
+      {
+        value: passwordLengthConfirm(passwordLength, passwordMin, passwordMax),
+      },
+      {
+        value: passwordConfirm(isPasswordConfirm),
+      },
+    ]);
   }, [emailValid, passwordLength, isPasswordConfirm]);
 
   return (
     <div className="signup-stats">
       <ul>
         {values.map((item, index) => {
-          return <li key={uuid()}>{
-            item.value.valid ? item.value.trueText : item.value.falseText
-          }</li>;
+          return (
+            <li key={uuid()}>
+              {item.value.valid ? item.value.trueText : item.value.falseText}
+            </li>
+          );
         })}
       </ul>
     </div>
