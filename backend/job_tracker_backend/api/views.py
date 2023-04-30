@@ -140,6 +140,7 @@ def verifyToken(request):
 @api_view(['POST'])
 def registerUser(request):
     user_exists = Account.objects.filter(email=request.data['email'])
+    print(user_exists, request.data)
     if user_exists:
         raise UserExists
 

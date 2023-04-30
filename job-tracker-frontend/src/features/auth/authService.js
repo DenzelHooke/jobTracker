@@ -8,20 +8,19 @@ const API_URL = DEV
 
 const registerUser = async ({ email, password }) => {
   try {
-    console.log('API: ', API_URL);
     const payload = { email, password };
     const res = await axios.post(`${API_URL}/register/`, payload);
-    if (res.data) {
-      localStorage.setItem(
-        'user',
-        JSON.stringify({
-          access: res.data.access,
-        })
-      );
-      return res.data;
-    }
+
+    localStorage.setItem(
+      'user',
+      JSON.stringify({
+        access: res.data.access,
+      })
+    );
+    return res.data;
   } catch (error) {
-    console.log(error);
+    // Gets  triggered when getting 401 status code from response automatically.
+    throw error;
   }
 };
 
@@ -47,7 +46,6 @@ const loginUser = async ({ email, password }) => {
 };
 
 const logout = () => {
-  console.log('Logging out.');
   localStorage.removeItem('user');
 };
 

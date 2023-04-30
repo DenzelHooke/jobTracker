@@ -43,7 +43,6 @@ const RegisterForm = () => {
     if (!email.match(validRegex)) {
       setEmailValid(false);
     } else {
-      console.log(email.match(validRegex));
       setEmailValid(true);
     }
   }, [formData.email]);
@@ -52,10 +51,6 @@ const RegisterForm = () => {
     const { password1, password2 } = formData;
 
     if (!checkPassLength(password1, passwordMin, passwordMax)) {
-      console.log(
-        'pass length: ',
-        checkPassLength(password1, passwordMin, passwordMax)
-      );
       setPasswordLength(false);
     } else {
       setPasswordLength(true);
@@ -67,14 +62,12 @@ const RegisterForm = () => {
     }
 
     if (password1 === password2) {
-      console.log('equal ', password1, password2);
       setPasswordConfirm(true);
       return;
     } else {
       setPasswordConfirm(false);
     }
   }, [formData]);
-  ``;
   useEffect(() => {}, [formData]);
 
   useEffect(() => {

@@ -38,7 +38,7 @@ export const registerUser = createAsyncThunk(
         error.message ||
         error.toString();
       console.error(message);
-      console.log(message, error);
+      // console.log(message, error);
       return thunkAPI.rejectWithValue(error.response.data.detail || message);
     }
   }
