@@ -31,6 +31,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = ENV_SECRET_KEY
+FRONTEND_DOMAIN = "http://localhost:3000"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = ENV_DEBUG_MODE

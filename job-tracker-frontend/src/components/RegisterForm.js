@@ -68,7 +68,6 @@ const RegisterForm = () => {
       setPasswordConfirm(false);
     }
   }, [formData]);
-  useEffect(() => {}, [formData]);
 
   useEffect(() => {
     if (isSuccess) {
