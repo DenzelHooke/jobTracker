@@ -9,7 +9,9 @@ const Layout = ({ children }) => {
       <Navbar />
       <ToastContainer />
       <NotifyWatcher />
-      <div id="layout">{children}</div>
+      <div id="layout" className="relative">
+        {children}
+      </div>
     </>
   );
 };

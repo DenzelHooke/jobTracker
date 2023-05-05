@@ -174,4 +174,9 @@ button {
   max-height: 600px;
   min-height: 450px;
   transition: width 1s ease-in-out;
+}
+
+.shrinkUI {
+  max-height: 350px;
+  min-height: 300px;
 }/*# sourceMappingURL=utils.css.map */

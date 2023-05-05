@@ -441,4 +441,45 @@ body {
 
 .rejectedBG {
   background-color: #a72608 !important;
+}
+
+#blobs {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+}
+#blobs svg {
+  position: absolute;
+  width: 400px;
+  scale: 1.2;
+  top: 10%;
+  opacity: 80%;
+}
+#blobs svg path {
+  fill: #3b8df8;
+}
+#blobs svg:nth-child(1) {
+  right: 0;
+}
+#blobs svg:nth-child(2) {
+  top: 40%;
+  left: 0;
+}
+#blobs svg:nth-child(3) {
+  transform: translate(50%, -50%);
+  top: 25%;
+  left: 30%;
+  right: 50%;
+}
+
+.relative {
+  position: relative;
+}
+
+.page {
+  z-index: 10;
+  position: relative;
 }/*# sourceMappingURL=globals.css.map */

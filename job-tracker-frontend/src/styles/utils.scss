@@ -193,3 +193,20 @@ button {
 
   transition: width 1s ease-in-out;
 }
+
+// .blueBg {
+//   background-color: blueviolet;
+
+//   background: -webkit-linear-gradient(to bottom, #d5d5d5, #ffffff);
+
+//   background: linear-gradient(
+//     to bottom,
+//     #d2e8fb,
+//     #b0d5f4
+//   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+// }
+
+.shrinkUI {
+  max-height: 350px;
+  min-height: 300px;
+}
