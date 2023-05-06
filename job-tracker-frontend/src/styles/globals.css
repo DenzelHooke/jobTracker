@@ -456,7 +456,9 @@ body {
   width: 400px;
   scale: 1.2;
   top: 10%;
-  opacity: 80%;
+  opacity: 60%;
+  animation-name: blob;
+  animation-duration: 10s;
 }
 #blobs svg path {
   fill: #3b8df8;
@@ -475,6 +477,14 @@ body {
   right: 50%;
 }
 
+@keyframes blob {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 60%;
+  }
+}
 .relative {
   position: relative;
 }
