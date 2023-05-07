@@ -73,12 +73,12 @@ export default function Dashboard() {
       )}
       <Sidebar content={category} onSelect={onSidebarSelect} />
       <div className="content">
-        <div className="dashboard-intro">
+        {/* <div className="dashboard-intro">
           <h2>Dashboard</h2>
           <button className="round-panel" onClick={() => onCreateNewClick()}>
             Create new <GoPlus size={25} />
           </button>
-        </div>
+        </div> */}
         <DisplayJobs />
       </div>
     </div>

@@ -1,6 +1,12 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { BsTrash3Fill, BsFileEarmarkPdfFill } from 'react-icons/bs';
+import {
+  BsTrash3Fill,
+  BsFileEarmarkPdfFill,
+  BsPaperclip,
+  BsArrowsAngleExpand,
+  BsArrowsAngleContract,
+} from 'react-icons/bs';
 import { MdEmail, MdOutlineExpandCircleDown } from 'react-icons/md';
 import { ImOffice } from 'react-icons/im';
 import { returnNA } from '@/helpers/data/strings';
@@ -40,8 +46,8 @@ const Job = ({ job }) => {
   const [coverURL, setCoverURL] = useState('');
   const [resumeURL, setResumeURL] = useState('');
   const [expandHeight, setExpandHeight] = useState('426px');
-  const shrinkHeight = '140px';
-  const iconSize = 20;
+  const shrinkHeight = '45px';
+  const iconSize = 17;
   const dispatch = useDispatch();
   const { category } = useSelector((state) => state.jobs);
 
@@ -54,13 +60,13 @@ const Job = ({ job }) => {
       addObserver(item);
     });
 
-    for (let i = 0; i < field_items.length; i++) {
-      field_items[i].addEventListener('click', (event) => {
-        const field = event.target;
-        field.contentEditable = field.contentEditable === true ? false : true;
-        console.log('value editable');
-      });
-    }
+    // for (let i = 0; i < field_items.length; i++) {
+    //   field_items[i].addEventListener('click', (event) => {
+    //     const field = event.target;
+    //     field.contentEditable = field.contentEditable === true ? false : true;
+    //     console.log('value editable');
+    //   });
+    // }
 
     const fetchData = async () => {
       console.log('BOOP');
@@ -132,28 +138,34 @@ const Job = ({ job }) => {
       id={`job-${job.id}`}>
       <div className="job-item">
         <div className="job-title">
+          <div>
+            {/* <span className="italic company mutedText">Company</span>
+            <br /> */}
+            <BsPaperclip size={25} />
+            <h3 className="item-value" onChange={onValueChange}>
+              {job.company_name}
+            </h3>
+          </div>
           <div className="interactables">
-            <motion.button
+            {/* <motion.button
               variants={buttonVariant}
               whileHover="hover"
               onClick={() => onJobDelete(job.id)}
-              className="deleteBtn roundBtn clickable rectangleBtn">
+              className="deleteBtn roundBtn clickable">
               <BsTrash3Fill size={iconSize} className="icon" />
-            </motion.button>
+            </motion.button> */}
             <motion.button
               variants={buttonVariant}
               whileHover="hover"
-              className="expandBtn roundBtn clickable rectangleBtn"
+              className="expandBtn roundBtn clickable"
               onClick={(e) => onExpandJob(`job-${job.id}`)}>
-              {isExpand ? 'Collapse' : 'Expand'}
+              {isExpand ? (
+                <BsArrowsAngleContract size={iconSize} />
+              ) : (
+                <BsArrowsAngleExpand size={iconSize} />
+              )}
             </motion.button>
           </div>
-          <br />
-          <span className="italic company mutedText">Company</span>
-          <br />
-          <h3 className="item-value" onChange={onValueChange}>
-            {job.company_name}
-          </h3>
         </div>
         <div className="contact">
           <div className="item">

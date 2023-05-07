@@ -1,6 +1,8 @@
+import '@/styles/utilities/_variables.scss';
 import '@/styles/globals.css';
 import '@/styles/utils.css';
 import '@/styles/index.scss';
+import '@/styles/dashboard.scss';
 
 import Layout from '../components/Layout';
 import { Provider } from 'react-redux';

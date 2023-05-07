@@ -2,7 +2,7 @@
 :root {
   box-sizing: border-box;
   --global-white: white;
-  --input-border: rgba(74, 74, 74, 0.178);
+  --input-border: rgba(74, 74, 74, 0.104);
 }
 
 a {
@@ -159,33 +159,9 @@ body {
 
 #dashboard {
   display: grid;
-  grid-template-columns: 220px 1fr;
+  grid-template-columns: 220px 400px 0.2fr;
   width: 100%;
   position: relative;
-}
-#dashboard .dashboard-intro {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 60px;
-}
-#dashboard .dashboard-intro button {
-  border-radius: 10px;
-  width: 200px;
-  background-color: #3b8df8;
-  border: 0;
-  color: white;
-  font-size: 14px;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  cursor: pointer;
-  transition: all 100ms ease-in-out;
-}
-#dashboard .dashboard-intro button:hover {
-  background-color: #2c6cbe;
-}
-#dashboard .content {
-  padding: 10px 40px;
 }
 #dashboard #sidebar {
   padding: 5px 0;
@@ -212,6 +188,7 @@ body {
 }
 #dashboard #sidebar .sidebar-options-wrapper .sidebar-options .sidebar-option:hover {
   background-color: #c1c1c1;
+  color: #171717;
 }
 #dashboard #sidebar .sidebar-options-wrapper .sidebar-options .sidebar-option span {
   pointer-events: none;
@@ -221,13 +198,22 @@ body {
   margin: 0 10px;
 }
 #dashboard .jobs-wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+  padding: 10px;
+  border-right: 2px solid rgba(0, 0, 0, 0.3);
+  height: 100%;
 }
 #dashboard .jobs-wrapper .interactables {
   display: flex;
   justify-content: space-between;
+  max-width: 20%;
+  align-items: center;
+  padding-right: 5px;
+}
+#dashboard .jobs-wrapper .interactables button {
+  width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 #dashboard .jobs-wrapper .interactables .icon {
   color: #171717;
@@ -239,14 +225,30 @@ body {
   fill: #171717;
 }
 #dashboard .jobs-wrapper .job-item-wrapper {
-  min-width: 250px;
-  max-width: 300px;
-  padding: 10px;
-  border-radius: 10px;
-  margin-bottom: 40px;
+  width: 100%;
+  border-radius: 3px;
   background-color: white;
   overflow: hidden;
-  max-height: 430px;
+  margin: 10px 0;
+}
+#dashboard .jobs-wrapper .job-item-wrapper .job-item .job-title {
+  background-color: #3b8df8;
+  display: flex;
+  height: 45px;
+  color: white;
+  justify-content: space-between;
+}
+#dashboard .jobs-wrapper .job-item-wrapper .job-item .job-title div:nth-child(1) {
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+}
+#dashboard .jobs-wrapper .job-item-wrapper .job-item .job-title .item-value {
+  padding: 0 20px;
+  font-size: 13px;
+}
+#dashboard .jobs-wrapper .job-item-wrapper .job-item .contact {
+  padding: 10px;
 }
 #dashboard .jobs-wrapper .job-item-wrapper .item {
   margin-bottom: 20px;
@@ -288,10 +290,7 @@ body {
   color: rgb(171, 171, 171);
 }
 #dashboard .jobs-wrapper .job-item-wrapper h3 {
-  font-style: italic;
-  font-weight: 500;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-  margin-bottom: 40px;
+  font-weight: 400;
 }
 
 .modal {

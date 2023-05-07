@@ -4,7 +4,7 @@
 :root {
   box-sizing: border-box;
   --global-white: white;
-  --input-border: rgba(74, 74, 74, 0.178);
+  --input-border: rgba(74, 74, 74, 0.104);
 }
 
 a {
@@ -196,38 +196,39 @@ body {
 
 #dashboard {
   display: grid;
-  grid-template-columns: 220px 1fr;
+  grid-template-columns: 220px 400px 0.2fr;
   width: 100%;
   position: relative;
+
   // height: 100%;
 
-  .dashboard-intro {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 60px;
-    button {
-      border-radius: 10px;
-      width: 200px;
-      background-color: $buttonBG;
-      border: 0;
-      color: white;
-      // font-weight: 600;
-      // word-spacing: 5px;
-      font-size: 14px;
-      display: flex;
-      justify-content: space-evenly;
-      align-items: center;
-      cursor: pointer;
-      transition: all 100ms ease-in-out;
+  // .dashboard-intro {
+  //   display: flex;
+  //   justify-content: space-between;
+  //   margin-bottom: 60px;
+  //   button {
+  //     border-radius: 10px;
+  //     width: 200px;
+  //     background-color: $buttonBG;
+  //     border: 0;
+  //     color: white;
+  //     // font-weight: 600;
+  //     // word-spacing: 5px;
+  //     font-size: 14px;
+  //     display: flex;
+  //     justify-content: space-evenly;
+  //     align-items: center;
+  //     cursor: pointer;
+  //     transition: all 100ms ease-in-out;
 
-      &:hover {
-        background-color: #2c6cbe;
-      }
-    }
-  }
-  .content {
-    padding: 10px 40px;
-  }
+  //     &:hover {
+  //       background-color: #2c6cbe;
+  //     }
+  //   }
+  // }
+  // .content {
+  //   padding: 10px 40px;
+  // }
 
   #sidebar {
     $sidebarPadding: 10px;
@@ -257,6 +258,7 @@ body {
 
           &:hover {
             background-color: #c1c1c1;
+            color: $dark-grey-black;
           }
           span {
             pointer-events: none;
@@ -277,17 +279,25 @@ body {
     // grid-auto-flow: column;
     // grid-template-rows: repeat(auto-fill);
 
-    display: flex;
-    flex-wrap: wrap;
-
-    gap: 10px;
     $expandBtnBg: grey;
     $deleteBtnBg: red;
     $iconColor: $dark-grey-black;
+    padding: 10px;
+    border-right: 2px solid rgba(0, 0, 0, 0.3);
+    height: 100%;
 
     .interactables {
       display: flex;
       justify-content: space-between;
+      max-width: 20%;
+      align-items: center;
+      padding-right: 5px;
+      button {
+        width: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
 
       .icon {
         color: $iconColor;
@@ -306,14 +316,38 @@ body {
       // -webkit-box-shadow: 0px 22px 58px -4px rgba(167, 167, 167, 1);
       // -moz-box-shadow: 0px 22px 58px -4px rgba(167, 167, 167, 1);
       // box-shadow: 0px 22px 58px -4px rgba(167, 167, 167, 1);
-      min-width: 250px;
-      max-width: 300px;
-      padding: 10px;
-      border-radius: 10px;
-      margin-bottom: 40px;
+      width: 100%;
+      // padding: 10px;
+      border-radius: 3px;
+      // margin-bottom: 40px;
       background-color: white;
       overflow: hidden;
-      max-height: 430px;
+      margin: 10px 0;
+
+      .job-item {
+        .job-title {
+          background-color: $buttonBG;
+          display: flex;
+          height: 45px;
+          color: white;
+          justify-content: space-between;
+
+          div:nth-child(1) {
+            font-weight: 400;
+            display: flex;
+            align-items: center;
+          }
+
+          .item-value {
+            padding: 0 20px;
+            font-size: 13px;
+          }
+        }
+
+        .contact {
+          padding: 10px;
+        }
+      }
 
       .item {
         margin-bottom: 20px;
@@ -363,10 +397,7 @@ body {
       }
 
       h3 {
-        font-style: italic;
-        font-weight: 500;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-        margin-bottom: 40px;
+        font-weight: 400;
       }
     }
   }
