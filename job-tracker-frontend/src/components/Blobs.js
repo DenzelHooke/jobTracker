@@ -1,6 +1,11 @@
 import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 
+function randomIntFromInterval(min, max) {
+  // min and max included
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
 const Blobs = () => {
   const useEffect = (() => {}, []);
 
@@ -15,12 +20,12 @@ const Blobs = () => {
     },
     animate: {
       scale: [1, 1, 1],
-      rotate: [0, 30, 0],
+      rotate: [0, randomIntFromInterval(15, 90), 0],
       transition: {
         // type: 'spring',
         // stiffness: 100,
         // damping: 100,
-        duration: 10,
+        duration: 20,
         repeat: Infinity,
       },
     },

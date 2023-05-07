@@ -2,7 +2,7 @@
 :root {
   box-sizing: border-box;
   --global-white: white;
-  --input-border: rgba(74, 74, 74, 0.249);
+  --input-border: rgba(74, 74, 74, 0.178);
 }
 
 a {
@@ -461,7 +461,7 @@ body {
   animation-duration: 10s;
 }
 #blobs svg path {
-  fill: #3b8df8;
+  fill: rgb(171, 171, 171);
 }
 #blobs svg:nth-child(1) {
   right: 0;

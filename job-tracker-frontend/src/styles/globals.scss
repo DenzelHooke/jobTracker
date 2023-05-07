@@ -4,7 +4,7 @@
 :root {
   box-sizing: border-box;
   --global-white: white;
-  --input-border: rgba(74, 74, 74, 0.249);
+  --input-border: rgba(74, 74, 74, 0.178);
 }
 
 a {
@@ -575,7 +575,7 @@ body {
     animation-name: blob;
     animation-duration: 10s;
     path {
-      fill: $buttonBG;
+      fill: $fadedText;
     }
   }
 
