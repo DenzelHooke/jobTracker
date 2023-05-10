@@ -6,10 +6,11 @@ import { resetJobState } from '@/features/job/jobSlice';
 import { permissionDeniedText } from '../helpers/auth/auth';
 import Sidebar from '../components/Sidebar';
 import Modal from '../components/content/Modal';
-import AddJob from '@/components/content/AddJob';
 import { GoPlus } from 'react-icons/go';
 import { getCategoryJobs, setCategory } from '@/features/job/jobSlice';
 import DisplayJobs from '@/components/DisplayJobs';
+import EditJob from '@/components/EditJob';
+import JobForm from '@/components/content/JobForm';
 
 export default function Dashboard() {
   const { user } = useSelector((state) => state.auth);
@@ -67,19 +68,22 @@ export default function Dashboard() {
       {displayingModal && (
         <Modal
           setModal={setDisplayingModal}
-          content={<AddJob />}
+          content={<JobForm />}
           className="add-job-modal"
         />
       )}
-      <Sidebar content={category} onSelect={onSidebarSelect} />
+      <Sidebar currentPage={category} onSelect={onSidebarSelect} />
       <div className="content">
-        {/* <div className="dashboard-intro">
+        <div className="dashboard-intro">
           <h2>Dashboard</h2>
           <button className="round-panel" onClick={() => onCreateNewClick()}>
             Create new <GoPlus size={25} />
           </button>
-        </div> */}
+        </div>
         <DisplayJobs />
+      </div>
+      <div className="edit-job">
+        <EditJob />
       </div>
     </div>
   );

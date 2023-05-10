@@ -159,7 +159,7 @@ body {
 
 #dashboard {
   display: grid;
-  grid-template-columns: 220px 400px 0.2fr;
+  grid-template-columns: 220px 400px 1fr;
   width: 100%;
   position: relative;
 }
@@ -186,6 +186,10 @@ body {
   padding: 10px 0;
   padding-left: 30px;
 }
+#dashboard #sidebar .sidebar-options-wrapper .sidebar-options .sidebar-option.active {
+  background-color: #c1c1c1;
+  color: #171717;
+}
 #dashboard #sidebar .sidebar-options-wrapper .sidebar-options .sidebar-option:hover {
   background-color: #c1c1c1;
   color: #171717;
@@ -198,9 +202,10 @@ body {
   margin: 0 10px;
 }
 #dashboard .jobs-wrapper {
+  overflow-y: auto;
   padding: 10px;
   border-right: 2px solid rgba(0, 0, 0, 0.3);
-  height: 100%;
+  height: 96vh;
 }
 #dashboard .jobs-wrapper .interactables {
   display: flex;
@@ -311,32 +316,36 @@ body {
   padding: 20px;
   background-color: white !important;
 }
-.add-job-modal h2 {
+
+#job-form-wrapper {
+  padding: 20px;
+}
+#job-form-wrapper h2 {
   color: #171717;
-  padding-bottom: 10px;
+  padding-bottom: 40px;
   font-size: 28px;
 }
-.add-job-modal form {
+#job-form-wrapper form {
   display: grid !important;
   grid-template-columns: 1fr 0.5fr;
 }
-.add-job-modal form .status-checkbox-wrapper {
+#job-form-wrapper form .status-checkbox-wrapper {
   padding-left: 20px;
   position: relative;
   height: 100%;
   grid-row: 1/-1;
   grid-column: 2/3;
 }
-.add-job-modal form .status-checkbox-wrapper p {
+#job-form-wrapper form .status-checkbox-wrapper p {
   text-align: center;
   color: #737373;
   font-weight: 500;
 }
-.add-job-modal form .inputs-wrapper {
+#job-form-wrapper form .inputs-wrapper {
   grid-column: 1/2;
   position: relative;
 }
-.add-job-modal form .inputs-wrapper::after {
+#job-form-wrapper form .inputs-wrapper::after {
   content: "";
   position: absolute;
   height: 100%;
@@ -346,20 +355,20 @@ body {
   right: -11px;
   opacity: 8%;
 }
-.add-job-modal form #createBtn {
+#job-form-wrapper form #createBtn {
   margin-top: auto;
   margin: 0;
   grid-row: 3/4;
 }
-.add-job-modal label {
+#job-form-wrapper label {
   color: #737373;
   font-weight: 400;
   display: block;
 }
-.add-job-modal .input-wrapper {
+#job-form-wrapper .input-wrapper {
   margin-bottom: 20px;
 }
-.add-job-modal .input-wrapper .input {
+#job-form-wrapper .input-wrapper .input {
   width: 100%;
   background-color: #f8f8f8;
   border-radius: 3px;

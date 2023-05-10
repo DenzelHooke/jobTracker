@@ -5,6 +5,21 @@ import { motion } from 'framer-motion';
 export const Sidebar = ({ currentPage, onSelect }) => {
   const iconSize = 19;
 
+  const tabs = [
+    {
+      name: 'applied',
+      icon: <BsEnvelope size={iconSize} className="icon" />,
+    },
+    {
+      name: 'pending',
+      icon: <BsClock size={iconSize} className="icon" />,
+    },
+    {
+      name: 'rejected',
+      icon: <BsPuzzle size={iconSize} className="icon" />,
+    },
+  ];
+
   const tags = {
     // animate: {},
     // initial: {
@@ -37,15 +52,21 @@ export const Sidebar = ({ currentPage, onSelect }) => {
       </div>
       <div className="sidebar-options-wrapper">
         <ul className="sidebar-options">
-          <motion.li
-            {...tags}
-            id="applied"
-            onClick={(e) => onClick(e)}
-            className="sidebar-option">
-            <BsEnvelope size={iconSize} className="icon" />
-            <span>Applied</span>
-          </motion.li>
-          <motion.li
+          {tabs.map((item) => (
+            <motion.li
+              id={item.name}
+              onClick={(e) => onClick(e)}
+              className={`sidebar-option ${
+                currentPage === item.name ? 'active' : ''
+              }`}>
+              {item.icon}
+              <span>{`${item.name[0].toUpperCase()}${item.name.slice(
+                1
+              )}`}</span>
+            </motion.li>
+          ))}
+
+          {/* <motion.li
             {...tags}
             id="pending"
             onClick={(e) => onClick(e)}
@@ -60,7 +81,7 @@ export const Sidebar = ({ currentPage, onSelect }) => {
             className="sidebar-option">
             <BsPuzzle size={iconSize} className="icon" />
             <span>Rejected</span>
-          </motion.li>
+          </motion.li> */}
         </ul>
       </div>
     </div>
