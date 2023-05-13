@@ -6,74 +6,110 @@ const API_URL = DEV
   : process.env.NEXT_PUBLIC_PROD_API;
 
 export const getCategoryJobs = async ({ categoryID }) => {
-  const user = JSON.parse(localStorage.getItem('user'));
-  const token = user.access;
-  console.log(categoryID);
-  const config = {
-    params: {
-      category: categoryID,
-    },
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  };
+  try {
+    const user = JSON.parse(localStorage.getItem('user'));
+    const token = user.access;
+    console.log(categoryID);
+    const config = {
+      params: {
+        category: categoryID,
+      },
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
 
-  const res = await axios.get(`${API_URL}/job/category/`, config);
+    const res = await axios.get(`${API_URL}/job/category/`, config);
 
-  if (res.data) {
-    return res.data;
+    if (res.data) {
+      return res.data;
+    }
+  } catch (error) {
+    throw error;
   }
 };
 
 export const getImageAccess = async (job_id) => {
-  const user = JSON.parse(localStorage.getItem('user'));
-  const config = {
-    headers: {
-      Authorization: `Bearer ${user.access}`,
-    },
-  };
+  try {
+    const user = JSON.parse(localStorage.getItem('user'));
+    const config = {
+      headers: {
+        Authorization: `Bearer ${user.access}`,
+      },
+    };
 
-  const res = await axios.get(`${API_URL}/job/access-image/${job_id}`, config);
+    const res = await axios.get(
+      `${API_URL}/job/access-image/${job_id}`,
+      config
+    );
 
-  if (res.data) {
-    return res.data;
+    if (res.data) {
+      return res.data;
+    }
+  } catch (error) {
+    throw error;
   }
 };
 
 export const createJob = async (formData) => {
-  const payload = formData;
+  try {
+    const payload = formData;
 
-  const user = JSON.parse(localStorage.getItem('user'));
-  console.log(user);
-  const config = {
-    headers: {
-      Authorization: `Bearer ${user.access}`,
-    },
-  };
+    const user = JSON.parse(localStorage.getItem('user'));
+    const config = {
+      headers: {
+        Authorization: `Bearer ${user.access}`,
+      },
+    };
 
-  const res = await axios.post(`${API_URL}/job/`, payload, config);
+    const res = await axios.post(`${API_URL}/job/`, payload, config);
 
-  if (res.data) {
-    return res.data;
+    if (res.data) {
+      return res.data;
+    }
+  } catch (error) {
+    throw error;
   }
 };
 
 export const deleteJob = async ({ job_id, category }) => {
-  const user = JSON.parse(localStorage.getItem('user'));
-  console.log(user);
-  const config = {
-    headers: {
-      Authorization: `Bearer ${user.access}`,
-    },
-  };
+  try {
+    const user = JSON.parse(localStorage.getItem('user'));
+    const config = {
+      headers: {
+        Authorization: `Bearer ${user.access}`,
+      },
+    };
 
-  const res = await axios.delete(
-    `${API_URL}/job/remove/${job_id}?category=${category}`,
-    config
-  );
+    const res = await axios.delete(
+      `${API_URL}/job/remove/${job_id}?category=${category}`,
+      config
+    );
 
-  if (res.data) {
-    return res.data;
+    if (res.data) {
+      return res.data;
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getJob = async ({ job_id }) => {
+  try {
+    const user = JSON.parse(localStorage.getItem('user'));
+    const config = {
+      headers: {
+        Authorization: `Bearer ${user.access}`,
+      },
+    };
+
+    const res = await axios.get(`${API_URL}/job/${job_id}/`, config);
+
+    if (res.data) {
+      return res.data;
+    }
+  } catch (error) {
+    throw error;
   }
 };
 
@@ -81,6 +117,7 @@ const jobService = {
   getCategoryJobs: getCategoryJobs,
   createJob: createJob,
   deleteJob: deleteJob,
+  getJob: getJob,
 };
 
 export default jobService;

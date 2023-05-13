@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import {
   BsTrash3Fill,
@@ -19,9 +19,7 @@ import { setError, setSuccess, resetState } from '@/features/utils/utilsSlice';
 const addObserver = (element) => {
   const observer = new MutationObserver((mutations) => {
     mutations.forEach((mutation) => {
-      console.log(mutation.type);
       if (mutation.type === 'characterData') {
-        console.log(mutation.target);
       }
     });
   });
@@ -41,19 +39,20 @@ const addObserver = (element) => {
   // observer.disconnect();
 };
 
-const Job = ({ job }) => {
+const Job = ({ job, setCurrentJob }) => {
   const [isExpand, setIsExpand] = useState(false);
   const [coverURL, setCoverURL] = useState('');
   const [resumeURL, setResumeURL] = useState('');
   const [expandHeight, setExpandHeight] = useState('426px');
+
+  const jobRef = useRef(null);
+
   const shrinkHeight = '45px';
   const iconSize = 17;
   const dispatch = useDispatch();
   const { category } = useSelector((state) => state.jobs);
 
   useEffect(() => {
-    console.log(document.querySelectorAll('.item-value'));
-
     const field_items = document.querySelectorAll('.item-value');
 
     field_items.forEach((item) => {
@@ -69,7 +68,6 @@ const Job = ({ job }) => {
     // }
 
     const fetchData = async () => {
-      console.log('BOOP');
       if (job.id) {
         try {
           const { resume_url, cover_url } = await getImageAccess(job.id);
@@ -117,17 +115,15 @@ const Job = ({ job }) => {
   };
 
   const onJobDelete = (job_id) => {
-    console.log('delete job ', job_id);
     dispatch(deleteJob({ job_id, category }));
   };
 
   const onExpandJob = (id) => {
     setIsExpand((prevState) => !prevState);
+    setCurrentJob(job.id);
   };
 
-  const onValueChange = (val) => {
-    console.log(val);
-  };
+  const onValueChange = (val) => {};
 
   return (
     <motion.div

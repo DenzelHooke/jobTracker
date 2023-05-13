@@ -7,8 +7,20 @@ import { setError, reset } from '@/features/utils/utilsSlice/';
 import { generateFormData } from '@/helpers/auth/createJobData';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const JobForm = () => {
+const JobForm = ({ title, jobData }) => {
   const dispatch = useDispatch();
+
+  const [formFiles, setFormFiles] = useState({
+    resume: false,
+    cover: false,
+  });
+
+  const [formData, setFormData] = useState({
+    company: jobData.company || '',
+    position: jobData.position || '',
+    email: jobData.email || '',
+    status: jobData.status || {},
+  });
 
   const onSubmit = (e) => {
     const validRegex =
@@ -53,18 +65,6 @@ const JobForm = () => {
     }));
   };
 
-  const [formFiles, setFormFiles] = useState({
-    resume: false,
-    cover: false,
-  });
-
-  const [formData, setFormData] = useState({
-    company: '',
-    position: '',
-    email: '',
-    status: {},
-  });
-
   const addJobVariant = {
     visible: {
       opacity: ['0%', '100%'],
@@ -85,64 +85,70 @@ const JobForm = () => {
   };
 
   return (
-    <motion.div
-      className="no-flex"
-      variants={addJobVariant}
-      exit={{
-        y: -1000,
-      }}
-      animate="visible">
-      <h2>Score your next job</h2>
-      <form
-        onSubmit={onSubmit}
-        autoComplete="off"
-        className="form"
-        encType="multipart/form-data">
-        <div className="inputs-wrapper">
-          <div id="company-wrapper" className="input-wrapper">
-            <label>Company</label>
-            <input
-              type="text"
-              placeholder="Enter company name"
-              onChange={onChange}
-              id="company"
-              className="input"
-              value={formData.company}
-            />
-          </div>
-          {/* <div id="email-wrapper">
-              <label>Email Address</label>
+    <div id="job-form-wrapper">
+      <motion.div
+        className="no-flex"
+        variants={addJobVariant}
+        exit={{
+          y: -1000,
+        }}
+        animate="visible">
+        {title && (
+          <>
+            <h2>{title}</h2>
+          </>
+        )}
+        <form
+          onSubmit={onSubmit}
+          autoComplete="off"
+          className="form"
+          encType="multipart/form-data">
+          <div className="inputs-wrapper">
+            <div id="company-wrapper" className="input-wrapper">
+              <label>Company</label>
               <input
                 type="text"
-                placeholder="Email of recruiter (Optional)"
+                placeholder="Enter company name"
                 onChange={onChange}
-                id="email"
+                id="company"
                 className="input"
-                value={formData.email}
+                value={formData.company}
               />
-            </div> */}
-          <div id="position-wrapper" className="input-wrapper">
-            <label htmlFor="">Position</label>
-            <input
-              type="text"
-              placeholder="Enter job role"
-              onChange={onChange}
-              id="position"
-              className="input"
-              value={formData.position}
-            />
+            </div>
+            {/* <div id="email-wrapper">
+                <label>Email Address</label>
+                <input
+                  type="text"
+                  placeholder="Email of recruiter (Optional)"
+                  onChange={onChange}
+                  id="email"
+                  className="input"
+                  value={formData.email}
+                />
+              </div> */}
+            <div id="position-wrapper" className="input-wrapper">
+              <label htmlFor="">Position</label>
+              <input
+                type="text"
+                placeholder="Enter job role"
+                onChange={onChange}
+                id="position"
+                className="input"
+                value={formData.position}
+              />
+            </div>
+            <FileUpload formFiles={formFiles} setFormFiles={setFormFiles} />
           </div>
-          <FileUpload formFiles={formFiles} setFormFiles={setFormFiles} />
-        </div>
-        <StatusCheckbox onStatusChange={onStatusChange} />
-        <button
-          className="round-panel button buttonHoverSuccess"
-          id="createBtn"
-          type="submit">
-          Create Job
-        </button>
-      </form>
-    </motion.div>
+          <StatusCheckbox onStatusChange={onStatusChange} />
+          <button
+            className="round-panel button buttonHoverSuccess"
+            id="createBtn"
+            type="submit">
+            Create Job
+          </button>
+        </form>
+      </motion.div>
+    </div>
   );
 };
 

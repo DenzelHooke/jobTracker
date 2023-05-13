@@ -1,11 +1,7 @@
 import JobForm from './content/JobForm';
 
 const EditJob = ({ job }) => {
-  return (
-    <div id="job-form-wrapper">
-      <JobForm />
-    </div>
-  );
+  return <JobForm jobData={job} />;
 };
 
 export default EditJob;

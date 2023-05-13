@@ -24,8 +24,9 @@ root_dir = Path(__file__).parent.parent
 
 @api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
-def jobDetail(request):
+def jobDetail(request, pk=None):
     if request.method == 'POST':
+
         s3_instance = None
 
         resume = request.FILES.get('resume') or ''
@@ -71,6 +72,17 @@ def jobDetail(request):
         return Response({
             "created": 1
         })
+
+    if request.method == 'GET':
+
+        try:
+            user = request.user
+            job = Job.objects.filter(
+                user=user).filter(id=pk).values()
+
+            return Response(job)
+        except Exception as e:
+            raise InvalidCreds
 
 
 @api_view(['DELETE'])

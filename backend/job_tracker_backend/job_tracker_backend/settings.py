@@ -31,14 +31,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = ENV_SECRET_KEY
-FRONTEND_DOMAIN = "http://localhost:3000"
+FRONTEND_DOMAIN = os.getenv('ALLOWED_ORIGIN')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = ENV_DEBUG_MODE
-ALLOWED_HOSTS = ['*']
+# ALLOWED_HOSTS = ['*']
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
+    os.getenv('ALLOWED_ORIGIN'),
 ]
+
+CORS_ORIGIN_ALLOW_ALL = True
 # CORS_ALLOW_CREDENTIALS = True
 
 

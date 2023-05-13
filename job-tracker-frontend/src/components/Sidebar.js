@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { BsEnvelope, BsClock, BsPuzzle } from 'react-icons/bs';
 import { motion } from 'framer-motion';
+import { v4 as uuidv4 } from 'uuid';
 
 export const Sidebar = ({ currentPage, onSelect }) => {
   const iconSize = 19;
@@ -54,6 +55,7 @@ export const Sidebar = ({ currentPage, onSelect }) => {
         <ul className="sidebar-options">
           {tabs.map((item) => (
             <motion.li
+              key={uuidv4()}
               id={item.name}
               onClick={(e) => onClick(e)}
               className={`sidebar-option ${

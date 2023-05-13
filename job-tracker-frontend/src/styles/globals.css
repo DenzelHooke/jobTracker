@@ -316,6 +316,9 @@ body {
   padding: 20px;
   background-color: white !important;
 }
+.add-job-modal #job-form-wrapper {
+  padding: 0;
+}
 
 #job-form-wrapper {
   padding: 20px;
@@ -385,7 +388,10 @@ body {
   margin: 20px 0;
   padding: 5px;
   border-radius: 10px;
-  background-color: black;
+}
+.status-checkbox-wrapper .off {
+  background-color: #171717;
+  color: white !important;
 }
 
 .Toastify__toast-container {

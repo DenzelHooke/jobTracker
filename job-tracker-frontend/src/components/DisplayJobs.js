@@ -1,28 +1,26 @@
-import React, { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteJob } from '@/features/job/jobSlice';
 import Job from './content/Job';
 import { v4 as uuidv4 } from 'uuid';
 import Loading from './Loading';
 
-const DisplayJobs = () => {
-  const dispatch = useDispatch();
-
+const DisplayJobs = ({ setCurrentJob }) => {
   const { jobs, gettingJobs } = useSelector((state) => state.jobs);
+  // Must be in a state, because setting current job causes a re-render but values set as useStates don't disappear during a re-render.
+  const [jobsToRender, setJobsToRender] = useState(false);
+  useEffect(() => {
+    if (jobs.length > 0) {
+      setJobsToRender(
+        jobs.map((job) => {
+          return <Job job={job} key={uuidv4()} setCurrentJob={setCurrentJob} />;
+        })
+      );
+    }
+  }, [jobs]);
+
   const displayState = {
-    getJobs: (
-      <div className="jobs-wrapper">
-        {jobs.length > 0 ? (
-          jobs.map((job) => {
-            return <Job job={job} key={uuidv4()} />;
-          })
-        ) : (
-          <>
-            <p>😥 You don't have any jobs saved in this category.</p>
-          </>
-        )}
-      </div>
-    ),
+    getJobs: <div className="jobs-wrapper">{jobsToRender}</div>,
   };
 
   return gettingJobs ? <Loading /> : displayState.getJobs;

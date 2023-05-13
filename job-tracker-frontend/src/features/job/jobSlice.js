@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import jobService from './jobService';
-import { redirect } from '../utils/utilsSlice';
 import { authFailedLoginAgain, unexpectedError } from '@/helpers/auth/auth';
 
 const initialState = {
@@ -21,12 +20,17 @@ export const getCategoryJobs = createAsyncThunk(
     try {
       return await jobService.getCategoryJobs({ categoryID });
     } catch (error) {
-      console.log(error);
-      const message = error.message || error.toString();
-      return thunkAPI.rejectWithValue({
-        message: message,
-        code: error.response.status,
-      });
+      try {
+        return thunkAPI.rejectWithValue({
+          message: message,
+          code: error.response.status,
+        });
+      } catch (error) {
+        return thunkAPI.rejectWithValue({
+          message: message,
+          code: '',
+        });
+      }
     }
   }
 );
@@ -37,12 +41,19 @@ export const createJob = createAsyncThunk(
     try {
       return await jobService.createJob(formData);
     } catch (error) {
-      console.log(error);
       const message = error.message || error.toString();
-      return thunkAPI.rejectWithValue({
-        message: message,
-        code: error.response.status,
-      });
+
+      try {
+        return thunkAPI.rejectWithValue({
+          message: message,
+          code: error.response.status,
+        });
+      } catch (error) {
+        return thunkAPI.rejectWithValue({
+          message: message,
+          code: '',
+        });
+      }
     }
   }
 );
@@ -53,12 +64,42 @@ export const deleteJob = createAsyncThunk(
     try {
       return await jobService.deleteJob({ job_id, category });
     } catch (error) {
-      console.log(error);
       const message = error.message || error.toString();
-      return thunkAPI.rejectWithValue({
-        message: message,
-        code: error.response.status,
-      });
+
+      try {
+        return thunkAPI.rejectWithValue({
+          message: message,
+          code: error.response.status,
+        });
+      } catch (error) {
+        return thunkAPI.rejectWithValue({
+          message: message,
+          code: '',
+        });
+      }
+    }
+  }
+);
+
+export const getJob = createAsyncThunk(
+  'job/getJob',
+  async ({ job_id }, thunkAPI) => {
+    try {
+      return await jobService.getJob({ job_id });
+    } catch (error) {
+      const message = error.message || error.toString();
+
+      try {
+        return thunkAPI.rejectWithValue({
+          message: message,
+          code: error.response.status,
+        });
+      } catch (error) {
+        return thunkAPI.rejectWithValue({
+          message: message,
+          code: '',
+        });
+      }
     }
   }
 );
@@ -127,6 +168,12 @@ export const jobSlice = createSlice({
         state.jobs = action.payload.jobs;
       })
       .addCase(deleteJob.rejected, (state, action) => {
+        state.isJobError = true;
+        state.jobMessage = action.payload.message;
+      })
+
+      .addCase(getJob.rejected, (state, action) => {
+        console.log(action);
         state.isJobError = true;
         state.jobMessage = action.payload.message;
       });
