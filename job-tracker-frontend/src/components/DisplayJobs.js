@@ -23,6 +23,7 @@ const DisplayJobs = ({ setCurrentJob }) => {
     getJobs: <div className="jobs-wrapper">{jobsToRender}</div>,
   };
 
+  // return displayState.getJobs;
   return gettingJobs ? <Loading /> : displayState.getJobs;
 };
 

@@ -172,10 +172,17 @@ export const jobSlice = createSlice({
         state.jobMessage = action.payload.message;
       })
 
+      .addCase(getJob.fulfilled, (state, action) => {
+        // state.isJobSuccess = true;
+        // state.isJobError = false;
+        // state.jobMessage = 'aaa';
+        state.currentJob = action.payload[0];
+        // console.log(action);
+      })
       .addCase(getJob.rejected, (state, action) => {
         console.log(action);
         state.isJobError = true;
-        state.jobMessage = action.payload.message;
+        // state.jobMessage = action.payload.message;
       });
   },
 });

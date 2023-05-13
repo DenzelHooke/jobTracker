@@ -50,7 +50,7 @@ const Job = ({ job, setCurrentJob }) => {
   const shrinkHeight = '45px';
   const iconSize = 17;
   const dispatch = useDispatch();
-  const { category } = useSelector((state) => state.jobs);
+  const { category, currentJob } = useSelector((state) => state.jobs);
 
   useEffect(() => {
     const field_items = document.querySelectorAll('.item-value');
@@ -84,19 +84,19 @@ const Job = ({ job, setCurrentJob }) => {
     return () => setIsExpand(false);
   }, [job.id]);
 
-  const jobVariant = {
-    shrink: {
-      maxHeight: shrinkHeight,
-    },
-    expand: {
-      maxHeight: expandHeight,
-      transition: {
-        type: 'spring',
-        stiffness: 320,
-        damping: 40,
-      },
-    },
-  };
+  // const jobVariant = {
+  //   shrink: {
+  //     maxHeight: shrinkHeight,
+  //   },
+  //   expand: {
+  //     maxHeight: expandHeight,
+  //     transition: {
+  //       type: 'spring',
+  //       stiffness: 320,
+  //       damping: 40,
+  //     },
+  //   },
+  // };
 
   const buttonVariant = {
     hover: {
@@ -128,8 +128,8 @@ const Job = ({ job, setCurrentJob }) => {
   return (
     <motion.div
       {...tags}
-      variants={jobVariant}
-      className="job-item-wrapper"
+      // variants={jobVariant}
+      className={`job-item-wrapper ` + `${isExpand ? 'expand' : ''}`}
       key={job.id}
       id={`job-${job.id}`}>
       <div className="job-item">

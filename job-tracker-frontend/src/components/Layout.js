@@ -1,5 +1,5 @@
 import { ToastContainer } from 'react-toastify';
-import NotifyWatcher from './notifyWatcher';
+import NotifyWatcher from './NotifyWatcher';
 import 'react-toastify/dist/ReactToastify.css';
 import Navbar from './Navbar';
 

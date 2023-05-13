@@ -2,13 +2,14 @@ import { useEffect, useRef, useState } from 'react';
 import FileUpload from './FileUpload';
 import StatusCheckbox from '../StatusCheckbox';
 import { createJob } from '@/features/job/jobSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setError, reset } from '@/features/utils/utilsSlice/';
 import { generateFormData } from '@/helpers/auth/createJobData';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const JobForm = ({ title, jobData }) => {
   const dispatch = useDispatch();
+  const { currentJob } = useSelector((state) => state.jobs);
 
   const [formFiles, setFormFiles] = useState({
     resume: false,
@@ -21,6 +22,19 @@ const JobForm = ({ title, jobData }) => {
     email: jobData.email || '',
     status: jobData.status || {},
   });
+
+  useEffect(() => {
+    if (currentJob) {
+      console.log('UPDATED JOB');
+      console.log(currentJob);
+      setFormData({
+        company: currentJob.company_name || '',
+        position: currentJob.company_position || '',
+        email: currentJob.company_email || '',
+        status: currentJob.status || {},
+      });
+    }
+  }, [currentJob]);
 
   const onSubmit = (e) => {
     const validRegex =
