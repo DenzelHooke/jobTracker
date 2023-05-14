@@ -7,14 +7,19 @@ import { permissionDeniedText } from '../helpers/auth/auth';
 import Sidebar from '../components/Sidebar';
 import Modal from '../components/content/Modal';
 import { GoPlus } from 'react-icons/go';
-import { getCategoryJobs, setCategory, getJob } from '@/features/job/jobSlice';
+import {
+  getCategoryJobs,
+  setCategory,
+  getJob,
+  fetchJobs,
+} from '@/features/job/jobSlice';
 import DisplayJobs from '@/components/DisplayJobs';
 import EditJob from '@/components/EditJob';
 import JobForm from '@/components/content/JobForm';
 
 export default function Dashboard() {
   const { user } = useSelector((state) => state.auth);
-  const { isJobError, isJobSuccess, jobMessage, category, gettingJobs } =
+  const { isJobError, isJobSuccess, jobMessage, category, isFetchingJobs } =
     useSelector((state) => state.jobs);
 
   const router = useRouter();
@@ -32,8 +37,10 @@ export default function Dashboard() {
   }, [currentJob]);
 
   useEffect(() => {
-    dispatch(getCategoryJobs({ categoryID: category }));
-  }, [category]);
+    if (isFetchingJobs) {
+      dispatch(getCategoryJobs({ categoryID: category }));
+    }
+  }, [isFetchingJobs, category]);
 
   useEffect(() => {
     if (isJobError) {
@@ -60,9 +67,9 @@ export default function Dashboard() {
   }, []);
 
   const onSidebarSelect = (value) => {
-    let selection = value.toLowerCase();
-    selection = selection.trim();
+    const selection = value.toLowerCase().trim();
     dispatch(setCategory(selection));
+    dispatch(fetchJobs());
   };
 
   const onCreateNewClick = () => {

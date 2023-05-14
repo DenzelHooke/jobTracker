@@ -6,6 +6,7 @@ const initialState = {
   jobs: {},
   isJobLoading: false,
   gettingJobs: false,
+  isFetchingJobs: true,
   isJobError: false,
   isJobSuccess: false,
   jobMessage: '',
@@ -113,9 +114,13 @@ export const jobSlice = createSlice({
       state.isJobSuccess = false;
       state.isJobLoading = false;
       state.jobMessage = '';
+      state.fetchJobs = false;
     },
     setCategory: (state, action) => {
       state.category = action.payload;
+    },
+    fetchJobs: (state) => {
+      state.isFetchingJobs = true;
     },
   },
   extraReducers: (builder) => {
@@ -140,14 +145,17 @@ export const jobSlice = createSlice({
 
       .addCase(getCategoryJobs.pending, (state) => {
         state.gettingJobs = true;
-        console.log('GETTING JOBS');
+        state.fetchJobs = true;
       })
       .addCase(getCategoryJobs.fulfilled, (state, action) => {
         state.gettingJobs = false;
+        state.isFetchingJobs = false;
+        state.isJobError = false;
         state.jobs = action.payload.jobs;
       })
       .addCase(getCategoryJobs.rejected, (state, action) => {
         state.gettingJobs = false;
+        state.isFetchingJobs = false;
         state.jobs = {};
         state.isJobError = true;
 
@@ -187,5 +195,5 @@ export const jobSlice = createSlice({
   },
 });
 
-export const { resetJobState, setCategory } = jobSlice.actions;
+export const { resetJobState, setCategory, fetchJobs } = jobSlice.actions;
 export default jobSlice.reducer;

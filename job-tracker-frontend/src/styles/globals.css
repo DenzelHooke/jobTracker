@@ -194,7 +194,7 @@ body {
   color: white;
 }
 #dashboard #sidebar .sidebar-options-wrapper .sidebar-options .sidebar-option:hover {
-  background-color: #c1c1c1;
+  background-color: #ededed;
   color: #171717;
 }
 #dashboard #sidebar .sidebar-options-wrapper .sidebar-options .sidebar-option span {
@@ -363,7 +363,7 @@ body {
 #job-form-wrapper form .status-checkbox-wrapper p {
   text-align: center;
   color: #737373;
-  font-weight: 500;
+  font-weight: 400;
 }
 #job-form-wrapper form .inputs-wrapper {
   grid-column: 1/2;
