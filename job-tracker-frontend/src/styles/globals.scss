@@ -260,13 +260,17 @@ body {
           padding-left: 30px;
 
           &.active {
-            background-color: #3b8df862;
+            background-color: $sidebar-option-active-bg;
             color: white;
           }
 
           &:hover {
-            background-color: #ededed;
+            background-color: $siderbar-option-hover-bg;
             color: $dark-grey-black;
+            &.active {
+              background-color: $sidebar-option-active-bg;
+              color: white;
+            }
           }
           span {
             pointer-events: none;

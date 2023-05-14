@@ -197,6 +197,10 @@ body {
   background-color: #ededed;
   color: #171717;
 }
+#dashboard #sidebar .sidebar-options-wrapper .sidebar-options .sidebar-option:hover.active {
+  background-color: rgba(59, 141, 248, 0.3843137255);
+  color: white;
+}
 #dashboard #sidebar .sidebar-options-wrapper .sidebar-options .sidebar-option span {
   pointer-events: none;
 }

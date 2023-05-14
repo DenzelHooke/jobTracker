@@ -1,1 +1,38 @@
-/*# sourceMappingURL=dashboard.css.map */
+@media screen and (max-width: 1300px) {
+  #dashboard {
+    grid-template-columns: 1fr;
+  }
+  #dashboard #sidebar {
+    padding: 0;
+    border: 0;
+  }
+  #dashboard #sidebar .sidebar-title {
+    display: none;
+  }
+  #dashboard #sidebar .sidebar-options-wrapper {
+    background-color: rgba(174, 174, 174, 0.13);
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+  }
+  #dashboard #sidebar .sidebar-options-wrapper .sidebar-options {
+    display: flex;
+    padding: 10px 5px;
+    gap: 10px;
+  }
+  #dashboard #sidebar .sidebar-options-wrapper .sidebar-options .sidebar-option {
+    padding-left: 0;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: #171717;
+    font-weight: 500;
+    border: 1px solid #d6d6d6;
+    background-color: rgb(235, 235, 235);
+  }
+  #dashboard #sidebar .sidebar-options-wrapper .sidebar-options .sidebar-option.active {
+    border: 0;
+  }
+  #dashboard #sidebar .sidebar-options-wrapper .sidebar-options .sidebar-option:hover {
+    background-color: rgb(235, 235, 235);
+  }
+}/*# sourceMappingURL=dashboard.css.map */

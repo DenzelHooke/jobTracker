@@ -1,0 +1,52 @@
+@import 'utilities/variables';
+
+@media screen and (max-width: 1300px) {
+  #dashboard {
+    grid-template-columns: 1fr;
+
+    #sidebar {
+      padding: 0;
+      border: 0;
+
+      .sidebar-title {
+        display: none;
+      }
+
+      .sidebar-options-wrapper {
+        background-color: rgba(174, 174, 174, 0.13);
+        display: flex;
+        justify-content: center;
+        padding: 10px 0;
+
+        .sidebar-options {
+          display: flex;
+          padding: 10px 5px;
+          gap: 10px;
+
+          .sidebar-option {
+            padding-left: 0;
+            padding: 10px 20px;
+            border-radius: 5px;
+            color: $dark-grey-black;
+            font-weight: 500;
+
+            border: 1px solid $borderGrey;
+            background-color: $sidebar-option-bg;
+
+            &.active {
+              border: 0;
+            }
+
+            &:hover {
+              background-color: $sidebar-option-bg;
+            }
+
+            .icon {
+              //   margin: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}
