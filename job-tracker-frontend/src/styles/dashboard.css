@@ -1,6 +1,7 @@
 @media screen and (max-width: 1300px) {
   #dashboard {
     grid-template-columns: 1fr;
+    grid-template-rows: 87px 230px 1fr;
   }
   #dashboard #sidebar {
     padding: 0;
@@ -35,4 +36,32 @@
   #dashboard #sidebar .sidebar-options-wrapper .sidebar-options .sidebar-option:hover {
     background-color: rgb(235, 235, 235);
   }
+  #dashboard .content {
+    height: 220px;
+    overflow-y: auto;
+    background-color: rgb(236, 236, 236);
+  }
+  #dashboard .content .jobs-wrapper {
+    overflow-y: visible;
+    height: auto;
+    border: 0;
+  }
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }/*# sourceMappingURL=dashboard.css.map */

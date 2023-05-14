@@ -4,6 +4,8 @@
   #dashboard {
     grid-template-columns: 1fr;
 
+    grid-template-rows: 87px 230px 1fr;
+
     #sidebar {
       padding: 0;
       border: 0;
@@ -48,5 +50,39 @@
         }
       }
     }
+
+    .content {
+      //   display: flex;
+      //   justify-content: center;
+      height: 220px;
+      overflow-y: auto;
+      background-color: $lightGrey;
+
+      .jobs-wrapper {
+        overflow-y: visible;
+
+        height: auto;
+        border: 0;
+      }
+    }
   }
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
