@@ -8,8 +8,9 @@ import Loading from './Loading';
 const DisplayJobs = ({ setCurrentJob }) => {
   const { jobs, gettingJobs } = useSelector((state) => state.jobs);
   // Must be in a state, because setting current job causes a re-render but values set as useStates don't disappear during a re-render.
-  const [jobsToRender, setJobsToRender] = useState(false);
+  const [jobsToRender, setJobsToRender] = useState([]);
   useEffect(() => {
+    setJobsToRender([]);
     if (jobs.length > 0) {
       setJobsToRender(
         jobs.map((job) => {
@@ -24,7 +25,8 @@ const DisplayJobs = ({ setCurrentJob }) => {
   };
 
   // return displayState.getJobs;
-  return gettingJobs ? <Loading /> : displayState.getJobs;
+  // return gettingJobs ? <Loading /> : displayState.getJobs;
+  return displayState.getJobs;
 };
 
 export default DisplayJobs;

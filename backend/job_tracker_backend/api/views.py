@@ -13,7 +13,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.exceptions import AuthenticationFailed
 import uuid
 import os
-from api.handlers.helpers import writePDF, AWS, generateFileNameFromUser, serializeDictFromRequest
+from api.handlers.helpers import writePDF, AWS, generateFileNameFromUser, serializeRequestToDict
 from job_tracker_backend.settings import IMAGE_BUCKET
 from pathlib import Path
 import json
@@ -52,7 +52,7 @@ def jobDetail(request, pk=None):
             resume = file_name
 
         # Serialize job status into dict
-        job_values = serializeDictFromRequest(request, cover, resume)
+        job_values = serializeRequestToDict(request, cover, resume)
 
         # Create a job with populated values
         Job.objects.create(
@@ -84,20 +84,22 @@ def updateJob(request, pk):
     cover = request.FILES.get('cover') or ''
 
     # Get job based off ID
-    job = Job.objects.filter(user=user).filter(id=pk)
-    job.company = request.company
-    # job.company = request.
+    job = Job.objects.filter(user=user).filter(id=pk).first()
+    print(request.data)
 
     # Serialize job status into dict
-    # job_values = serializeDictFromRequest(request, cover, resume)
+    job_values = serializeRequestToDict(request, cover, resume)
+    job.company_name = job_values['company_name']
+    job.company_email = job_values['company_email']
+    job.company_position = job_values['company_position']
+    job.applied = job_values['applied']
+    job.pending = job_values['pending']
+    job.rejected = job_values['rejected']
+    job.cover = job_values['cover']
+    job.resume = job_values['resume']
 
-    # Create a job with populated values
-    # Job.objects.create(
-    #     **job_values,
-    #     user=request.user
-    # )
-
-    print(request.data)
+    # Update job in DB
+    job.save()
 
     return Response("hello world")
 

@@ -106,7 +106,7 @@ def save_pdf_to_dir(file, path, type):
 # def check_image_dir(user):
 #     # image_dir_exist
 
-def serializeDictFromRequest(request, cover, resume):
+def serializeRequestToDict(request, cover, resume):
 
     jobStatus = json.loads(request.data['jobStatus'])
 
