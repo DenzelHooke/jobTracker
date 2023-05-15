@@ -74,7 +74,6 @@ export default function Dashboard() {
 
   const onCreateNewClick = () => {
     setDisplayingModal(true);
-    console.log('Creating modal');
   };
 
   return (
@@ -82,19 +81,25 @@ export default function Dashboard() {
       {displayingModal && (
         <Modal
           setModal={setDisplayingModal}
-          content={<JobForm title="Add a job" />}
+          content={<JobForm title="Add a job" isModal={displayingModal} />}
           className="add-job-modal"
         />
       )}
       <Sidebar currentPage={category} onSelect={onSidebarSelect} />
       <div className="content">
-        {/* <div className="dashboard-intro">
-          <h2>Dashboard</h2>
-          <button className="round-panel" onClick={() => onCreateNewClick()}>
-            Create new <GoPlus size={25} />
-          </button>
-        </div> */}
-        <DisplayJobs setCurrentJob={setCurrentJob} />
+        <div className="container">
+          <div className="dashboard-intro">
+            {/* <h2>Dashboard</h2> */}
+            <button
+              id="create-job-btn"
+              className="option-btn"
+              onClick={() => onCreateNewClick()}>
+              {/* Create new <GoPlus size={25} /> */}
+              Add
+            </button>
+          </div>
+          <DisplayJobs setCurrentJob={setCurrentJob} />
+        </div>
       </div>
       <div className="edit-job">
         <EditJob job={currentJob} />

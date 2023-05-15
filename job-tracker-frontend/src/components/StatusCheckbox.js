@@ -33,7 +33,7 @@ const StatusCheckbox = ({ onStatusChange }) => {
         onClick={onClick}
         id="applied">
         {/* <BsSendCheckFill size={15} /> */}
-        <span>I applied!</span>
+        <span className="status-item-text">Applied</span>
       </div>
       <div
         className={`status-checkbox clickable white-text no-click-child ${
@@ -42,7 +42,7 @@ const StatusCheckbox = ({ onStatusChange }) => {
         onClick={onClick}
         id="pending">
         {/* <BsHourglassSplit size={15} /> */}
-        <span>Haven't applied yet</span>
+        <span className="status-item-text">Haven't applied yet</span>
       </div>
       <div
         className={`status-checkbox clickable white-text no-click-child ${
@@ -51,7 +51,7 @@ const StatusCheckbox = ({ onStatusChange }) => {
         onClick={onClick}
         id="rejected">
         {/* <FaSadCry size={15} /> */}
-        <span>Rejected</span>
+        <span className="status-item-text">Rejected</span>
       </div>
     </div>
   );

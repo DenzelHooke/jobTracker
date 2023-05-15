@@ -7,34 +7,39 @@ import { setError, reset } from '@/features/utils/utilsSlice/';
 import { generateFormData } from '@/helpers/auth/createJobData';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const JobForm = ({ title, jobData }) => {
+const JobForm = ({ title, jobData, isModal }) => {
   const dispatch = useDispatch();
   const { currentJob } = useSelector((state) => state.jobs);
+  const defaultFormData = {
+    company: '',
+    position: '',
+    email: '',
+    status: {},
+  };
 
   const [formFiles, setFormFiles] = useState({
     resume: false,
     cover: false,
   });
 
-  const [formData, setFormData] = useState({
-    company: jobData.company || '',
-    position: jobData.position || '',
-    email: jobData.email || '',
-    status: jobData.status || {},
-  });
+  const [formData, setFormData] = useState(defaultFormData);
 
   useEffect(() => {
-    if (currentJob) {
-      console.log('UPDATED JOB');
-      console.log(currentJob);
+    if (currentJob && !isModal) {
       setFormData({
         company: currentJob.company_name || '',
         position: currentJob.company_position || '',
         email: currentJob.company_email || '',
         status: currentJob.status || {},
       });
+
+      return;
     }
-  }, [currentJob]);
+
+    if (isModal) {
+      setFormData(defaultFormData);
+    }
+  }, [currentJob, isModal]);
 
   const onSubmit = (e) => {
     const validRegex =
@@ -99,7 +104,7 @@ const JobForm = ({ title, jobData }) => {
   };
 
   return (
-    <div id="job-form-wrapper">
+    <div id="job-form-wrapper" className="job-form-wrapper">
       <motion.div
         className="no-flex"
         variants={addJobVariant}

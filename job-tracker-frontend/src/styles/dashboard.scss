@@ -1,11 +1,30 @@
 @import 'utilities/variables';
 
 @media screen and (max-width: 1300px) {
+  // ::-webkit-scrollbar {
+  //   width: 0;
+  // }
+
+  // /* Track */
+  // ::-webkit-scrollbar-track {
+  //   background: #f1f1f1;
+  // }
+
+  // /* Handle */
+  // ::-webkit-scrollbar-thumb {
+  //   background: #888;
+  // }
+
+  // /* Handle on hover */
+  // ::-webkit-scrollbar-thumb:hover {
+  //   background: #555;
+  // }
+
   #dashboard {
     grid-template-columns: 1fr;
 
-    grid-template-rows: 87px 230px 1fr;
-
+    grid-template-rows: 87px 314px 1fr;
+    gap: 15px;
     #sidebar {
       padding: 0;
       border: 0;
@@ -52,37 +71,37 @@
     }
 
     .content {
+      margin-top: 30px;
+      .container {
+        max-width: 500px;
+        margin: 0 auto;
+        // border-right: 1px solid $borderGrey;
+        // border-left: 1px solid $borderGrey;
+
+        border: 1px solid $borderGrey;
+        background-color: white;
+      }
+      background-color: $lightGrey;
       //   display: flex;
       //   justify-content: center;
-      height: 220px;
-      overflow-y: auto;
-      background-color: $lightGrey;
+      // height: 220px;
+      // overflow-y: auto;
 
       .jobs-wrapper {
         overflow-y: visible;
 
         height: auto;
-        border: 0;
+
+        .job-item {
+          .doc {
+            overflow-x: hidden;
+          }
+        }
       }
     }
+
+    .edit-job {
+      grid-row: 2 / 3;
+    }
   }
-}
-
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #888;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
 }
