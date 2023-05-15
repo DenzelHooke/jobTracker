@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import FileUpload from './FileUpload';
 import StatusCheckbox from '../StatusCheckbox';
-import { createJob } from '@/features/job/jobSlice';
+import { createJob, editJob } from '@/features/job/jobSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { setError, reset } from '@/features/utils/utilsSlice/';
 import { generateFormData } from '@/helpers/auth/createJobData';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const JobForm = ({ title, jobData, isModal }) => {
+const JobForm = ({ title, jobID, isModal, editMode }) => {
   const dispatch = useDispatch();
   const { currentJob } = useSelector((state) => state.jobs);
   const defaultFormData = {
@@ -42,8 +42,8 @@ const JobForm = ({ title, jobData, isModal }) => {
   }, [currentJob, isModal]);
 
   const onSubmit = (e) => {
-    const validRegex =
-      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    // const validRegex =
+    //   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
     e.preventDefault();
     if (formData.company.length < 1) {
@@ -52,11 +52,11 @@ const JobForm = ({ title, jobData, isModal }) => {
       return;
     }
 
-    if (formData.email.length > 0) {
-      if (!formData.email.match(validRegex)) {
-        dispatch(setError('Please provide a valid company email address'));
-      }
-    }
+    // if (formData.email.length > 0) {
+    //   if (!formData.email.match(validRegex)) {
+    //     dispatch(setError('Please provide a valid company email address'));
+    //   }
+    // }
 
     const newFormData = generateFormData({
       company: formData.company,
@@ -65,7 +65,11 @@ const JobForm = ({ title, jobData, isModal }) => {
       jobStatus: formData.status,
       resumePDF: formFiles.resume,
     });
-    console.log(...newFormData);
+
+    if (editMode) {
+      dispatch(editJob({ data: newFormData, jobID }));
+      return;
+    }
 
     dispatch(createJob(newFormData));
   };
@@ -135,16 +139,16 @@ const JobForm = ({ title, jobData, isModal }) => {
               />
             </div>
             {/* <div id="email-wrapper">
-                <label>Email Address</label>
-                <input
-                  type="text"
-                  placeholder="Email of recruiter (Optional)"
-                  onChange={onChange}
-                  id="email"
-                  className="input"
-                  value={formData.email}
-                />
-              </div> */}
+              <label>Email Address</label>
+              <input
+                type="text"
+                placeholder="Email of recruiter"
+                onChange={onChange}
+                id="email"
+                className="input"
+                value={formData.email}
+              />
+            </div> */}
             <div id="position-wrapper" className="input-wrapper">
               <label htmlFor="">Position</label>
               <input
@@ -158,12 +162,15 @@ const JobForm = ({ title, jobData, isModal }) => {
             </div>
             <FileUpload formFiles={formFiles} setFormFiles={setFormFiles} />
           </div>
-          <StatusCheckbox onStatusChange={onStatusChange} />
+          <StatusCheckbox
+            onStatusChange={onStatusChange}
+            editMode={editMode}
+            currentJob={currentJob}
+          />
           <button
-            className="round-panel button buttonHoverSuccess"
-            id="createBtn"
+            className="round-panel button buttonHoverSuccess submit-btn"
             type="submit">
-            Create Job
+            {editMode ? 'Edit job' : 'Create job'}
           </button>
         </form>
       </motion.div>

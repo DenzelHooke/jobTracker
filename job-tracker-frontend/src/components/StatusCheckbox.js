@@ -1,16 +1,17 @@
 import { useState, useEffect } from 'react';
 import { BsSendCheckFill, BsHourglassSplit } from 'react-icons/bs';
 import { FaSadCry } from 'react-icons/fa';
-const StatusCheckbox = ({ onStatusChange }) => {
+const StatusCheckbox = ({ onStatusChange, editMode, currentJob }) => {
   const [status, setStatus] = useState({
     applied: true,
     pending: false,
     rejected: false,
   });
+
   const size = 15;
   const onClick = (e) => {
     if (e.target !== e.currentTarget) return;
-    console.log(e.currentTarget);
+    // console.log(e.currentTarget);
     setStatus(() => ({
       applied: false,
       pending: false,
@@ -18,6 +19,16 @@ const StatusCheckbox = ({ onStatusChange }) => {
       [e.target.id]: true,
     }));
   };
+
+  useEffect(() => {
+    if (editMode && currentJob) {
+      setStatus({
+        applied: currentJob.applied || false,
+        pending: currentJob.pending || false,
+        rejected: currentJob.rejected || false,
+      });
+    }
+  }, [editMode, currentJob]);
 
   useEffect(() => {
     onStatusChange(status);

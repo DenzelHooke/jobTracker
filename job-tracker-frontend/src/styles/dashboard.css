@@ -39,6 +39,7 @@
   }
   #dashboard .content {
     margin-top: 30px;
+    border: 0;
     background-color: rgb(236, 236, 236);
   }
   #dashboard .content .container {

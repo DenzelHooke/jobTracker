@@ -13,7 +13,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.exceptions import AuthenticationFailed
 import uuid
 import os
-from api.handlers.helpers import writePDF, AWS, generateFileNameFromUser
+from api.handlers.helpers import writePDF, AWS, generateFileNameFromUser, serializeDictFromRequest
 from job_tracker_backend.settings import IMAGE_BUCKET
 from pathlib import Path
 import json
@@ -45,26 +45,17 @@ def jobDetail(request, pk=None):
             # Upload file to aws
             s3_instance.upload_file(
                 bucket_name=IMAGE_BUCKET, path_to_file=path, file_name=file_name.strip(), type="resume")
+
+            # Remove file from server
             os.remove(path)
 
             resume = file_name
 
-        # Deserialize job status into dict
-        jobStatus = json.loads(request.data['jobStatus'])
-        job_values = {
-            'company_name': request.data.get('company', None),
-            'company_email': request.data.get('email', None),
-            'company_position': request.data.get('position', None),
-            'applied': jobStatus['applied'],
-            'pending': jobStatus['pending'],
-            'rejected': jobStatus['rejected'],
-            'cover': cover.strip() or '',
-            'resume': resume.strip() or '',
-
-        }
+        # Serialize job status into dict
+        job_values = serializeDictFromRequest(request, cover, resume)
 
         # Create a job with populated values
-        new_job = Job.objects.create(
+        Job.objects.create(
             **job_values,
             user=request.user
         )
@@ -83,6 +74,32 @@ def jobDetail(request, pk=None):
             return Response(job)
         except Exception as e:
             raise InvalidCreds
+
+
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated])
+def updateJob(request, pk):
+    user = request.user
+    resume = request.FILES.get('resume') or ''
+    cover = request.FILES.get('cover') or ''
+
+    # Get job based off ID
+    job = Job.objects.filter(user=user).filter(id=pk)
+    job.company = request.company
+    # job.company = request.
+
+    # Serialize job status into dict
+    # job_values = serializeDictFromRequest(request, cover, resume)
+
+    # Create a job with populated values
+    # Job.objects.create(
+    #     **job_values,
+    #     user=request.user
+    # )
+
+    print(request.data)
+
+    return Response("hello world")
 
 
 @api_view(['DELETE'])

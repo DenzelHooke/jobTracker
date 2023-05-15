@@ -59,6 +59,29 @@ export const createJob = createAsyncThunk(
   }
 );
 
+export const editJob = createAsyncThunk(
+  'job/editJob',
+  async ({ data, jobID }, thunkAPI) => {
+    try {
+      return await jobService.editJob(data, jobID);
+    } catch (error) {
+      const message = error.message || error.toString();
+
+      try {
+        return thunkAPI.rejectWithValue({
+          message: message,
+          code: error.response.status,
+        });
+      } catch (error) {
+        return thunkAPI.rejectWithValue({
+          message: message,
+          code: '',
+        });
+      }
+    }
+  }
+);
+
 export const deleteJob = createAsyncThunk(
   'job/deleteJob',
   async ({ job_id, category }, thunkAPI) => {

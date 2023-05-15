@@ -71,6 +71,31 @@ export const createJob = async (formData) => {
     throw error;
   }
 };
+export const editJob = async (data, jobID) => {
+  try {
+    const payload = data;
+    console.log(data, jobID);
+
+    const user = JSON.parse(localStorage.getItem('user'));
+    const config = {
+      headers: {
+        Authorization: `Bearer ${user.access}`,
+      },
+    };
+
+    const res = await axios.put(
+      `${API_URL}/job/update/${jobID}/`,
+      payload,
+      config
+    );
+
+    if (res.data) {
+      return res.data;
+    }
+  } catch (error) {
+    throw error;
+  }
+};
 
 export const deleteJob = async ({ job_id, category }) => {
   try {
@@ -114,10 +139,11 @@ export const getJob = async ({ job_id }) => {
 };
 
 const jobService = {
-  getCategoryJobs: getCategoryJobs,
-  createJob: createJob,
-  deleteJob: deleteJob,
-  getJob: getJob,
+  getCategoryJobs,
+  createJob,
+  deleteJob,
+  getJob,
+  editJob,
 };
 
 export default jobService;

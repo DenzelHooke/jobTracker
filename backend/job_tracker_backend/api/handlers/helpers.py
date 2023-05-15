@@ -4,6 +4,7 @@ from pathlib import Path
 from account.models import Account
 import boto3
 from botocore.client import Config
+import json
 
 
 class AWS:
@@ -104,3 +105,20 @@ def save_pdf_to_dir(file, path, type):
 
 # def check_image_dir(user):
 #     # image_dir_exist
+
+def serializeDictFromRequest(request, cover, resume):
+
+    jobStatus = json.loads(request.data['jobStatus'])
+
+    job_values = {
+        'company_name': request.data.get('company', None),
+        'company_email': request.data.get('email', None),
+        'company_position': request.data.get('position', None),
+        'applied': jobStatus['applied'],
+        'pending': jobStatus['pending'],
+        'rejected': jobStatus['rejected'],
+        'cover': cover.strip() or '',
+        'resume': resume.strip() or '',
+    }
+
+    return job_values
