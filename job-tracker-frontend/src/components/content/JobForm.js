@@ -7,6 +7,12 @@ import { setError, reset } from '@/features/utils/utilsSlice/';
 import { generateFormData } from '@/helpers/auth/createJobData';
 import { motion, AnimatePresence } from 'framer-motion';
 
+const defaultStatus = () => ({
+  applied: true,
+  pending: false,
+  rejected: false,
+});
+
 const JobForm = ({ title, jobID, isModal, editMode }) => {
   const dispatch = useDispatch();
   const { currentJob } = useSelector((state) => state.jobs);
@@ -14,7 +20,7 @@ const JobForm = ({ title, jobID, isModal, editMode }) => {
     company: '',
     position: '',
     email: '',
-    status: {},
+    status: defaultStatus(),
   };
 
   const [formFiles, setFormFiles] = useState({
@@ -30,7 +36,7 @@ const JobForm = ({ title, jobID, isModal, editMode }) => {
         company: currentJob.company_name || '',
         position: currentJob.company_position || '',
         email: currentJob.company_email || '',
-        status: currentJob.status || {},
+        status: currentJob.status || defaultStatus(),
       });
 
       return;
@@ -47,7 +53,6 @@ const JobForm = ({ title, jobID, isModal, editMode }) => {
 
     e.preventDefault();
     if (formData.company.length < 1) {
-      console.log('ADD FORM SUBMIT');
       dispatch(setError('Please provide a valid company name to continue'));
       return;
     }

@@ -52,7 +52,18 @@ def jobDetail(request, pk=None):
             resume = file_name
 
         # Serialize job status into dict
-        job_values = serializeRequestToDict(request, cover, resume)
+        jobStatus = json.loads(request.data['jobStatus'])
+
+        job_values = {
+            'company_name': request.data.get('company', None),
+            'company_email': request.data.get('email', None),
+            'company_position': request.data.get('position', None),
+            'applied': jobStatus['applied'],
+            'pending': jobStatus['pending'],
+            'rejected': jobStatus['rejected'],
+            'cover': cover.strip() or '',
+            'resume': resume.strip() or '',
+        }
 
         # Create a job with populated values
         Job.objects.create(
@@ -60,9 +71,9 @@ def jobDetail(request, pk=None):
             user=request.user
         )
 
-        return Response({
-            "created": 1
-        })
+    return Response({
+        "created": 1
+    })
 
     if request.method == 'GET':
 

@@ -166,6 +166,22 @@ export const jobSlice = createSlice({
         state.jobMessage = 'Job created successfully!';
       })
 
+      .addCase(editJob.fulfilled, (state) => {
+        state.fetchJobs = true;
+        state.isJobError = false;
+        state.jobMessage = '';
+      })
+      .addCase(editJob.rejected, (state, action) => {
+        state.isJobError = true;
+        try {
+          if (action.payload.code === 401) {
+            state.jobMessage = authFailedLoginAgain();
+          }
+        } catch (error) {
+          state.jobMessage = unexpectedError();
+        }
+      })
+
       .addCase(getCategoryJobs.pending, (state) => {
         state.gettingJobs = true;
         state.fetchJobs = true;

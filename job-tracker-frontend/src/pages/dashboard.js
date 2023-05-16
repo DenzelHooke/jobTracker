@@ -81,7 +81,13 @@ export default function Dashboard() {
       {displayingModal && (
         <Modal
           setModal={setDisplayingModal}
-          content={<JobForm title="Add a job" isModal={displayingModal} />}
+          content={
+            <JobForm
+              title="Add a job"
+              isModal={displayingModal}
+              editMode={false}
+            />
+          }
           className="add-job-modal"
         />
       )}

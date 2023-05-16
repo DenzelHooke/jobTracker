@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 import Loading from './Loading';
 
 const DisplayJobs = ({ setCurrentJob }) => {
-  const { jobs, gettingJobs } = useSelector((state) => state.jobs);
+  const { jobs, fetchJobs } = useSelector((state) => state.jobs);
   // Must be in a state, because setting current job causes a re-render but values set as useStates don't disappear during a re-render.
   const [jobsToRender, setJobsToRender] = useState([]);
   useEffect(() => {

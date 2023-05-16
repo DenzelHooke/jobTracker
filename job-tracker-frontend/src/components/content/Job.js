@@ -143,13 +143,13 @@ const Job = ({ job, setCurrentJob }) => {
             </h3>
           </div>
           <div className="interactables">
-            {/* <motion.button
+            <motion.button
               variants={buttonVariant}
               whileHover="hover"
               onClick={() => onJobDelete(job.id)}
               className="deleteBtn roundBtn clickable">
               <BsTrash3Fill size={iconSize} className="icon" />
-            </motion.button> */}
+            </motion.button>
             <motion.button
               variants={buttonVariant}
               whileHover="hover"
