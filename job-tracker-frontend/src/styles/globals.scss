@@ -236,21 +236,25 @@ body {
     border-right: 1px solid $borderGrey;
 
     .dashboard-intro {
+      height: 50px;
       padding: 10px;
       padding-bottom: 10px;
+      border-bottom: 1px solid $dark-grey-black;
+      display: flex;
+      justify-content: center;
     }
 
     .option-btn {
       padding: 4px 12px;
       width: 150px;
-      background-color: $greenery-green;
+      background-color: $buttonBG;
       color: white;
       border-radius: 5px;
       // border-radius: 2px;
       transition: all 200ms ease-in-out;
 
       &:hover {
-        background-color: #04724dc4;
+        background-color: $buttonBG-hover;
       }
 
       &:hover {
@@ -335,6 +339,7 @@ body {
       max-width: 30%;
       align-items: center;
       padding-right: 5px;
+
       button {
         width: 35px;
         display: flex;
@@ -513,6 +518,7 @@ body {
     color: $dark-grey-black;
     padding-bottom: 40px;
     font-size: 28px;
+    font-weight: 400;
   }
 
   form {
@@ -523,7 +529,7 @@ body {
     .status-checkbox-wrapper {
       padding-left: 20px;
       position: relative;
-      height: 100%;
+      height: auto;
       grid-row: 1 / -1;
       grid-column: 2 / 3;
 
@@ -548,19 +554,26 @@ body {
       &::after {
         content: '';
         position: absolute;
-        height: 100%;
+        height: 80%;
         width: 2px;
         background-color: $light-lightGrey;
         top: 0;
         right: -11px;
-        opacity: 8%;
+        opacity: 9%;
       }
     }
 
-    #createBtn {
+    .submit-btn {
       margin-top: auto;
       margin: 0;
       grid-row: 3 / 4;
+      grid-column: 1 / -1;
+
+      background-color: $buttonBG;
+
+      &:hover {
+        background-color: $buttonBG-hover;
+      }
     }
   }
 

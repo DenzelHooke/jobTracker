@@ -101,7 +101,7 @@ export default function Dashboard() {
               className="option-btn"
               onClick={() => onCreateNewClick()}>
               {/* Create new <GoPlus size={25} /> */}
-              Add
+              Create new
             </button>
           </div>
           <DisplayJobs setCurrentJob={setCurrentJob} />

@@ -172,9 +172,7 @@ const JobForm = ({ title, jobID, isModal, editMode }) => {
             editMode={editMode}
             currentJob={currentJob}
           />
-          <button
-            className="round-panel button buttonHoverSuccess submit-btn"
-            type="submit">
+          <button className="round-panel button submit-btn" type="submit">
             {editMode ? 'Edit job' : 'Create job'}
           </button>
         </form>
