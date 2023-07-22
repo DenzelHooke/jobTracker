@@ -71,9 +71,9 @@ def jobDetail(request, pk=None):
             user=request.user
         )
 
-    # return Response({
-    #     "created": 1
-    # })
+        return Response({
+            "created": 1
+        })
 
     if request.method == 'GET':
 
