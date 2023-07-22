@@ -269,10 +269,16 @@ body {
 }
 #dashboard .jobs-wrapper .job-item-wrapper.expand {
   height: 350px;
-  overflow-y: hidden;
+  overflow-y: scroll;
   box-shadow: 0px 5px 7px -1px rgba(0, 0, 0, 0.28);
 }
+#dashboard .jobs-wrapper .job-item-wrapper .job-item {
+  position: relative;
+}
 #dashboard .jobs-wrapper .job-item-wrapper .job-item .job-title {
+  position: sticky;
+  top: 0;
+  z-index: 100;
   background-color: hsl(214, 93%, 60%);
   display: flex;
   height: 45px;
@@ -290,6 +296,7 @@ body {
 }
 #dashboard .jobs-wrapper .job-item-wrapper .job-item .contact {
   padding: 10px;
+  overflow: auto;
 }
 #dashboard .jobs-wrapper .job-item-wrapper .item {
   margin-bottom: 20px;

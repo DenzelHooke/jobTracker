@@ -370,14 +370,14 @@ body {
       border-radius: 3px;
       // margin-bottom: 40px;
       background-color: white;
-      overflow: auto;
+      overflow: hidden;
       margin: 10px 0;
       height: 45px;
 
       &.expand {
         // min-height: 325px;
         height: 350px;
-        overflow-y: hidden;
+        overflow-y: scroll;
 
         -webkit-box-shadow: 0px 5px 7px -1px rgba(0, 0, 0, 0.28);
         -moz-box-shadow: 0px 5px 7px -1px rgba(0, 0, 0, 0.28);
@@ -388,7 +388,11 @@ body {
       // transition: all 150ms cubic-bezier(0.8, -0.02, 0.42, 0.86);
 
       .job-item {
+        position: relative;
         .job-title {
+          position: sticky;
+          top: 0;
+          z-index: 100;
           background-color: $buttonBG;
           display: flex;
           height: 45px;
@@ -409,6 +413,7 @@ body {
 
         .contact {
           padding: 10px;
+          overflow: auto;
           // border: 1px solid $borderGrey;
         }
       }

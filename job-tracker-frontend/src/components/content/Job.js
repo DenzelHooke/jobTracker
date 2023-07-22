@@ -119,7 +119,16 @@ const Job = ({ job, setCurrentJob }) => {
   };
 
   const onExpandJob = (id) => {
-    setIsExpand((prevState) => !prevState);
+    const job_element = document.querySelector(`#job-${job.id}`);
+    setIsExpand((prevState) => {
+      if (prevState) {
+        job_element.classList.remove('scroll');
+      } else {
+        job_element.classList.add('scroll');
+      }
+
+      return !prevState;
+    });
     setCurrentJob(job.id);
   };
 
