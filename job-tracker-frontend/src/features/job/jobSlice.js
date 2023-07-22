@@ -224,7 +224,7 @@ export const jobSlice = createSlice({
         // state.isJobError = false;
         // state.jobMessage = 'aaa';
         state.currentJob = action.payload[0];
-        // console.log(action);
+        console.log(action);
       })
       .addCase(getJob.rejected, (state, action) => {
         console.log(action);
