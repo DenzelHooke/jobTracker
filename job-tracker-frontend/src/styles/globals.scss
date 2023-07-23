@@ -239,7 +239,7 @@ body {
       height: 50px;
       padding: 10px;
       padding-bottom: 10px;
-      border-bottom: 1px solid $dark-grey-black;
+      border-bottom: 1px solid $lightGrey;
       display: flex;
       justify-content: center;
     }
@@ -247,14 +247,14 @@ body {
     .option-btn {
       padding: 4px 12px;
       width: 150px;
-      background-color: $buttonBG;
+      background-color: $job-item;
       color: white;
       border-radius: 5px;
       // border-radius: 2px;
       transition: all 200ms ease-in-out;
 
       &:hover {
-        background-color: $buttonBG-hover;
+        background-color: $job-item;
       }
 
       &:hover {
@@ -270,7 +270,7 @@ body {
     padding: 5px 0;
     width: 100%;
     background-color: white;
-    border-right: 1px solid $border-edge;
+    border-right: 1px solid $lightGrey;
     color: $dark-grey-black;
 
     .sidebar-title {
@@ -292,15 +292,15 @@ body {
           padding-left: 30px;
 
           &.active {
-            background-color: $sidebar-option-active-bg;
+            background-color: $buttonBG;
             color: white;
           }
 
           &:hover {
-            background-color: $siderbar-option-hover-bg;
-            color: $dark-grey-black;
+            background-color: $buttonBG-hover;
+            color: white;
             &.active {
-              background-color: $sidebar-option-active-bg;
+              background-color: $buttonBG;
               color: white;
             }
           }
@@ -393,7 +393,7 @@ body {
           position: sticky;
           top: 0;
           z-index: 100;
-          background-color: $buttonBG;
+          background-color: $job-item;
           display: flex;
           height: 45px;
           color: white;

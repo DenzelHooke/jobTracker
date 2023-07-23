@@ -60,6 +60,7 @@
 
             &:hover {
               background-color: $sidebar-option-bg;
+              color: $dark-grey-black;
             }
 
             .icon {
@@ -91,6 +92,7 @@
 
       .jobs-wrapper {
         overflow-y: visible;
+        // background-color: rgb(153, 153, 153);
 
         height: auto;
 
@@ -107,3 +109,10 @@
     }
   }
 }
+
+// button {
+//   background-color: red;
+//   svg {
+//     fill: rgb(74, 74, 74);
+//   }
+// }

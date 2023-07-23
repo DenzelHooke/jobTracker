@@ -36,6 +36,7 @@
   }
   #dashboard #sidebar .sidebar-options-wrapper .sidebar-options .sidebar-option:hover {
     background-color: rgb(235, 235, 235);
+    color: #171717;
   }
   #dashboard .content {
     margin-top: 30px;

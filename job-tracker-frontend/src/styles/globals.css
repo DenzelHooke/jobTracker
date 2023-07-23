@@ -171,20 +171,20 @@ body {
   height: 50px;
   padding: 10px;
   padding-bottom: 10px;
-  border-bottom: 1px solid #171717;
+  border-bottom: 1px solid rgb(236, 236, 236);
   display: flex;
   justify-content: center;
 }
 #dashboard .content .option-btn {
   padding: 4px 12px;
   width: 150px;
-  background-color: hsl(214, 93%, 60%);
+  background-color: rgb(59, 59, 59);
   color: white;
   border-radius: 5px;
   transition: all 200ms ease-in-out;
 }
 #dashboard .content .option-btn:hover {
-  background-color: hsl(214, 93%, 50%);
+  background-color: rgb(59, 59, 59);
 }
 #dashboard .content .option-btn:hover {
   cursor: pointer;
@@ -193,7 +193,7 @@ body {
   padding: 5px 0;
   width: 100%;
   background-color: white;
-  border-right: 1px solid black;
+  border-right: 1px solid rgb(236, 236, 236);
   color: #171717;
 }
 #dashboard #sidebar .sidebar-title {
@@ -213,15 +213,15 @@ body {
   padding-left: 30px;
 }
 #dashboard #sidebar .sidebar-options-wrapper .sidebar-options .sidebar-option.active {
-  background-color: rgba(59, 141, 248, 0.3843137255);
+  background-color: hsl(214, 93%, 60%);
   color: white;
 }
 #dashboard #sidebar .sidebar-options-wrapper .sidebar-options .sidebar-option:hover {
-  background-color: #ededed;
-  color: #171717;
+  background-color: hsl(214, 93%, 50%);
+  color: white;
 }
 #dashboard #sidebar .sidebar-options-wrapper .sidebar-options .sidebar-option:hover.active {
-  background-color: rgba(59, 141, 248, 0.3843137255);
+  background-color: hsl(214, 93%, 60%);
   color: white;
 }
 #dashboard #sidebar .sidebar-options-wrapper .sidebar-options .sidebar-option span {
@@ -279,7 +279,7 @@ body {
   position: sticky;
   top: 0;
   z-index: 100;
-  background-color: hsl(214, 93%, 60%);
+  background-color: rgb(59, 59, 59);
   display: flex;
   height: 45px;
   color: white;
