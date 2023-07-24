@@ -25,55 +25,60 @@ root_dir = Path(__file__).parent.parent
 @api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
 def jobDetail(request, pk=None):
-    if request.method == 'POST':
+    try: 
+        if request.method == 'POST':
 
-        s3_instance = None
+            s3_instance = None
 
-        resume = request.FILES.get('resume') or ''
-        cover = request.FILES.get('cover') or ''
-        # Check if images folder exists
-        if resume:
-            # Generate appropriate file name
-            file_name = generateFileNameFromUser(
-                resume.name, request.user, type="resume")
+            resume = request.FILES.get('resume') or ''
+            cover = request.FILES.get('cover') or ''
+            # Check if images folder exists
+            if resume:
+                # Generate appropriate file name
+                file_name = generateFileNameFromUser(
+                    resume.name, request.user, type="resume")
 
-            # Create pdf on system and return path of file.
-            path = writePDF(path=f'{root_dir}/files/',
-                            file=resume, file_name=file_name)
-            s3_instance = AWS()
+                # Create pdf on system and return path of file.
+                path = writePDF(path=f'{root_dir}/files/',
+                                file=resume, file_name=file_name)
+                s3_instance = AWS()
 
-            # Upload file to aws
-            s3_instance.upload_file(
-                bucket_name=IMAGE_BUCKET, path_to_file=path, file_name=file_name.strip(), type="resume")
+                # Upload file to aws
+                s3_instance.upload_file(
+                    bucket_name=IMAGE_BUCKET, path_to_file=path, file_name=file_name.strip(), type="resume")
 
-            # Remove file from server
-            os.remove(path)
+                # Remove file from server
+                os.remove(path)
 
-            resume = file_name
+                resume = file_name
 
-        # Serialize job status into dict
-        jobStatus = json.loads(request.data['jobStatus'])
+            # Serialize job status into dict
+            jobStatus = json.loads(request.data['jobStatus'])
 
-        job_values = {
-            'company_name': request.data.get('company', None),
-            'company_email': request.data.get('email', None),
-            'company_position': request.data.get('position', None),
-            'applied': jobStatus['applied'],
-            'pending': jobStatus['pending'],
-            'rejected': jobStatus['rejected'],
-            'cover': cover.strip() or '',
-            'resume': resume.strip() or '',
-        }
 
-        # Create a job with populated values
-        Job.objects.create(
-            **job_values,
-            user=request.user
-        )
+            # Create a dict with key value pairs that pertain to ke yvalue pairs for a job Object. 
+            job_values = {
+                'company_name': request.data.get('company', None),
+                'company_email': request.data.get('email', None),
+                'company_position': request.data.get('position', None),
+                'applied': jobStatus['applied'],
+                'pending': jobStatus['pending'],
+                'rejected': jobStatus['rejected'],
+                'cover': cover.strip() or '',
+                'resume': resume.strip() or '',
+            }
 
-        return Response({
-            "created": 1
-        })
+            # Create a job with populated values
+            Job.objects.create(
+                **job_values,
+                user=request.user
+            )
+
+            return Response({
+                "created": 1
+            })
+    except:
+        print('Hello')
 
     if request.method == 'GET':
 

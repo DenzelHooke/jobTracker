@@ -270,7 +270,7 @@ body {
 #dashboard .jobs-wrapper .job-item-wrapper.expand {
   height: 350px;
   overflow-y: scroll;
-  box-shadow: 0px 5px 7px -1px rgba(0, 0, 0, 0.28);
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
 }
 #dashboard .jobs-wrapper .job-item-wrapper .job-item {
   position: relative;

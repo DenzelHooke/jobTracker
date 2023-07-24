@@ -179,14 +179,14 @@ const Job = ({ job, setCurrentJob }) => {
             <br />
             <div className="item-value">{returnNA(job.company_position)}</div>
           </div>
-          <div className="item">
+          {/* <div className="item">
             <ImOffice size={iconSize} />
             <span className="italic small mutedText">Company email</span>
             <br />
             <div>
               <div className="item-value">{returnNA(job.company_email)}</div>
             </div>
-          </div>
+          </div> */}
 
           <div className="item">
             <div></div>
