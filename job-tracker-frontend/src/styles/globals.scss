@@ -379,9 +379,8 @@ body {
         height: 350px;
         overflow-y: scroll;
 
-        -webkit-box-shadow: 0px 5px 7px -1px rgba(0, 0, 0, 0.28);
-        -moz-box-shadow: 0px 5px 7px -1px rgba(0, 0, 0, 0.28);
-        box-shadow: 0px 5px 7px -1px rgba(0, 0, 0, 0.28);
+
+        box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;      
       }
 
       transition: all 380ms cubic-bezier(0.8, -0.02, 0.42, 0.86);
