@@ -9,7 +9,7 @@ export const getCategoryJobs = async ({ categoryID }) => {
   try {
     const user = JSON.parse(localStorage.getItem('user'));
     const token = user.access;
-    console.log(categoryID);
+
     const config = {
       params: {
         category: categoryID,

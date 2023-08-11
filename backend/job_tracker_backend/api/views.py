@@ -25,7 +25,7 @@ root_dir = Path(__file__).parent.parent
 @api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
 def jobDetail(request, pk=None):
-    try: 
+    try:
         if request.method == 'POST':
 
             s3_instance = None
@@ -55,8 +55,7 @@ def jobDetail(request, pk=None):
             # Serialize job status into dict
             jobStatus = json.loads(request.data['jobStatus'])
 
-
-            # Create a dict with key value pairs that pertain to ke yvalue pairs for a job Object. 
+            # Create a dict with key value pairs that pertain to ke yvalue pairs for a job Object.
             job_values = {
                 'company_name': request.data.get('company', None),
                 'company_email': request.data.get('email', None),
@@ -158,6 +157,7 @@ def deleteJob(request, pk):
 def getCategory(request):
 
     user = request.user
+    print("category: ", request.query_params)
     category = {
         request.query_params['category']: True
     }

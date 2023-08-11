@@ -63,6 +63,7 @@ const JobForm = ({ title, jobID, isModal, editMode }) => {
     //   }
     // }
 
+    // Formdata jobject is needed to pass file data to backend api.
     const newFormData = generateFormData({
       company: formData.company,
       email: formData.email,

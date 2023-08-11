@@ -23,9 +23,9 @@ const Mission = () => {
 
         scrollTrigger: {
           trigger: titleRef.current,
-          start: 'top 50% bottom 40%',
-          end: 'top 20%',
-          scrub: 2,
+          start: 'top 80%',
+          end: 'top 40%',
+          scrub: 3,
         },
       }
     );
@@ -35,7 +35,7 @@ const Mission = () => {
     <section className="mission section">
       <div className="max-container">
         <h2 className="title" ref={titleRef}>
-          Maximize productivity to it's <span className="boldText">peak</span>
+          Maximize productivity to it's <span className="boldText">PEAK</span>
         </h2>
         <div className="utility">
           <div className="image-container">

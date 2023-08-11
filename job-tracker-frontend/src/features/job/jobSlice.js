@@ -184,7 +184,7 @@ export const jobSlice = createSlice({
 
       .addCase(getCategoryJobs.pending, (state) => {
         state.gettingJobs = true;
-        state.fetchJobs = true;
+        // state.fetchJobs = true;
       })
       .addCase(getCategoryJobs.fulfilled, (state, action) => {
         state.gettingJobs = false;
@@ -193,6 +193,7 @@ export const jobSlice = createSlice({
         state.jobs = action.payload.jobs;
       })
       .addCase(getCategoryJobs.rejected, (state, action) => {
+        state.fetchJobs = false;
         state.gettingJobs = false;
         state.isFetchingJobs = false;
         state.jobs = {};
